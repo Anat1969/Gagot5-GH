@@ -51,6 +51,7 @@ aside{border-inline-end:1px solid var(--line);display:flex;flex-direction:column
 .card{border-bottom:1px solid var(--line);padding:10px 0}
 .card h3{font-size:15px;font-weight:800}
 table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}th,td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:center}td:first-child,th:first-child{text-align:right}.yes{color:var(--ok);font-weight:800}.no{color:#bbb}
+table.sp{width:100%;border-collapse:collapse;font-size:12px}table.sp th{background:#f4f4f4;padding:5px 4px;text-align:right}table.sp td{border-bottom:1px solid var(--line);padding:6px 4px;vertical-align:top;text-align:right}table.sp td.tl{color:#444;line-height:1.4}ul.nt{padding-inline-start:18px;font-size:12.5px;line-height:1.55;margin-top:4px}
 .pl{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.pl span{background:#eef6ef;border-radius:6px;padding:2px 8px;font-size:12px}
 .load{border:0;background:var(--ink);color:#fff;border-radius:8px;padding:6px 10px;font:700 12px inherit;cursor:pointer;margin-top:6px}
 .card .where{font-size:12px;color:var(--mute);margin-top:1px}
@@ -73,7 +74,8 @@ table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}th,td{
 #modes button.on{background:var(--ink);color:#fff}
 #rain{display:none;position:absolute;inset:0;background:#fff;grid-template-columns:230px minmax(0,1fr);gap:0}
 body[data-mode=rain] #rain{display:grid}
-body[data-mode=rain] canvas,body[data-mode=rain] #hud,body[data-mode=rain] #meter,body[data-mode=rain] #hint,body[data-mode=rain] .tabs{display:none}
+body:not([data-mode=roof]) canvas,body:not([data-mode=roof]) #hud,body:not([data-mode=roof]) #meter,body:not([data-mode=roof]) #hint,body:not([data-mode=roof]) .tabs,body:not([data-mode=roof]) #simp,body:not([data-mode=roof]) #seclab,body:not([data-mode=roof]) #secsvg{display:none}
+body[data-mode=ash] #ash{display:block}
 body[data-mode=roof] #foot2{display:none}
 #rmap{padding:10px 8px;display:flex;flex-direction:column;border-inline-end:1px solid var(--line);min-height:0}
 #mpills{display:flex;flex-direction:column;gap:5px;margin-bottom:6px}
@@ -107,8 +109,30 @@ body[data-mode=roof] #foot2{display:none}
 .lnk:hover{color:var(--blue)}
 #foot{flex:none;border-top:1px solid var(--line);padding:8px 16px;font-size:12px;display:flex;gap:14px;flex-wrap:wrap}
 #foot a{color:var(--ink);font-weight:700}
+#ash{display:none;position:absolute;inset:0;background:#fff;overflow:auto;padding:16px 20px}
+.ah{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gauge{background:#eef6ef;border-radius:12px;padding:14px 16px}.gauge.b2{background:#eef2fb}
+.gl{font-size:12px;color:var(--mute)}.gv{font-size:44px;font-weight:900;line-height:1.1;margin:2px 0}.gs{font-size:12.5px;line-height:1.45}
+.ash4{font-size:14px;font-weight:900;margin:16px 0 6px}
+table.fit th,table.fit td{border:1px solid #fff;padding:8px 6px;font-size:12px;line-height:1.35;vertical-align:top}
+table.fit th{background:#f4f4f4;font-weight:800}table.fit tr.cur th{background:var(--ink);color:#fff}
+.fitg{background:#dff3e4}.fita{background:#fdf1c8}.fitr{background:#fbd9d9}
+.ab{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.ab .load{margin-top:0}
+.ac{display:grid;grid-template-columns:1fr 1fr;gap:16px}.ac ul{padding-inline-start:18px;font-size:12.5px;line-height:1.6}
+#simp{display:none;position:absolute;left:12px;bottom:96px;width:280px;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.2);padding:10px 12px;font-size:12.5px;max-height:55%;overflow:auto}
+#simp h4{font-size:14px;font-weight:900;margin-bottom:6px}.sr{margin:6px 0}.small{font-size:11px;color:var(--mute);line-height:1.45}
+.kv{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--line)}
+#simp input[type=number],#simp select{border:0;background:#f4f4f4;border-radius:6px;padding:3px 6px;font:700 12px inherit}#simp input[type=range]{width:100%}
+.heatbar{height:10px;border-radius:5px;background:linear-gradient(90deg,#3b82f6,#fde047,#ef4444)}
+#secsvg,#seclab{display:none;position:absolute;inset:0;pointer-events:none}#secsvg{width:100%;height:100%}
+.sl{position:absolute;width:240px;font-size:12px;line-height:1.25;background:rgba(255,255,255,.92);border-radius:8px;padding:3px 8px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.sl b{display:block;font-size:12.5px}.sl span{display:block;color:var(--mute);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sl b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+img.exi{width:100%;height:150px;object-fit:cover;border-radius:10px;display:block}.cr{font-size:10.5px;color:var(--mute);margin:2px 0 4px}
+#info .ti{width:100%;height:110px;object-fit:cover;border-radius:10px;margin-top:8px;display:block}
 @media(max-width:820px){
- body[data-mode=rain] #stage{height:auto}
+ .ah,.ac{grid-template-columns:1fr}
+ body[data-mode=rain] #stage,body[data-mode=ash] #stage{height:auto}
+ #ash{position:static}
  #rain{grid-template-columns:1fr;position:static}
  header .sub{display:none}
  #rmap{height:420px;border:0}
@@ -133,13 +157,15 @@ dialog button{margin-top:12px}
 <header>
   <a href="#" id="home">גגות מועילים</a>
   <span class="sub">ארבעה סוגי גג, הדמיה תלת-ממדית ודוגמאות מהארץ ומהעולם</span>
-  <div id="modes"><button data-m="roof" class="on">הדמיית גג</button><button data-m="rain">גשם ונגר</button></div>
+  <div id="modes"><button data-m="roof" class="on">הדמיית גג</button><button data-m="rain">גשם ונגר</button><button data-m="ash">אשדוד</button></div>
   <ai-menu></ai-menu>
 </header>
 <main>
   <div id="stage">
     <canvas id="c"></canvas>
     <div id="hud"></div>
+    <svg id="secsvg"></svg><div id="seclab"></div><div id="simp"></div>
+    <div id="ash"></div>
     <div id="rain">
       <div id="rmap"><div id="mpills"></div><svg id="msvg" viewBox="0 0 1700 4350" preserveAspectRatio="xMidYMid meet"></svg><div id="mleg"></div></div>
       <div id="rcharts">
@@ -153,7 +179,7 @@ dialog button{margin-top:12px}
     <div id="hint">גרור לסיבוב, גלגלת לזום, לחיצה על משבצת צובעת אותה בסוג שנבחר</div>
     <div id="meter">
       <div><div id="pct">0%</div><div style="font-size:11px;color:var(--mute)">שטח גג מועיל</div></div>
-      <div><div id="bar"><div id="thr"></div></div><div style="font-size:11px;color:var(--mute);margin-top:4px">הקו השחור: סף 50% מסך הגגות, כולל שטחים טכניים</div></div>
+      <div><div id="bar"><div id="thr"></div></div><div style="font-size:11px;color:var(--mute);margin-top:4px">הקו השחור: הסף מסך הגגות (ברירת מחדל 50%), כולל שטחים טכניים</div></div>
       <div id="verdict" class="bad"></div>
       <div id="calc"></div>
     </div>
@@ -183,6 +209,7 @@ const TYPES={
   il:[
    {t:"קמפוס WIX",w:"תל אביב",p:"גג סופח משנת 2022 באזור שסבל מהצפות חוזרות. 5.5 דונם, אגירה של כ-120 מ\"ק (כ-22 מ\"מ גשם, חישוב שלי), עובי המערכת כ-90 מ\"מ. משהה כ-25% מהגשם, ומשולב עם 7 קידוחי החדרה. שכבה עליונה של אגרגט בהיר.",ok:1,s:"docs/useful_roofs_review_2025.pdf"}],
   world:[
+   {t:"גג כחול עם פאנל סולארי, Village im Dritten",w:"וינה",p:"גג כחול משולב בפאנלים סולאריים.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
    {t:"גג כחול-ירוק, ארגון Osborne",w:"ברונקס, ניו יורק",p:"נבנה ב-2013 על שליש מהגג (כ-665 מ\"ר). אגירה של כ-350,000 ליטר. מפחית כ-32% מהעומס על הניקוז המקומי.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
    {t:"מדריכי גג כחול, פילדלפיה",w:"ארצות הברית",p:"מחלקת המים מגדירה גג כחול כפתרון השהיה: אגירה זמנית ושחרור איטי. אינו מסיר מזהמים.",ok:1,s:"https://water.phila.gov/pool/files/smgm-4-6-blue-roofs.pdf"},
    {t:"מדריך מי נגר, ניו יורק",w:"ארצות הברית",p:"נספח G כולל דוגמת חישוב לגג כחול של כ-1,850 מ\"ר עם מערכת השהיה במורד.",ok:1,s:"https://www.nyc.gov:443/assets/dep/downloads/pdf/water/stormwater/unified-stormwater-rule/uswr_nyc_stormwater_manual_appendix-g-b_detention-series-examples.pdf"},
@@ -197,6 +224,7 @@ const TYPES={
    {t:"תל אביב: מוסדות חינוך",w:"תל אביב",p:"הוועדה המקומית קבעה: על מבני חינוך יוקם גג ירוק אם שטח הגג הפנוי ממערכות גדול מ-250 מ\"ר.",ok:1,s:""},
    {t:"הרצליה, תכנית הר/2440",w:"הרצליה",p:"תכנית מתאר להתחדשות אזור התעסוקה המערבי (דצמבר 2023): מוסד התכנון יקבע לפחות 40% משטח הגגות בתכנית המפורטת כגג מועיל או ירוק.",ok:1,s:""},
    {t:"ירושלים, תכנית 101-0406009",w:"ירושלים",p:"בנין מדגל: נדרש גג חי להתאמה לאתר טבע עירוני ובסמיכות לאפיק נחל.",ok:1,s:""},
+   {t:"גג ירוק בפארק רמת הנדיב",w:"זכרון יעקב",p:"גג ירוק בפארק, מתועד בסקירת גגות מועילים 2025.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
    {t:"בניין PSES (הקפסולה), אוניברסיטת תל אביב",w:"תל אביב",p:"כמחצית משטח הגג מכוסה צמחייה מקומית חסכונית במים, בעיקר סוקולנטים וקקטוסים. הגג משמש מעבדת מחקר וכיתה פתוחה.",ok:1,s:"https://en-environment.tau.ac.il/PSESbuilding/Green_Roof"}],
   world:[
    {t:"ACROS Fukuoka",w:"פוקואוקה, יפן",p:"בניין עם גג גן מדורג שהופך את הבניין לפארק עירוני.",ok:0},
@@ -208,6 +236,7 @@ const TYPES={
   il:[
    {t:"חובת פאנלים בבנייה חדשה",w:"ישראל",p:"נדרשת מערכת PV במבנים חדשים לא למגורים עם גג מעל 250 מ\"ר, ובבתים צמודי קרקע עם גג מעל 100 מ\"ר. יעד 3.5 גיגה-וואט עד 2040.",ok:1,s:"https://www.pv-magazine.com/2025/07/02/israel-requires-pv-systems-on-new-residential-commercial-buildings/"},
    {t:"שילוב גג ירוק וסולארי",w:"מחקרים בישראל ובעולם",p:"המצע הירוק מצנן את סביבת הפאנלים. מחקר בישראל (שינדלר ואחרים, 2018) מצא שגג ירוק אקסטנסיבי מושקה בקיץ עדיף על גג רגיל עם פאנלים. לתכנון: מרחק 75 עד 100 ס\"מ בין שורות, שפה תחתונה לפחות 20 ס\"מ מעל המצע, והגבהת קורות לעומסים. הערה: המדריך (2022) והסקירה (2025) נותנים נתוני ירידת יעילות שונים. ראו בגג צהוב.",ok:1,s:""},
+   {t:"פאנלים על בניינים ברמת גן",w:"רמת גן",p:"גגות בניינים בצפיפות עירונית עם פאנלים סולאריים, כפי שמוצג בסקירת גגות מועילים 2025.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
    {t:"תקנות חובת PV, 6.8.2024",w:"ישראל",p:"המועצה הארצית אישרה: מבנה חדש שאינו למגורים עם גג מעל 250 מ\"ר, ובית צמוד קרקע עם גג מעל 100 מ\"ר (מתקן של 5 קילו-וואט לפחות). החלטת ממשלה 465: 30% חשמל מתחדש עד 2030.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
    {t:"גג הכנסת",w:"ירושלים",p:"מערכת של 450 קילו-וואט על גג הכנסת, שהוצגה כפרויקט הסולארי הגדול בעולם שהושלם על ידי בית נבחרים.",ok:1,s:"https://reneweconomy.com.au/israeli-parliament-installs-450kw-rooftop-solar-system-22585"},
    {t:"מפעל אורמט",w:"יבנה",p:"מערכת של כ-1 מגה-וואט על גג של כ-15,000 עד 16,000 מ\"ר. הכותרת \"הגדול במזרח התיכון\" היא טענת היזמים.",ok:1,s:"https://www.greenprophet.com/?p=9354"}],
@@ -222,6 +251,8 @@ const TYPES={
    {t:"החווה ההידרופונית, דיזנגוף סנטר",w:"תל אביב",p:"חווה של כ-100 מ\"ר על גג הקניון, שמספקת ירקות עלים למסעדות ולשוק איכרים.",ok:1,s:"https://www.timesofisrael.com/hi-tech-farmer-turns-mall-roof-into-bed-of-lettuce/"},
    {t:"\"המרפסת\", מוסללה",w:"ירושלים",p:"גג פעיל פתוח לציבור ברחוב יפו: חקלאות עירונית, מרחבי עבודה, \"קמפינג גגות\", דבוראות והדגמת חקלאות הידרופונית.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
    {t:"מתחם מיקרוסופט",w:"הרצליה",p:"הושלם ב-2020. גינות גג וטרסות מדורגות, LEED Gold, שימוש חוזר במי עיבוי מזגנים להשקיה, ומערכת סולארית.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
+   {t:"פארק הגג, דיזנגוף סנטר",w:"תל אביב",p:"המרכז לקיימות עירונית על גג הקניון. חלק מהגג הוא גג ירוק אינטנסיבי עם אלמנטים חקלאיים, וחלק פעיל, וכולל חממה הידרופונית.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
+   {t:"אברהם הוסטל",w:"ירושלים",p:"גג פעיל במרכז העיר, מקום מפגש עם ישיבה ופינות הצללה.",ok:1,s:"docs/useful_roofs_review_2025.pdf"},
    {t:"האי, מתחם עזריאלי",w:"תל אביב",p:"פארק שעשועים לילדים על גג קניון עזריאלי.",ok:1,s:"https://www.timeout.com/israel/kids/the-island"},
    {t:"גגות גינה בבתי ספר במג'דל שמס",w:"רמת הגולן",p:"גנים על גגות מתחמי בתי הספר, בתכנון משותף עם מחלקת החינוך של המועצה.",ok:1,s:"https://ejewishphilanthropy.com/birthright-israel-volunteers-construct-rooftop-gardens-for-the-children-of-majdal-shams/"}],
   world:[
@@ -256,7 +287,8 @@ const hud=document.getElementById("hud");
 ORDER.forEach(k=>{const b=document.createElement("button");b.className="brush";b.dataset.k=k;b.innerHTML=`<i style="background:${TYPES[k].css}"></i>${TYPES[k].name}`;b.onclick=()=>{brush=k;render()};hud.appendChild(b)});
 const fill=document.createElement("button");fill.className="brush";fill.textContent="מלא הכול";fill.onclick=()=>{grid=grid.map(g=>g==="tech"?g:brush);gs=gs.map(()=>sub);buildRoof();render()};hud.appendChild(fill);
 const rst=document.createElement("button");rst.className="brush";rst.textContent="איפוס";rst.onclick=reset;hud.appendChild(rst);
-const ex2=document.createElement("button");ex2.className="brush";ex2.textContent="פירוק שכבות";ex2.onclick=()=>{exploded=!exploded;ex2.classList.toggle("on",exploded)};hud.appendChild(ex2);
+[["rain","גשם"],["sun","שמש"],["heat","חום"]].forEach(([k,t])=>{const b=document.createElement("button");b.className="brush simb";b.dataset.s=k;b.textContent=t;b.onclick=()=>{if(secState.on)secToggle();setSim(k)};hud.appendChild(b)});
+const secb=document.createElement("button");secb.className="brush";secb.id="secb";secb.textContent="חתך פרט";secb.onclick=()=>secToggle();hud.appendChild(secb);
 function reset(){grid=Array(COLS*ROWS).fill("none");[0,1,COLS*ROWS-1].forEach(i=>grid[i]="tech");buildRoof();render()}
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{region=b.dataset.r;render()});
 document.getElementById("home").onclick=e=>{e.preventDefault();brush="green";region="il";render()};
@@ -264,15 +296,17 @@ document.getElementById("home").onclick=e=>{e.preventDefault();brush="green";reg
 function render(){
  document.body.dataset.mode=mode;document.querySelectorAll("#modes button").forEach(b=>b.classList.toggle("on",b.dataset.m===mode));
  if(mode==="rain"){renderRain();return}
+ if(mode==="ash"){renderAsh();return}
  document.querySelectorAll(".brush[data-k]").forEach(b=>b.classList.toggle("on",b.dataset.k===brush));
  document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.r===region));
  const T=TYPES[brush];
  const facts=brush==="green"?GSUB[sub].f:T.facts;
  const subUI=brush==="green"?`<div id="sub">${Object.keys(GSUB).map(k=>`<button data-s="${k}" class="${k===sub?"on":""}">${GSUB[k].n}</button>`).join("")}</div>`:"";
- document.getElementById("info").innerHTML=`<h2><i style="background:${T.css}"></i>${T.name}</h2><div id="insight">${T.insight}</div><div id="desc">${T.desc}</div>${subUI}${facts.length?`<div class="facts">${facts.map(f=>`<div>${f[0]}<b>${f[1]}</b></div>`).join("")}</div>`:""}`;
+ const pk=brush==="green"?SIMG[sub]:TIMG[brush];const pim=pk?`<img class="ti" src="docs/img/${pk}.jpg" alt=""><div class="cr">${IMGCR[pk]||""}</div>`:"";
+ document.getElementById("info").innerHTML=`<h2><i style="background:${T.css}"></i>${T.name}</h2><div id="insight">${T.insight}</div><div id="desc">${T.desc}</div>${subUI}${pim}${facts.length?`<div class="facts">${facts.map(f=>`<div>${f[0]}<b>${f[1]}</b></div>`).join("")}</div>`:""}`;
  document.querySelectorAll("#sub button").forEach(b=>b.onclick=()=>{sub=b.dataset.s;render()});
  const list=T[region]||[];const ex=document.getElementById("ex");
- if(region==="spec"){ex.innerHTML=(brush==="green"||brush==="blue")?`<div class="card"><p>שכבות הגג מלמטה למעלה. לחיצה על "פירוק שכבות" בהדמיה מפרידה אותן.</p></div>`+LAYERS.slice().reverse().map(l=>`<div class="lay"><i style="background:#${l.c.toString(16).padStart(6,"0")}"></i><div><h3>${l.n}</h3><p>${l.t}</p></div></div>`).join("")+`<div class="card"><h3>צמחייה לדוגמה, גג אקסטנסיבי</h3><p>זריעת 20 מינים חד שנתיים, 50 זרעים למ\"ר לכל מין, ושתילת 40 עד 50 גרם בצלי צורית גבוהה למ\"ר. משקל המערכת עד 150 ק\"ג למ\"ר.</p><div class="pl">${["בן חצב החורש","שום האבקנים","כדן נאה","נרקיס מצוי","לוף ארצישראלי","חרדל השדה","דרדר כחול","פרג אגסי","אספסת מצויה","דמדומית קטנת-פרי"].map(x=>`<span>${x}</span>`).join("")}</div></div><div class="src">מקור: מדריך לתכנון גגות ירוקים, משרד הבינוי והשיכון והמועצה הישראלית לבנייה ירוקה, דצמבר 2022. נספח א': דוגמה ולא מפרט מחייב.</div>`:`<div class="card"><p>מפרט שכבות זמין לגג ירוק.</p></div>`;meter();return}
+ if(region==="spec"){ex.innerHTML=specHTML();bindSpec();meter();return}
 if(region==="policy"){const G=[["חיוב והסדרה","חקיקה ותקנות, תכניות ארציות, מחוזיות ומקומיות, הנחיות מרחביות, דרישות בהליכי רישוי, מדיניות ועדה מקומית."],["תמרוץ ועידוד","סיוע כספי, מענקים והלוואות. הקלות במיסים והיטלים. האצת רישוי והקלות בירוקרטיות."],["הסברה וחינוך","קמפיינים, הכשרות מקצועיות, \"נאה דורש נאה מקיים\" במגזר הציבורי, תחרויות ופרויקטי הדגמה."]];
  const I=[["ת\"י 5281 ותקנות בנייה בת-קיימה","התקן מחייב כוכב אחד לפחות מאז מרץ 2022. גג מועיל מזכה בנקודות, אך הניקוד המינימלי לא הביא לגגות ירוקים בהיקף משמעותי."],["תיקון 8 לתמ\"א 1 ומדיניות נגר","כל תכנית מפורטת עם בינוי אחראית לניהול נגר בשטחה. מסמך המדיניות (2021, עודכן אפריל 2024) ממליץ על גגות כחולים וירוקים."],["הר/2440 הרצליה, דצמבר 2023","לפחות 40% משטח הגגות בתכנית המפורטת ייקבעו כגג מועיל או ירוק."],["כפר סבא, מרץ 2022","50% משטח הגג במבני משרדים ומסחר מעל 1,000 מ\"ר."],["צהוב: תקנות 6.8.2024","PV בבניין חדש שאינו למגורים עם גג מעל 250 מ\"ר ובצמוד קרקע מעל 100 מ\"ר."]];
  const W=[["צרפת","2015 חובת גג ירוק או PV במסחר חדש. 2019 הסף 1,000 מ\"ר. מ-2023 הסף 500 מ\"ר."],["באזל","2002 חובת גג ירוק בכל הגגות השטוחים החדשים והמשופצים, בקרן שממומנת מ-5% מחשבונות האנרגיה. 2022: 40% מהגגות ירוקים."],["המבורג","3 מיליון אירו לסבסוד עד 60% מההתקנה, קמפיין ומחקר. 168 הקטר ב-2020."],["וינה","מ-2003 סבסוד 8 עד 25 אירו למ\"ר, תקרה 2,200 אירו למבנה, והסמכת מתקינים."],["שיקגו","בונוס זכויות בנייה (FAR) לגג ירוק על 50% מהגג או 2,000 מ\"ר."],["טוקיו","2001 חובת גינות גג: פרטי מעל 1,000 מ\"ר, ציבורי מעל 250. מעל 5,000 מ\"ר: 25% מהגג. אפריל 2025 חובת PV."]];
@@ -282,8 +316,8 @@ if(region==="policy"){const G=[["חיוב והסדרה","חקיקה ותקנות
  if(region==="maint"){const R=[["הסרת צמחייה לא רצויה ומתה",0,1],["בדיקת מערכת ההשקיה",0,1],["דישון",0,1],["שמירה על גבולות, רצועות בטיחות ודרכי גישה",1,1],["הצפת המצע לשטיפת מלחים",0,1],["גיזום ודילול",0,1],["קיבוע וייצוב עצים",0,1],["בדיקת פתחי ניקוז והסרת כלוך",1,1]];ex.innerHTML=`<div class="card"><p>גג אקסטנסיבי דורש ביקור פעם או פעמיים בשנה. אינטנסיבי דורש תחזוקה תכופה. אחרי התבססות הצמחייה (תקופת הקליטה) מפחיתים את הדרישות.</p></div><table><tr><th>פעולה</th><th>אקסטנסיבי</th><th>אינטנסיבי</th></tr>${R.map(r=>`<tr><td>${r[0]}</td><td class="${r[1]?"yes":"no"}">${r[1]?"כן":"לא"}</td><td class="${r[2]?"yes":"no"}">${r[2]?"כן":"לא"}</td></tr>`).join("")}</table><div class="src">מקור: מדריך לתכנון גגות ירוקים, 2022. באקסטנסיבי עם השקיה ייתכן צורך בהסרת צמחים פולשים בקיץ.</div>`;meter();return}
  if(!["blue","green","yellow","active"].includes(brush)){ex.innerHTML=`<div class="card"><p>בחר סוג גג כדי לראות דוגמאות.</p></div>`}
  else if(!list.length){ex.innerHTML=`<div class="empty">לא נמצאה דוגמה מאומתת ${region==="il"?"בארץ":"בעולם"} לסוג זה בחיפוש. מומלץ לבדוק מול מינהל התכנון ופורום ה-15 (מסמך הסקירה ההשוואתי מ-2024).</div>`}
- else ex.innerHTML=list.map(e=>`<div class="card"><h3>${e.t}</h3><div class="where">${e.w}</div><p>${e.p}</p><span class="tag ${e.ok?"t-ok":"t-chk"}">${e.ok?"נמצא במקור מקוון":"ידע כללי, לאימות"}</span>${e.preset?`<button class="load" data-load="1">טען לגג בהדמיה</button>`:""}${e.s?`<div class="src"><a href="${e.s}" target="_blank" rel="noopener">מקור</a></div>`:`<div class="src">מקור: מדריך לתכנון גגות ירוקים, 2022</div>`}</div>`).join("");
- document.querySelectorAll(".load").forEach(b=>b.onclick=()=>{area=2300;sub="living";grid=Array(35).fill("green");gs=Array(35).fill("living");[0,1,34].forEach(i=>grid[i]="tech");brush="green";const a=document.getElementById("area");if(a)a.value=2300;buildRoof();render()});
+ else ex.innerHTML=list.map(exCard).join("");
+ document.querySelectorAll("button.load[data-ex]").forEach(b=>b.onclick=()=>loadEx(b.dataset.ex));
  meter();
 }
 function meter(){
@@ -298,7 +332,7 @@ function meter(){
  const cd=document.getElementById("calc");if(!document.getElementById("area")){cd.innerHTML=`<span>שטח הגג <input id="area" type="number" min="50" max="20000" value="${area}"> מ"ר</span><span>עלות גג ירוק משוערת <b id="cost"></b></span><span>נגר בשעת שיא מהשטח הירוק והכחול <b id="wet"></b></span>`;document.getElementById("area").oninput=e=>{area=Math.max(50,+e.target.value||600);meter()}}
  document.getElementById("cost").textContent=Math.round(cost/1000)*1000>0?Math.round(cost/1000).toLocaleString("he-IL")+" אלף ש\"ח":"0";
  document.getElementById("wet").textContent=wet.toFixed(1)+" מ\"ק לשעה";
- const v=document.getElementById("verdict");const ok=p>=50;v.className=ok?"ok":"bad";v.textContent=ok?"עומד בסף 50%":`חסרים ${Math.ceil(n/2)-good} משבצות`;
+ const v=document.getElementById("verdict");const ok=p>=THR;document.getElementById("thr").style.left=THR+"%";v.className=ok?"ok":"bad";v.textContent=ok?`עומד בסף ${THR}%`:`חסרים ${Math.ceil(n*THR/100)-good} משבצות`;
 }
 
 /* menu */
@@ -321,34 +355,37 @@ const W=COLS*CELL,D=ROWS*CELL,H=6;
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(120,120),new THREE.MeshLambertMaterial({color:0xe6e9ec}));ground.rotation.x=-Math.PI/2;ground.position.y=-H;ground.receiveShadow=true;S.add(ground);
 // building body + neighbors
 const bm=new THREE.MeshLambertMaterial({color:0xf0ebe3});
-const body=new THREE.Mesh(new THREE.BoxGeometry(W,H,D),bm);body.position.y=-H/2;body.castShadow=body.receiveShadow=true;S.add(body);
+const bldg=new THREE.Group();S.add(bldg);
+const body=new THREE.Mesh(new THREE.BoxGeometry(W,H,D),bm);body.position.y=-H/2;body.castShadow=body.receiveShadow=true;bldg.add(body);
 // windows
 const wm=new THREE.MeshLambertMaterial({color:0x8fa6b8});
-for(let f=0;f<3;f++)for(let i=0;i<COLS;i++){[[1,D/2+.01],[-1,-D/2-.01]].forEach(([s,z])=>{const w=new THREE.Mesh(new THREE.PlaneGeometry(1,1),wm);w.position.set(-W/2+CELL/2+i*CELL,-1.3-f*1.8,z);if(s<0)w.rotation.y=Math.PI;S.add(w)})}
+for(let f=0;f<3;f++)for(let i=0;i<COLS;i++){[[1,D/2+.01],[-1,-D/2-.01]].forEach(([s,z])=>{const w=new THREE.Mesh(new THREE.PlaneGeometry(1,1),wm);w.position.set(-W/2+CELL/2+i*CELL,-1.3-f*1.8,z);if(s<0)w.rotation.y=Math.PI;bldg.add(w)})}
 const roofGroup=new THREE.Group();S.add(roofGroup);
 const mats={};const M=(c,o={})=>new THREE.MeshLambertMaterial(Object.assign({color:c},o));
 function cellPos(i){const cx=i%COLS,cz=Math.floor(i/COLS);return[-W/2+CELL/2+cx*CELL,-D/2+CELL/2+cz*CELL]}
-const pickers=[];
+const pickers=[],tiles=[];let THR=50;
 function buildRoof(){
- while(roofGroup.children.length)roofGroup.remove(roofGroup.children[0]);pickers.length=0;
+ while(roofGroup.children.length)roofGroup.remove(roofGroup.children[0]);pickers.length=0;tiles.length=0;
  grid.forEach((t,i)=>{
-  const g=new THREE.Group();const[x,z]=cellPos(i);g.position.set(x,0,z);
+  const g=new THREE.Group();const[x,z]=cellPos(i);g.position.set(x,0,z);const T0={t,g,waterMax:2.5};tiles[i]=T0;
   const base=new THREE.Mesh(new THREE.BoxGeometry(CELL-.06,.18,CELL-.06),M(t==="none"?0x2b2b2b:0x3a3a3a));base.position.y=.09;base.receiveShadow=true;base.userData.i=i;g.add(base);pickers.push(base);
   const add=(geo,mat,px,py,pz)=>{const m=new THREE.Mesh(geo,mat);m.position.set(px,py,pz);m.castShadow=m.receiveShadow=true;m.userData.i=i;g.add(m);pickers.push(m);return m};
   if(t==="green"){const sb=gs[i];const mh=sb==="intensive"?.6:sb==="living"?.4:.3;
-   add(new THREE.BoxGeometry(CELL-.1,mh,CELL-.1),M(0x6b4a2f),0,.18+mh/2,0);
+   T0.soil=add(new THREE.BoxGeometry(CELL-.1,mh,CELL-.1),M(0x6b4a2f),0,.18+mh/2,0);
    const top=.18+mh;
    if(sb==="intensive"){for(let k=0;k<6;k++){add(new THREE.SphereGeometry(.28+Math.random()*.25,8,6),M(0x2e8b4f+Math.floor(Math.random()*0x0a2000)),(Math.random()-.5)*1.5,top+.4,(Math.random()-.5)*1.5)};add(new THREE.CylinderGeometry(.06,.08,.9,6),M(0x5a3b22),.5,top+.45,-.5);add(new THREE.SphereGeometry(.45,8,6),M(0x1f7a3a),.5,top+1.05,-.5)}
    else if(sb==="living"){const fc=[0xc2338a,0x8e5bd0,0xe9c46a,0x6fb34a];for(let k=0;k<14;k++){add(new THREE.SphereGeometry(.1,6,5),M(fc[k%4]),(Math.random()-.5)*1.7,top+.08+Math.random()*.1,(Math.random()-.5)*1.7)}}
    else{for(let k=0;k<12;k++){add(new THREE.SphereGeometry(.12+Math.random()*.08,6,5),M(0x7fae5a+Math.floor(Math.random()*0x0a2000)),(Math.random()-.5)*1.7,top+.06,(Math.random()-.5)*1.7)}}}
   if(t==="blue"){[[-1,0],[1,0],[0,-1],[0,1]].forEach(([a,b])=>add(new THREE.BoxGeometry(a?.08:CELL,.35,b?.08:CELL),M(0x9aa3ad),a*(CELL/2-.05),.3,b*(CELL/2-.05)));
-   add(new THREE.BoxGeometry(CELL-.2,.12,CELL-.2),M(0x1f6fe5,{transparent:true,opacity:.75}),0,.32,0);add(new THREE.CylinderGeometry(.1,.1,.5,8),M(0x333333),.6,.4,.6)}
-  if(t==="yellow"){for(let k=0;k<2;k++){const p=add(new THREE.BoxGeometry(CELL-.4,.06,.65),M(0x1c3a7a),0,.55,-.45+k*.9);p.rotation.x=-.5;add(new THREE.BoxGeometry(.06,.45,.06),M(0x888888),-.6,.3,-.45+k*.9);add(new THREE.BoxGeometry(.06,.45,.06),M(0x888888),.6,.3,-.45+k*.9)}}
+   T0.water=add(new THREE.BoxGeometry(CELL-.2,.12,CELL-.2),M(0x1f6fe5,{transparent:true,opacity:.75}),0,.32,0);add(new THREE.CylinderGeometry(.1,.1,.5,8),M(0x333333),.6,.4,.6)}
+  if(t==="yellow"){for(let k=0;k<2;k++){const p=add(new THREE.BoxGeometry(CELL-.4,.06,.65),M(0x1c3a7a),0,.55,-.45+k*.9);p.rotation.x=.5;add(new THREE.BoxGeometry(.06,.45,.06),M(0x888888),-.6,.3,-.45+k*.9);add(new THREE.BoxGeometry(.06,.45,.06),M(0x888888),.6,.3,-.45+k*.9)}}
   if(t==="active"){add(new THREE.BoxGeometry(CELL-.1,.12,CELL-.1),M(0xc9a26a),0,.24,0);add(new THREE.BoxGeometry(.9,.12,.3),M(0x7a4b25),0,.45,.5);add(new THREE.BoxGeometry(.9,.3,.06),M(0x7a4b25),0,.6,.66);
    [-.5,.5].forEach(px=>{add(new THREE.CylinderGeometry(.1,.1,.55,8),M(0xe8590c),px,.55,-.4);add(new THREE.SphereGeometry(.12,8,6),M(0xf1c9a5),px,.95,-.4)})}
   if(t==="white"){add(new THREE.BoxGeometry(CELL-.1,.1,CELL-.1),M(0xffffff),0,.23,0)}
   if(t==="logi"){add(new THREE.CylinderGeometry(.8,.8,.08,24),M(0x0f766e),0,.22,0);add(new THREE.TorusGeometry(.62,.05,6,24),M(0xffffff),0,.28,0).rotation.x=Math.PI/2;add(new THREE.BoxGeometry(.5,.05,.12),M(0xffffff),0,.3,0)}
   if(t==="tech"){add(new THREE.BoxGeometry(1.2,.8,1.0),M(0x9ca3ad),0,.55,0);add(new THREE.CylinderGeometry(.25,.25,.15,12),M(0x444444),.2,1,0)}
+  const film=new THREE.Mesh(new THREE.PlaneGeometry(CELL-.08,CELL-.08),new THREE.MeshBasicMaterial({color:0x3b82f6,transparent:true,opacity:0,depthWrite:false}));film.rotation.x=-Math.PI/2;film.position.y=.2;g.add(film);T0.film=film;
+  const heat=new THREE.Mesh(new THREE.PlaneGeometry(CELL-.08,CELL-.08),new THREE.MeshBasicMaterial({color:new THREE.Color(hc(HEAT[t]??1)),transparent:true,opacity:.72,depthWrite:false}));heat.rotation.x=-Math.PI/2;heat.position.y=1.3;heat.visible=SIM.m==="heat";g.add(heat);T0.heat=heat;
   roofGroup.add(g);
  });
  // parapet
@@ -356,20 +393,188 @@ function buildRoof(){
  [[W/2,0],[-W/2,0]].forEach(([x,z])=>{const m=new THREE.Mesh(new THREE.BoxGeometry(.2,.5,D),pm);m.position.set(x,.25,z);roofGroup.add(m)});
  meter();
 }
-const explG=new THREE.Group();S.add(explG);
-const EL=[{c:0x2b2b2b,h:.08},{c:0x2f5d50,h:.04},{c:0x8a8f95,h:.05},{c:0x9fd4c4,h:.14},{c:0xe8e8e8,h:.03},{c:0x6b4a2f,h:.35}];
-const explM=EL.map(l=>{const m=new THREE.Mesh(new THREE.BoxGeometry(5,l.h,5),new THREE.MeshLambertMaterial({color:l.c}));m.castShadow=true;explG.add(m);return m});
-const plant=new THREE.Group();for(let k=0;k<14;k++){const p=new THREE.Mesh(new THREE.SphereGeometry(.18+Math.random()*.15,8,6),new THREE.MeshLambertMaterial({color:[0x2e9d4f,0xc2338a,0x8e5bd0,0x6fb34a][k%4]}));p.position.set((Math.random()-.5)*4.2,.15,(Math.random()-.5)*4.2);plant.add(p)}explG.add(plant);
-explG.visible=false;
-function updExpl(){explT+=((exploded?1:0)-explT)*.08;explG.visible=explT>.02;roofGroup.visible=explT<.5;
- const y0=.4;let y=y0;explM.forEach((m,i)=>{y+=EL[i].h/2;m.position.set(0,y+explT*i*.9,0);y+=EL[i].h/2});
- plant.position.y=y+explT*EL.length*.9+.05;explG.position.set(0,0,0)}
+/* ===== חתך פרט ===== */
+const SECV={
+ green_ext:{n:"גג ירוק אקסטנסיבי",tag:"שטוח, שיפוע עד 2%",top:"ext",wall:1,drain:1,wt:"עד 150 ק\"ג למ\"ר",src:"מדריך לתכנון גגות ירוקים 2022, נספח א'",
+  notes:["מצע בעובי עד 20 ס\"מ, השקיה מועטה או ללא, ללא דישון.","שכבות הגג יישאו אישורי יצרן לעמידות של 25 שנים לפחות.","יש לדאוג לבסיס טוב וחפיפה של 10 ס\"מ בחיבורי הגיאוטקסטיל, ולא לאפשר חדירת חומרים לשכבת הניקוז.","הגנה אחידה נגד שורשים בכל האזורים, בהלחמה, עם חפיית 10 ס\"מ. בנקודות ממשק עם קצה הגג, קירות ואלמנטים בולטים: להגביה את השכבה מעל גובה המצע.","מערכת ניקוז: לפחות שני פתחים (רגיל וחירום), פתחי ביקורת נגישים שלא נסתמים בצמחייה. במסלולי ניקוז מצמחייה יש להרחיק אבנים וחצץ."],
+  L:[
+  {n:"תקרת בטון",mm:"",t:"לפי קונסטרוקטור",c:0x9ca3af,v:.7},
+  {n:"בטון שיפועים",mm:"40–140",t:"4 עד 14 ס\"מ. שיפוע עד 2%",c:0xb8bcc4,v:.45},
+  {n:"בידוד תרמי",mm:"",t:"לפי יועץ תרמי. בגג פוך הבידוד מעל האיטום",c:0xf2e6a0,v:.3},
+  {n:"איטום",mm:"",t:"לפי יועץ איטום, ת\"י 1430 ו-1752. בדיקת איטום לפני ההקמה",c:0x2b2b2b,v:.12},
+  {n:"הגנה נגד שורשים",mm:"0.5–1.5",t:"יריעת פוליאתילן. הלחמה, חפיפה 10 ס\"מ, עליית שוליים מעל גובה המצע",c:0x2f5d50,v:.08},
+  {n:"הגנה מכאנית",mm:"1–6",t:"גיאוטקסטיל, לפחות GRK2. אוגר 2 עד 5 ליטר למ\"ר",c:0x8a8f95,v:.12},
+  {n:"שכבת ניקוז",mm:"15–20",t:"תבניות ביצים. 1 ס\"מ למצע עד 10 ס\"מ, 1.5 ס\"מ למצע 10 עד 20, 2 ס\"מ למעל 20. EN 13252",c:0x9fd4c4,v:.3},
+  {n:"שכבת סינון",mm:"",t:"גיאוטקסטיל 25 גר' למ\"ר, קוטר פתחים (O90) 0.06 עד 0.2 מ\"מ. חפיפה 10 ס\"מ",c:0xe8e8e8,v:.06},
+  {n:"מצע גידול",mm:"160",t:"דוגמה: 16 ס\"מ, 80% פרלייט (0.6 מ\"מ) בתוספת טוף, כבול וקומפוסט (סכום האחוזים במקור 110%). חלופה: 12 ס\"מ על בסיס טוף",c:0x6b4a2f,v:.75},
+  {n:"חיפוי",mm:"20",t:"2 ס\"מ חצץ 6 עד 12 מ\"מ (\"שומשום\")",c:0xbdb5a6,v:.1}]},
+ green_living:{n:"גג חי",tag:"צמחייה מקומית, ללא השקיה",top:"living",wall:1,drain:1,wt:"גבוה, לפחות 150 ק\"ג למ\"ר",src:"מדריך לתכנון גגות ירוקים 2022, חתך הגג החי (מרכז מנדל, ירושלים)",
+  notes:["מצע על בסיס אדמה מקומית (טרה-רוסה), עובי מעל 15 ס\"מ. 10 ס\"מ בתעלות ו-20 ס\"מ בתלוליות, לפי החתך.","ללא השקיה וללא דישון. צמחייה מקומית: עשבוניים, סוקולנטים, גאופיטים.","בטון הגנה בין שכבות לפי קונסטרוקטור.","זריעה: ראו נספח א'. פריחה בעיקר בחורף."],
+  L:[
+  {n:"תקרת בטון",mm:"",t:"לפי קונסטרוקטור",c:0x9ca3af,v:.7},
+  {n:"בטון שיפועים",mm:"40–140",t:"4 עד 14 ס\"מ",c:0xb8bcc4,v:.45},
+  {n:"בידוד תרמי",mm:"",t:"לפי יועץ תרמי",c:0xf2e6a0,v:.3},
+  {n:"יריעות איטום",mm:"",t:"לפי יועץ איטום",c:0x2b2b2b,v:.12},
+  {n:"יריעה חוסמת שורשים",mm:"",t:"הלחמה, חפיפה 10 ס\"מ",c:0x2f5d50,v:.08},
+  {n:"יריעת הגנה",mm:"",t:"גיאוטקסטיל",c:0x8a8f95,v:.12},
+  {n:"בטון הגנה",mm:"",t:"לפי קונסטרוקטור",c:0xc7c7c7,v:.3},
+  {n:"יריעת ניקוז",mm:"",t:"לפי שיפוע ונפח הצפוי",c:0x9fd4c4,v:.3},
+  {n:"יריעת סינון",mm:"",t:"25 גר' למ\"ר",c:0xe8e8e8,v:.06},
+  {n:"אדמה מקומית (טרה-רוסה)",mm:"100–200",t:"מינימום 10 ס\"מ, 20 ס\"מ בתלוליות. עפ\"י מפרט טבע (עמיר בלבן)",c:0x8b4a2b,v:.85}]},
+ green_int:{n:"גג ירוק אינטנסיבי",tag:"גינה, השקיה, מצע עמוק",top:"int",wall:1,drain:1,wt:"גבוה",src:"מדריך לתכנון גגות ירוקים 2022, תעודת זהות; סל הכלים (אגמא)",
+  notes:["מצע מעל 20 ס\"מ. עומק מומלץ מ-20 ס\"מ (צמחי כיסוי) עד כ-80 ס\"מ (עצים).","השקיה שוטפת (טפטפות או ממטרות) ודישון שוטף. עלות 800 עד 1,200 ש\"ח למ\"ר.","מצע גבוה מחייב בדיקת עומסים והקמת קורות מתאימים. לעצים: קיבוע וייצוב.","אי אפשר להחדיר ישירות את הנגר מגג אינטנסיבי לתווך הרווי בשל חשש לזיהום בנוטריינטים."],
+  L:[
+  {n:"תקרת בטון",mm:"",t:"לפי קונסטרוקטור, עומס גבוה",c:0x9ca3af,v:.8},
+  {n:"בטון שיפועים",mm:"40–140",t:"4 עד 14 ס\"מ",c:0xb8bcc4,v:.45},
+  {n:"בידוד תרמי",mm:"",t:"לפי יועץ תרמי",c:0xf2e6a0,v:.3},
+  {n:"איטום",mm:"",t:"לפי יועץ איטום",c:0x2b2b2b,v:.12},
+  {n:"הגנה נגד שורשים",mm:"0.5–1.5",t:"פוליאתילן, הלחמה, חפיפה 10 ס\"מ",c:0x2f5d50,v:.08},
+  {n:"הגנה מכאנית",mm:"1–6",t:"גיאוטקסטיל, לפחות GRK2",c:0x8a8f95,v:.12},
+  {n:"שכבת ניקוז",mm:"20+",t:"2 ס\"מ לפחות במצע מעל 20 ס\"מ",c:0x9fd4c4,v:.3},
+  {n:"שכבת סינון",mm:"",t:"גיאוטקסטיל, חפיפה 10 ס\"מ",c:0xe8e8e8,v:.06},
+  {n:"מצע גידול",mm:"200–800",t:"מצע עמוק, ידיד לצמחייה גדולה. עשיר בחומר אורגני",c:0x5a3b22,v:1.25}]},
+ blue_abs:{n:"גג כחול: גג סופח",tag:"דוגמת קמפוס WIX, תל אביב",top:"agg",wall:1,drain:1,overflow:1,wt:"50 עד 60 ק\"ג למ\"ר ברוויה מלאה",src:"סקירת גגות מועילים 2025, עמ' 14 ו-17; סל הכלים של אגמא, גג סופג",
+  notes:["עובי המערכת הכולל בקמפוס WIX: כ-90 מ\"מ. אגירה של כ-120 מ\"ק על 5.5 דונם.","לפי תקן 412 הגג נדרש לעמוד לפחות ב-150 ק\"ג למ\"ר. גג סופח סטנדרטי שוקל 50 עד 60 ק\"ג למ\"ר ברוויה מלאה.","תחזוקה: מניעת סתימות בפתחי הניקוז והשחרור. ניקוי תקופתי.","לא מתאים לבנייה קלה (חלק מהמבנים התעשייתיים) בגלל המשקל.","חובה להתקין על איטום תקין. פתרון הקצה לנגר: מיכל אגירה, בור חלחול, קידוח החדרה או תיעול עירוני."],
+  L:[
+  {n:"תקרה ואיטום קיימים",mm:"",t:"איטום תקין הוא תנאי להתקנה",c:0x6b7280,v:.8},
+  {n:"יריעת הגנה",mm:"",t:"יריעה מגנה על האיטום",c:0x8a8f95,v:.1},
+  {n:"יריעה גיאוטכנית",mm:"",t:"מפרידה ומסננת",c:0xe8e8e8,v:.1},
+  {n:"לוח גג סופח",mm:"",t:"מצע אינרטי (ללא השפעה כימית), עם מערכת פתחים וסכרים שתופסת ומשחררת נגר",c:0x93c5fd,v:.65},
+  {n:"אגרגט בהיר",mm:"",t:"שכבה עליונה שמחזירה קרינה. סה\"כ המערכת כ-90 מ\"מ",c:0xd6d3cb,v:.2}]},
+ blue_simple:{n:"גג כחול בסיסי (גג סופג)",tag:"משטח השהיה ללא מערכת ספיגה",top:"water",wall:1,drain:1,overflow:2,wt:"כ-110 ק\"ג למ\"ר במילוי מלא (חישוב: 1 מ\"מ מים = 1 ק\"ג למ\"ר)",src:"סל הכלים של אגמא, גג סופג. החישוב שלי",
+  notes:["אפשר לייצר גג כחול שינהל נגר במגרש בעלות מינימלית, ללא מערכות ספיגה: מקטינים את קוטר המרזבים ומתקינים פתח overflow בגובה 11 ס\"מ מעל פני הגג.","המים נשארים על הגג עד גובה פתח הגלישה, ומשתחררים לאט דרך המרזב המצומצם.","לבדוק עומסים: 11 ס\"מ מים הם כ-110 ק\"ג למ\"ר. הגג חייב לעמוד בעומס לפי קונסטרוקטור.","איטום מושלם הוא תנאי: מים עומדים לאורך זמן."],
+  L:[
+  {n:"תקרת בטון",mm:"",t:"לפי קונסטרוקטור, בדרך כלל ללא שיפוע",c:0x9ca3af,v:.8},
+  {n:"איטום",mm:"",t:"איטום מושלם, כולל עליית שוליים מעל גובה המים",c:0x2b2b2b,v:.14},
+  {n:"מים מושהים",mm:"110",t:"גובה עד פתח הגלישה, 11 ס\"מ מעל פני הגג",c:0x60a5fa,v:.95,tr:1}]},
+ blue_green:{n:"גג כחול-ירוק",tag:"דוגמת Osborne, ברונקס",top:"bg",wall:1,drain:1,overflow:1,wt:"לפי קונסטרוקטור",src:"סקירת גגות מועילים 2025, עמ' 16; מקרה בוחן שיקגו (Living Architecture Monitor)",
+  notes:["שכבת אבנים וחצץ שמעכבת את חלחול המים, ומעליה צמחייה ללא השקיה.","בשיקגו: משטחי הגג מבטון ללא שיפוע לנפח השהיה מרבי.","הותקן בשליש משטח הגג (כ-665 מ\"ר), אגירה כ-350,000 ליטר, הפחתה של כ-32% מהעומס על הניקוז המקומי.","עובי השכבות לא מפורט במקורות. נדרש יועץ איטום וקונסטרוקטור."],
+  L:[
+  {n:"תקרת בטון",mm:"",t:"ללא שיפוע (במקרה שיקגו)",c:0x9ca3af,v:.8},
+  {n:"איטום והגנה",mm:"",t:"לפי יועץ איטום",c:0x2b2b2b,v:.14},
+  {n:"שכבת אבנים וחצץ",mm:"",t:"משהה את חלחול המים, יוצר נפח אגירה",c:0xb0b4b9,v:.7},
+  {n:"סינון ומצע",mm:"",t:"שכבה דקה לצמחייה",c:0x6b4a2f,v:.3},
+  {n:"צמחייה ללא השקיה",mm:"",t:"גם בית גידול לדבורים (במקרה ברונקס)",c:0x6fb34a,v:.15}]},
+ pv:{n:"גג ירוק-צהוב (ביו-סולארי)",tag:"פאנלים מעל גג ירוק אקסטנסיבי",top:"pv",wall:1,drain:1,wt:"גג ירוק + פאנלים + נטל, לפי קונסטרוקטור",src:"מדריך לתכנון גגות ירוקים 2022, עמ' 44-45; סקירת גגות מועילים 2025, עמ' 32-33",
+  notes:["שורות פאנלים במרחק 75 עד 100 ס\"מ ביניהן (GRO) לגישה לתחזוקה ולהימנעות מהצללה הדדית.","שפה תחתונה של הפאנל לפחות 20 ס\"מ מעל פני המצע.","בדיקת התכנות: משקל משולב של הפאנלים והגג הירוק, כולל עומסי רוח. עיגון הפאנלים לשלד או באמצעות נטל.","הצמחייה: נמוכה ובעלת צל חלקי. מכסה 'בטיחות' בין השורות.","הצבת כבלים וציוד כך שלא יפריעו לתחזוקה. תיאום מועדי שתילה והתקנה.","מחקר בישראל (שינדלר ואחרים, 2018): גג ירוק אקסטנסיבי מושקה בקיץ עדיף על גג רגיל עם פאנלים."],
+  L:[
+  {n:"תקרה, שיפועים ואיטום",mm:"",t:"כמו בגג ירוק אקסטנסיבי",c:0x2b2b2b,v:.7},
+  {n:"הגנה נגד שורשים והגנה מכאנית",mm:"",t:"כמו בגג ירוק אקסטנסיבי",c:0x2f5d50,v:.2},
+  {n:"ניקוז וסינון",mm:"",t:"שכבות כמו בגג ירוק",c:0x9fd4c4,v:.3},
+  {n:"מצע גידול",mm:"120–160",t:"מצע אקסטנסיבי",c:0x6b4a2f,v:.6},
+  {n:"צמחייה נמוכה",mm:"",t:"מתחת ובין הפאנלים. 20 ס\"מ מרווח לפאנל",c:0x7fae5a,v:.12}]},
+ active:{n:"גג פעיל",tag:"מרחב לשהייה ופעילות",top:"active",wall:1,drain:1,wt:"לפי קונסטרוקטור ולפי עומס משתמשים",src:"סקירת גגות מועילים 2025, עמ' 22-25; חוות דעת מתכנן מחוז ת\"א 2025, עמ' 7; מדריך 2022",
+  notes:["מעקה גג לפי ת\"י 1142. בהעלאת מפלס הרצפה יש להעלות את המעקה.","נגישות לפי ת\"י 1918. גג ציבורי: גישה ישירה ממפלס הרחוב, כניסה נפרדת ושטח ציבורי מינימלי רשום.","מילוט אש: מרחק מפתחי מילוט, נתיבי הצלה, תאורה לאורך נתיבי המילוט.","הצללה והגנה מרוח, בדגש על קומות גבוהות. מעל 9 קומות, גג פעיל פחות מומלץ.","הפרדה פיזית בין מערכות טכניות לשימושי הגג, למניעת מפגע חזותי ואקוסטי.","בישראל יש להתחשב בצורך בהצללה ובבחירת חומרים שאינם קולטים חום (הסקירה, על מגרש המשחקים בקופנהגן)."],
+  L:[
+  {n:"תקרת בטון",mm:"",t:"לפי קונסטרוקטור לעומס שימוש",c:0x9ca3af,v:.8},
+  {n:"בטון שיפועים ואיטום",mm:"",t:"לפי יועץ איטום",c:0x2b2b2b,v:.3},
+  {n:"ניקוז והגנה",mm:"",t:"לפי תכנון, מערכת ניקוז לפי ת\"י 1205",c:0x9fd4c4,v:.25},
+  {n:"רצפת גג",mm:"",t:"דק, ריצוף או חומרים שאינם קולטי חום. לא פורט במקורות",c:0xc9a26a,v:.25}]},
+ white:{n:"גג לבן",tag:"ציפוי מחזיר קרינה",top:"white",wall:1,drain:1,wt:"ללא תוספת משמעותית",src:"סקירת גגות מועילים 2025, עמ' 26-28",
+  notes:["ציפוי בהיר על האיטום. עלות והתחזוקה כמו גג רגיל.","בניו יורק: הפחתה של כ-2 עד 3 מעלות בגג ובקומות העליונות.","בשעות היום ההחזר מחמם מעט את המרחב, אך בערב הבניין פולט פחות חום.","פרטי המערכת (עובי, יצרן) לא מפורטים במקורות."],
+  L:[
+  {n:"תקרת בטון",mm:"",t:"לפי קונסטרוקטור",c:0x9ca3af,v:.8},
+  {n:"בטון שיפועים ובידוד",mm:"",t:"לפי יועצים",c:0xb8bcc4,v:.4},
+  {n:"איטום",mm:"",t:"לפי יועץ איטום",c:0x2b2b2b,v:.14},
+  {n:"ציפוי בהיר",mm:"",t:"מחזיר קרינה, אלבדו גבוה",c:0xffffff,v:.1}]},
+ logi:{n:"גג לוגיסטי",tag:"מנחת רחפנים",top:"logi",wall:1,drain:1,wt:"לא נקבע במקורות",src:"סקירת גגות מועילים 2025, עמ' 29-31",
+  notes:["הטכנולוגיה בשלבי התפתחות, ללא תקינה מוסכמת.","נדרשת גמישות תכנונית: שטח פנוי בגג, רעש, בטיחות ופרטיות.","אין פרט ביצוע במקורות."],
+  L:[
+  {n:"תקרת בטון",mm:"",t:"לפי קונסטרוקטור",c:0x9ca3af,v:.8},
+  {n:"איטום",mm:"",t:"לפי יועץ איטום",c:0x2b2b2b,v:.14},
+  {n:"משטח נחיתה",mm:"",t:"לא פורט במקורות",c:0x0f766e,v:.2}]}
+};
+function secVarFor(b){if(b==="blue")return secState.blue||"blue_abs";if(b==="green")return sub==="living"?"green_living":sub==="intensive"?"green_int":"green_ext";if(b==="yellow")return"pv";if(b==="active")return"active";if(b==="white")return"white";if(b==="logi")return"logi";return"green_ext"}
+const secState={on:false,var:"green_ext",blue:"blue_abs",anch:[]};
+const secG=new THREE.Group();secG.visible=false;S.add(secG);
+const secLab=document.getElementById("seclab");
+function buildSec(){
+ while(secG.children.length)secG.remove(secG.children[0]);
+ secLab.innerHTML="";secState.anch=[];secState.drainLab=null;secState.ovfLab=null;
+ const V=SECV[secState.var];let y=0,topY=0;const ls=[];
+ V.L.forEach((l,k)=>{
+  const w=5-k*0.2;
+  const mat=l.tr?M(l.c,{transparent:true,opacity:.7}):M(l.c);
+  const m=new THREE.Mesh(new THREE.BoxGeometry(w,l.v,4),mat);m.castShadow=m.receiveShadow=true;
+  secG.add(m);ls.push({m,k,l,h:l.v,w});
+ });
+ // parapet wall
+ const wallH=V.L.reduce((s,l)=>s+l.v,0)+1.4;
+ secState.wallH=wallH;
+ const wall=new THREE.Mesh(new THREE.BoxGeometry(.4,wallH,4),M(0xe9e4dc));wall.castShadow=true;secG.add(wall);
+ const wallUp=[];
+ const up=(c,hOff,lbl)=>{const p=new THREE.Mesh(new THREE.BoxGeometry(.05,1,3.96),M(c));secG.add(p);wallUp.push({p,hOff,lbl});return p};
+ // upturns: waterproofing and root barrier
+ const iw=V.L.findIndex(l=>/איטום/.test(l.n));const ir=V.L.findIndex(l=>/שורשים/.test(l.n));
+ if(iw>=0)up(0x2b2b2b,.55,"עליית איטום");
+ if(ir>=0)up(0x2f5d50,.8,"עליית יריעה חוסמת שורשים, מעל גובה המצע");
+ // drain
+ const drain=new THREE.Group();
+ if(V.drain){const cy=new THREE.Mesh(new THREE.CylinderGeometry(.18,.18,1,16),M(0x555a60));drain.add(cy);const cap=new THREE.Mesh(new THREE.CylinderGeometry(.3,.3,.12,16),M(0x333333));drain.add(cap);secG.add(drain)}
+ // top decoration
+ const deco=new THREE.Group();secG.add(deco);
+ const rnd=(a)=>(Math.random()-.5)*a;
+ const addD=(g,mat,x,yy,z)=>{const m=new THREE.Mesh(g,mat);m.position.set(x,yy,z);m.castShadow=true;deco.add(m);return m};
+ if(V.top==="ext"||V.top==="pv"){for(let i=0;i<26;i++)addD(new THREE.SphereGeometry(.1+Math.random()*.08,6,5),M(0x7fae5a+Math.floor(Math.random()*0x0a2000)),rnd(4.2)-.1,.06,rnd(3.6))}
+ if(V.top==="living"){const fc=[0xc2338a,0x8e5bd0,0xe9c46a,0x6fb34a];for(let i=0;i<30;i++)addD(new THREE.SphereGeometry(.09,6,5),M(fc[i%4]),rnd(4.2)-.1,.08+Math.random()*.15,rnd(3.6))}
+ if(V.top==="int"){for(let i=0;i<8;i++)addD(new THREE.SphereGeometry(.35+Math.random()*.25,8,6),M(0x2e8b4f+Math.floor(Math.random()*0x0a2000)),rnd(3.8),.3,rnd(3.4));addD(new THREE.CylinderGeometry(.08,.1,1.2,6),M(0x5a3b22),1,.6,-.8);addD(new THREE.SphereGeometry(.6,8,6),M(0x1f7a3a),1,1.4,-.8)}
+ if(V.top==="agg"){for(let i=0;i<30;i++)addD(new THREE.SphereGeometry(.07+Math.random()*.05,5,4),M(0xd6d3cb),rnd(4.2)-.1,.04,rnd(3.6))}
+ if(V.top==="bg"){for(let i=0;i<14;i++)addD(new THREE.SphereGeometry(.18,6,5),M(0x7fae5a),rnd(4.2)-.1,.12,rnd(3.6))}
+ if(V.top==="pv"){for(let r=0;r<2;r++){const p=addD(new THREE.BoxGeometry(3.4,.07,1.3),M(0x1c3a7a),-.2,.95,-1+r*1.9);p.rotation.x=.5;[-1.4,1.2].forEach(px=>addD(new THREE.BoxGeometry(.07,.8,.07),M(0x888888),px,.5,-1+r*1.9))}}
+ if(V.top==="active"){for(let i=0;i<9;i++)addD(new THREE.BoxGeometry(.45,.05,3.8),M(i%2?0xc9a26a:0xb98f55),-2.2+i*.5,.03,0);const rg=addD(new THREE.BoxGeometry(.08,1.1,3.9),M(0x333333),2.4,.55,0);addD(new THREE.BoxGeometry(.08,.08,3.9),M(0x333333),2.4,1.1,0);}
+ if(V.top==="white"){addD(new THREE.BoxGeometry(4.6,.02,3.8),M(0xffffff),-.1,.02,0)}
+ if(V.top==="logi"){addD(new THREE.CylinderGeometry(1.4,1.4,.06,24),M(0x0f766e),0,.04,0);addD(new THREE.TorusGeometry(1.1,.07,6,24),M(0xffffff),0,.09,0).rotation.x=Math.PI/2}
+ // overflow notch (visual: small box on wall) and water
+ let ovf=null;if(V.overflow){ovf=new THREE.Mesh(new THREE.BoxGeometry(.5,.35,.9),M(0xdc2626));secG.add(ovf)}
+ secState.parts={ls,wall,wallUp,drain,deco,ovf,V};
+ // labels DOM
+ const mk=(txt,sub,cls)=>{const d=document.createElement("div");d.className="sl "+(cls||"");d.innerHTML=`<b>${txt}</b><span>${sub}</span>`;secLab.appendChild(d);return d};
+ ls.forEach(o=>{o.lab=mk(o.l.n+(o.l.mm?` · ${o.l.mm} מ"מ`:""),o.l.t)});
+ V.drain&&(secState.drainLab=mk("נקז וגם פתח ביקורת נגיש",'ת"י 1205: לפחות שני פתחים, נגישים'));
+ ovf&&(secState.ovfLab=mk(V.overflow===2?'פתח גלישה בגובה 11 ס"מ':"פתח גלישה (overflow)","מעל פני הגג, למניעת הצפת הגג"));
+ wallUp.forEach(w=>w.lab=mk(w.lbl,"בחיבור לקיר הפרפט"));
+ secState.wallLab=mk('מעקה ופרפט','ת"י 1142 למעקה. גובה לפי תכנון');
+ secState.svg=document.getElementById("secsvg");
+ updSecLayout();
+}
+function updSecLayout(){
+ const P=secState.parts;if(!P)return;const gap=explT*.55;let y=-1.2;
+ P.ls.forEach((o,k)=>{o.m.position.set(-2.5+o.w/2,y+gap*k+o.h/2,0);o.y0=y+gap*k;o.y1=y+gap*k+o.h;y+=o.h});
+ const top=P.ls.length?P.ls[P.ls.length-1].y1:0;secState.top=top;
+ P.wall.position.set(-2.7,-1.2+secState.wallH/2-.1+gap*.5,0);
+ const sub1=(re)=>P.ls.findIndex(o=>re.test(o.l.n));
+ P.wallUp.forEach(w=>{const i=/שורשים/.test(w.lbl)?sub1(/שורשים/):sub1(/איטום/);const o=P.ls[i];const base=o?o.y1:0;const h=top-base+w.hOff;w.p.scale.set(1,h,1);w.p.position.set(-2.46,base+h/2,0)});
+ P.drain.position.set(1.6,(-1.2+top)/2,1.4);P.drain.children[0].scale.set(1,top+1.2,1);P.drain.children[1].position.y=(top+1.2)/2;
+ if(P.ovf){P.ovf.position.set(-2.46,P.V.overflow===2?top:(P.ls[P.ls.length-1].y0+.12),-1.9)}
+ P.deco.position.set(0,top+gap*.3,0);
+}
+function updSec(){
+ const on=secState.on;secG.visible=on;roofGroup.visible=!on;bldg.visible=!on;
+ secLab.style.display=on?"block":"none";document.getElementById("secsvg").style.display=on?"block":"none";
+ if(!on)return;
+ explT+=((expTarget)-explT)*.1;updSecLayout();
+ // project labels
+ const P=secState.parts;if(!P)return;
+ const w=stage.clientWidth,h=stage.clientHeight;
+ const proj=v=>{const p=v.clone().project(cam);return{x:(p.x*.5+.5)*w,y:(-p.y*.5+.5)*h}};
+ const items=[];
+ P.ls.forEach(o=>items.push({d:o.lab,a:proj(new THREE.Vector3(-2.5+o.w,(o.y0+o.y1)/2,2))}));
+ if(secState.drainLab)items.push({d:secState.drainLab,a:proj(new THREE.Vector3(1.6,secState.top+.2,1.4))});
+ if(secState.ovfLab)items.push({d:secState.ovfLab,a:proj(P.ovf.position.clone())});
+ P.wallUp.forEach(wu=>items.push({d:wu.lab,a:proj(new THREE.Vector3(-2.46,wu.p.position.y+wu.p.scale.y/2,2))}));
+ items.push({d:secState.wallLab,a:proj(new THREE.Vector3(-2.7,secState.top+1.0,2))});
+ items.sort((a,b)=>a.a.y-b.a.y);
+ let last=-1e9,x0=Math.max(w*.62,w-250),svg="";
+ items.forEach(it=>{const y=Math.max(last+36,it.a.y-18);last=y;it.d.title=it.d.textContent;it.d.style.left=x0+"px";it.d.style.top=y+"px";svg+=`<line x1="${it.a.x}" y1="${it.a.y}" x2="${x0-2}" y2="${y+18}" stroke="#999" stroke-width="1"/><circle cx="${it.a.x}" cy="${it.a.y}" r="3" fill="#111"/>`});
+ secState.svg.innerHTML=svg;
+}
+let expTarget=0;
 
 /* ===== גשם ונגר ===== */
 const DUR=[10,15,20,30,45,60,90,120,180,240];
 const RS={reg:7,area:30,imp:3,soil:4,custom:0.5,metric:"d50",built:false};
 const METRICS={d50:{n:'גשם יממתי, חזרה 1:50 (מ"מ)',f:g=>g.d50},i560:{n:'עוצמה 60 דק\', חזרה 1:5 (מ"מ/שעה)',f:g=>g.idf[5][5]},i5010:{n:'עוצמה 10 דק\', חזרה 1:50 (מ"מ/שעה)',f:g=>g.idf[50][0]}};
-document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;RS.built=false;render()});
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>{if(secState.on)secToggle();mode=b.dataset.m;RS.built=false;AS.built=false;render()});
 function openCoef(mm){if(RS.soil<0)return RS.custom;const i=Math.max(0,Math.min(9,Math.floor(mm/10)-1));return RAIN.soil[RS.soil].c[i]}
 function calcRunoff(){
  const g=RAIN.reg[RS.reg],A=RS.area,I=Math.min(RS.imp,A),f=I/A;
@@ -448,9 +653,156 @@ function updRain(){
  const roofRun=roofA*0.9*g.d50/1000;
  document.getElementById("rlink").innerHTML=`<b>הקשר לגג שהגדרת בהדמיה</b><br>גג של ${fmt(roofA)} מ"ר ייצר באירוע 1:50 באזור ${g.n} כ-<b>${fmt(roofRun)} מ"ק</b> נגר (מקדם 0.9, ללא השהיה). ${Math.round(good*100)}% מהגג מוגדרים מועילים. זהו חלק מהאטום בתכנית: ${fmt(c.M>0?roofRun/c.V*100:0)}% מהנגר המחושב, אם הגג הוא כל התכסית האטומה בתכנית.`;
 }
+/* ===== סימולציות בתוך המודל ===== */
+const SIM={m:"none",T:50,cap:22,hour:12,p:0,hold:0};
+const simp=document.getElementById("simp");
+const rainPts=(()=>{const n=700,g=new THREE.BufferGeometry(),a=new Float32Array(n*3);for(let i=0;i<n;i++){a[i*3]=(Math.random()-.5)*(W+2);a[i*3+1]=Math.random()*10;a[i*3+2]=(Math.random()-.5)*(D+2)}g.setAttribute("position",new THREE.BufferAttribute(a,3));const p=new THREE.Points(g,new THREE.PointsMaterial({color:0x3b82f6,size:.14,transparent:true,opacity:.85}));p.visible=false;S.add(p);return p})();
+const hc=l=>l<.5?mixc("#3b82f6","#fde047",l/.5):mixc("#fde047","#ef4444",(l-.5)/.5);
+const HEAT={none:1,tech:.95,yellow:.85,logi:.7,active:.6,blue:.45,green:.3,white:.12};
+function rainDepth(){const g=RAIN.reg[RS.reg];return g.idf[SIM.T][5]}
+function setSim(m){
+ SIM.m=SIM.m===m?"none":m;SIM.p=0;SIM.hold=0;
+ document.querySelectorAll(".simb").forEach(b=>b.classList.toggle("on",b.dataset.s===SIM.m));
+ rainPts.visible=SIM.m==="rain";
+ tiles.forEach(t=>{t.heat.visible=SIM.m==="heat"});
+ if(SIM.m!=="sun"){sun.position.set(12,22,10);sun.intensity=.8}
+ S.background.set(0xf4f7fa);S.fog.color.set(0xf4f7fa);
+ simUI();
+}
+function simUI(){
+ simp.style.display=SIM.m==="none"?"none":"block";
+ if(SIM.m==="rain"){const g=RAIN.reg[RS.reg];
+  simp.innerHTML=`<h4>סימולציית גשם</h4><div class="sr">אזור: <b>${g.n}</b> (בחירה במצב "גשם ונגר")</div>
+  <div class="sr"><label>תקופת חזרה <select id="simT"><option value="5">1:5</option><option value="10">1:10</option><option value="25">1:25</option><option value="50">1:50</option><option value="100">1:100</option></select></label></div>
+  <div class="sr"><label>קיבולת השהיה בגג הכחול <input id="simC" type="number" min="5" max="150" value="${SIM.cap}"> מ"מ</label></div>
+  <div class="sr small">ברירת מחדל 22 מ"מ: חישוב שלי מקמפוס WIX (120 מ"ק על 5.5 דונם). גג כחול בסיסי: עד 110 מ"מ.</div>
+  <div id="simO"></div>`;
+  document.getElementById("simT").value=SIM.T;document.getElementById("simT").onchange=e=>{SIM.T=+e.target.value;SIM.p=0;simNums()};
+  document.getElementById("simC").oninput=e=>{SIM.cap=Math.max(1,+e.target.value||22);simNums()};
+  simNums();
+ }
+ if(SIM.m==="sun"){simp.innerHTML=`<h4>סימולציית שמש</h4><div class="sr"><label>שעה <input id="simH" type="range" min="6" max="18" step=".25" value="${SIM.hour}"></label> <b id="simHt"></b></div><div class="sr small">השמש נעה ממזרח למערב דרך דרום (לקדמת המסך). הפאנלים מוטים לדרום. הצללים מוצגים בזמן אמת.</div>`;
+  document.getElementById("simH").oninput=e=>{SIM.hour=+e.target.value;applySun()};applySun();}
+ if(SIM.m==="heat"){simp.innerHTML=`<h4>מפת חום איכותית</h4><div class="heatbar"></div><div class="sr small" style="direction:ltr;display:flex;justify-content:space-between"><span>קר</span><span>חם</span></div><div class="sr small">הערכה יחסית לפי סוג משטח, ללא מדידה. בסיס: סקירת גגות מועילים 2025 (גג לבן מחזיר קרינה, פאנל שחור קולט, הצמחייה מצננת). אינה תחזית טמפרטורה.</div><div id="simO"></div>`;heatNums()}
+}
+function simNums(){
+ const g=RAIN.reg[RS.reg],d=rainDepth(),n=grid.length,c={};grid.forEach(x=>c[x]=(c[x]||0)+1);
+ const cell=area/n,inflow=d/1000*area,held=Math.min(d,SIM.cap)/1000*(c.blue||0)*cell;
+ const o=document.getElementById("simO");if(!o)return;
+ o.innerHTML=`<div class="kv"><span>גשם ב-60 דק'</span><b>${fmt(d,0)} מ"מ</b></div><div class="kv"><span>מים שהגיעו לגג</span><b>${fmt(inflow,1)} מ"ק</b></div><div class="kv"><span>נקלט בגג הכחול</span><b style="color:var(--blue)">${fmt(held,1)} מ"ק</b></div><div class="kv"><span>נשאר לניקוז</span><b style="color:var(--bad)">${fmt(inflow-held,1)} מ"ק</b></div><div class="sr small">ללא הנחת השהיה בגג ירוק, כי המקורות אינם נותנים ערך לכך. נתוני הגשם: מינהל התכנון, נובמבר 2022.</div>`;
+}
+function heatNums(){const n=grid.length;const avg=grid.reduce((s,t)=>s+(HEAT[t]??1),0)/n;const o=document.getElementById("simO");if(o)o.innerHTML=`<div class="kv"><span>מדד חום יחסי של הגג</span><b>${Math.round(avg*100)}</b></div><div class="sr small">100 = גג חשוף כהה. ככל שנמוך יותר, הגג מחמם פחות.</div>`}
+function applySun(){
+ const h=SIM.hour,ang=(h-6)/12*Math.PI,el=Math.max(.08,Math.sin(ang)*1.15),R2=32;
+ sun.position.set(-Math.cos(ang)*R2*Math.cos(el),Math.sin(el)*R2,Math.sin(ang)*R2*Math.cos(el)*.85);
+ sun.intensity=.35+.65*Math.sin(ang);
+ const sky=new THREE.Color().setHSL(.58,.35,.55+.35*Math.sin(ang));S.background.copy(sky);S.fog.color.copy(sky);
+ const t=document.getElementById("simHt");if(t)t.textContent=`${String(Math.floor(h)).padStart(2,"0")}:${String(Math.round((h%1)*60)).padStart(2,"0")} · גובה ${Math.round(el*57.3)} מעלות`;
+}
+function updSim(){
+ if(SIM.m==="rain"){
+  const a=rainPts.geometry.attributes.position;for(let i=0;i<a.count;i++){let y=a.getY(i)-.22;if(y<0)y+=10;a.setY(i,y)}a.needsUpdate=true;
+  if(SIM.p<1)SIM.p+=.004;else{SIM.hold++;if(SIM.hold>240){SIM.p=0;SIM.hold=0}}
+  const d=rainDepth();
+  tiles.forEach(t=>{
+   if(t.water){const f=Math.min(1,SIM.p*d/SIM.cap);const sc=.25+f*(t.waterMax-.25);t.water.scale.y=sc;t.water.position.y=.26+.06*sc}
+   if(t.soil){t.soil.material.color.setHex(0x6b4a2f).lerp(new THREE.Color(0x35261a),Math.min(1,SIM.p*1.5))}
+   if(t.film){t.film.material.opacity=(t.t==="blue"||t.t==="green")?0:.55*Math.min(1,SIM.p*3)}
+  });
+ }else if(SIM.m!=="rain"){tiles.forEach(t=>{if(t.film)t.film.material.opacity=0;if(t.water){t.water.scale.y=1;t.water.position.y=.32}if(t.soil)t.soil.material.color.setHex(0x6b4a2f)})}
+}
+
+/* ===== דוגמאות עם תמונה ושחזור במודל ===== */
+const PAT=s=>{const m={b:"blue",g:"green",y:"yellow",a:"active",w:"white",l:"logi",t:"tech",n:"none"};return s.replace(/\//g,"").split("").map(c=>m[c])};
+const IMGCR={mandel:"צילום: עמיר בלבן, החברה להגנת הטבע",ramathanadiv:"צילום: עידית הוד",dizengoff:"סקירת גגות מועילים 2025",vienna:"צילום: נדב בן ששון",bronx:"צילום: Hazen and Sawyer",wix:"צילום: נועה שטיינברגר",ramatgan:"צילום: שרית לוי-גרוסו",abraham:"צילום: אלכס קולומויסקי",mussrara:"צילום: דור פזואלו",microsoft:"צילום: עמית גירון",copenhagen:"צילום: נועה שטיינברגר",nasa:"צילום: NASA Earth Observatory",viborg:"צילום: Katie Medlock",extroof:"מדריך לתכנון גגות ירוקים 2022",introof:"מדריך לתכנון גגות ירוקים 2022"};
+const EXM={
+ "גג חי, מרכז מנדל":{img:"mandel",pat:"ttggggg/ggggggg/ggggggg/ggggggg/ggggggt",sub:"living",area:2300},
+ "גג ירוק בפארק רמת הנדיב":{img:"ramathanadiv",pat:"ttggggg/ggggggg/ggggggg/ggggggg/ggggggt",sub:"extensive",area:800},
+ "קמפוס WIX":{img:"wix",pat:"bbbgaaa/bbbgaaa/bbbgggg/bbbgggg/bbbggtt",sub:"extensive",area:5500},
+ "גג כחול-ירוק, ארגון Osborne":{img:"bronx",pat:"gggggbb/gggggbb/gggggbb/gggggbb/gggggtt",sub:"extensive",area:2000},
+ "גג כחול עם פאנל סולארי, Village im Dritten":{img:"vienna",pat:"bbyybby/bbyybby/bbyybby/bbyybby/bbyybtt",sub:"extensive",area:1000},
+ "פאנלים על בניינים ברמת גן":{img:"ramatgan",pat:"ttyyyyy/yyyyyyy/yyyyyyy/yyyyyyy/yyyyyyt",sub:"extensive",area:600},
+ "\"המרפסת\", מוסללה":{img:"mussrara",pat:"ttggaaa/aggggaa/aagggaa/aaaaaaa/aaaaatt",sub:"extensive",area:600},
+ "אברהם הוסטל":{img:"abraham",pat:"ttaaggg/aaaaggg/aaaaggg/aaaaggg/aaaaatt",sub:"extensive",area:500},
+ "פארק הגג, דיזנגוף סנטר":{img:"dizengoff",pat:"ttaaggg/aaaaggg/aaaaggg/aaaaaaa/aaaaatt",sub:"intensive",area:1500},
+ "מתחם מיקרוסופט":{img:"microsoft",pat:"ttggaaa/ggggaay/ggggaay/ggggaaa/gggggtt",sub:"intensive",area:2000},
+ "Park n' Play, חניון נורדהאון":{img:"copenhagen",pat:"aaaaaaa/aaaaaaa/aaaaaaa/aaaaaaa/aaaaaaa",sub:"extensive",area:3000},
+ "בניין העירייה, ויבורג":{img:"viborg",pat:"ttyyggg/ggyyggg/ggyyggg/ggyyggg/ggyyggt",sub:"extensive",area:1500},
+ "גגות מצננים":{img:"nasa",pat:"ttwwwww/wwwwwww/wwwwwww/wwwwwww/wwwwwwt",sub:"extensive",area:1000}
+};
+const TIMG={blue:"wix",green:null,yellow:"ramatgan",active:"mussrara",white:"nasa"};
+const SIMG={extensive:"extroof",living:"mandel",intensive:"introof"};
+function exCard(e){const m=EXM[e.t]||{};
+ return `<div class="card">${m.img?`<img class="exi" loading="lazy" src="docs/img/${m.img}.jpg" alt=""><div class="cr">${IMGCR[m.img]||""}</div>`:""}<h3>${e.t}</h3><div class="where">${e.w}</div><p>${e.p}</p><span class="tag ${e.ok?"t-ok":"t-chk"}">${e.ok?"נמצא במקור מקוון":"ידע כללי, לאימות"}</span>${m.pat?`<button class="load" data-ex="${e.t.replace(/"/g,"&quot;")}">הצג במודל התלת-ממדי</button>`:""}${e.s?`<div class="src"><a href="${e.s}" target="_blank" rel="noopener">מקור</a></div>`:`<div class="src">מקור: מדריך לתכנון גגות ירוקים, 2022</div>`}</div>`}
+function loadEx(t){const m=EXM[t];if(!m)return;if(secState.on)secToggle();area=m.area;sub=m.sub;grid=PAT(m.pat);gs=grid.map(()=>m.sub);
+ const a=document.getElementById("area");if(a)a.value=area;
+ buildRoof();mode="roof";document.body.dataset.mode="roof";if(secState.on)buildSec();render()}
+/* ===== מצב אשדוד ===== */
+const AS={use:"res",foot:800,floors:5,built:false};
+const FIT={
+ blue:[["rec","מומלץ"],["rec","מומלץ"],["rec","מומלץ"]],
+ green:[["rec","מומלץ. לבדיקה: הצללה"],["rec","מומלץ. לבדיקה: הצללה"],["rec","מומלץ. לבדיקה: רוח"]],
+ active:[["rec","מומלץ. לבדיקה: הצללה ורוח"],["mid","מומלץ, קושי מסוים בהנגשה לציבור. לבדיקה: הצללה ורוח"],["no","לא מומלץ: קושי משמעותי בהנגשה לציבור ובנוחות השימוש"]],
+ yellow:[["mid","מתאים לכל גובה, אך מומלץ לשלב מקומה 4 ומעלה. לבדיקה: סנוור, הצללה/רוח, חזות"],["rec","מומלץ מקומה 4. לבדיקה: סנוור, הצללה/רוח, חזות"],["rec","מומלץ. לבדיקה: סנוור, הצללה/רוח, חזות"]]
+};
+function ashReq(){
+ if(AS.use==="pub")return{pct:50,applies:true,why:"מבני ומוסדות ציבור, בכל גודל גג: לפחות 50% מסה\"כ שטחי הגגות."};
+ if(AS.foot<500)return{pct:0,applies:false,why:"תכסית מתחת ל-500 מ\"ר: הסף בחוות הדעת אינו חל. מומלץ לשקול גג מועיל בכל זאת."};
+ return AS.use==="res"?{pct:30,applies:true,why:"מבני מגורים עם תכסית 500 מ\"ר ומעלה: לפחות 30% מסה\"כ שטחי הגגות."}:{pct:50,applies:true,why:"מבנים עם משרדים/מסחר ותכסית 500 מ\"ר ומעלה: לפחות 50%."};
+}
+function ashClause(r){const parts=[`במבנים בתחום התכנית יתוכננו גגות מועילים (גג ירוק, גג כחול, גג צהוב או גג פעיל) בהיקף שלא יפחת מ-30% מסה"כ שטחי הגגות במבני מגורים בעלי תכסית של 500 מ"ר ומעלה, מ-50% בבנייני משרדים ומסחר בעלי תכסית של 500 מ"ר ומעלה, ומ-50% במבני ומוסדות ציבור, בכל גודל גג.`,`שטח גג מועיל אינו כולל את השטח הטכני והתפעולי. מערכות לייצור חשמל מתחדש שיוקמו לפי תקנות התכנון והבנייה יימנו בתוך התכסית האמורה.`,`התכנית המפורטת תקבע את סוג השימוש והיקפו בגג, בהתאם למאפייני המרחב, צרכי הפרוגרמה, ייעוד ושימושי הקרקע, ותכסית הבינוי וגובה הבניין. הנחיות לתכנון ולהליך הרישוי יכללו בדיקות הצללה, רוח, סנוור, נגישות, בטיחות, איטום וניקוז.`,`במבנה גבוה יש לבחון את מיקום הגגות המועילים בקומות הנמוכות ובמפלסי המדרגות, ולהעדיף שם גגות פעילים לשימוש הציבור.`];return parts.join("\n\n")}
+function renderAsh(){
+ const r=ashReq(),band=AS.floors<=4?0:AS.floors<=9?1:2;
+ if(!AS.built){AS.built=true;
+  document.getElementById("info").innerHTML=`<h2><i style="background:var(--green)"></i>אשדוד: בדיקת עמידה</h2><div id="insight">מה חל על המבנה, ו<mark>מה</mark> מתאים לגובה שלו</div><div id="desc">הספים לקוחים מחוות דעת מתכנן מחוז תל אביב (ספטמבר 2025). למיטב ידיעתי אשדוד אינה במחוז זה (יש לאמת), ולכן אלה תבנית להשוואה ולא דרישה חלה.</div>
+  <label class="fld">סוג המבנה<select id="aUse"><option value="res">מגורים</option><option value="off">משרדים ומסחר</option><option value="pub">מבנה או מוסד ציבור</option></select></label>
+  <label class="fld">תכסית המבנה (מ"ר)<input id="aFoot" type="number" min="50" step="50" value="${AS.foot}"></label>
+  <label class="fld">מספר קומות<input id="aFl" type="number" min="1" max="60" value="${AS.floors}"></label>`;
+  document.getElementById("aUse").value=AS.use;
+  const up=()=>{AS.use=aUse.value;AS.foot=Math.max(50,+aFoot.value||50);AS.floors=Math.max(1,+aFl.value||1);renderAsh()};
+  ["aUse","aFoot","aFl"].forEach(id=>document.getElementById(id).oninput=up);
+  const L=[["חוות דעת מתכנן מחוז תל אביב, ספטמבר 2025 (PDF)","מקור הספים והטבלאות","docs/district_opinion_2025.pdf"],["סקירת גגות מועילים 2025","מינהל התכנון ופורום ה-15","docs/useful_roofs_review_2025.pdf"],["מבא\"ת: תכניות אשדוד","חיפוש הוראות תכנית המתאר הכוללנית","https://mavat.iplan.gov.il/"],["סל הכלים לניהול נגר","הנחיות לניהול נגר בתכנית","https://runoff.agma.org.il/tools/"]];
+  document.getElementById("ex").innerHTML=L.map(l=>`<a class="lnk" href="${l[2]}" target="_blank" rel="noopener">${l[0]}<small>${l[1]}</small></a>`).join("")+`<div class="src">לא נמצאה מדיניות גגות מועילים של אשדוד בחיפוש. יש לבדוק מול מהנדס העיר.</div>`;
+ }
+ const roof=AS.foot,need=Math.round(roof*r.pct/100);
+ const fitT=["blue","green","active","yellow"],names={blue:"גג כחול",green:"גג ירוק",active:"גג פעיל",yellow:"גג צהוב"},cls={rec:"fitg",mid:"fita",no:"fitr"};
+ const BN=["עד 4 קומות","4 עד 9 קומות","מעל 9 קומות"];
+ document.getElementById("ash").innerHTML=`<div class="ah"><div class="gauge"><div class="gl">הסף החל על המבנה</div><div class="gv">${r.applies?r.pct+"%":"לא חל"}</div><div class="gs">${r.why}</div></div>
+ <div class="gauge b2"><div class="gl">גג מועיל נדרש (אם הגג כולו כתכסית)</div><div class="gv">${r.applies?fmt(need)+" מ\"ר":"-"}</div><div class="gs">מתוך ${fmt(roof)} מ"ר. מערכות PV חובה נספרות בתוך הסף.</div></div></div>
+ <h4 class="ash4">התאמת סוג הגג לגובה הבניין (טבלה 1 בחוות הדעת)</h4>
+ <table class="fit"><tr><th></th>${fitT.map(k=>`<th>${names[k]}</th>`).join("")}</tr>${BN.map((b,i)=>`<tr class="${i===band?"cur":""}"><th>${b}${i===band?" (המבנה שלך)":""}</th>${fitT.map(k=>`<td class="${cls[FIT[k][i][0]]}">${FIT[k][i][1]}</td>`).join("")}</tr>`).join("")}</table>
+ <div class="ab"><button class="load" id="aSim">פתח בהדמיה התלת-ממדית עם הסף הזה</button><button class="load" id="aRain">נגר באשדוד: אזור 7, מישור החוף</button><button class="load" id="aCopy">העתק ניסוח סעיף</button></div>
+ <div class="ac"><div><h4 class="ash4">תהליך וגג פעיל ציבורי</h4><ul><li>גג פעיל ציבורי: נגישות מהרחוב, כניסה נפרדת, שטח ציבורי מינימלי רשום בהוראות.</li><li>בבניין מגדלי: להעדיף גגות פעילים בקומות הנמוכות.</li><li>מערכות טכניות על הגג: הפרדה פיזית ואקוסטית משימושי הגג.</li><li>אפשר לקבוע בתכנית הקמה ייעודית למערכות טכניות, לרבות זכויות בנייה, כדי לפנות את שטח הגג.</li><li>בגג כחול: נפח הנגר הנדרש במגרש לפי תמ"א 1 תיקון 8.</li></ul></div>
+ <div><h4 class="ash4">מה עוד צריך לאשר באשדוד</h4><ul><li>האם יש הנחיות מרחביות או מדיניות ועדה מקומית לגגות.</li><li>הוראות תכנית המתאר הכוללנית לגבי גגות ונגר.</li><li>חוות דעת מתכנן מחוז דרום, אם קיימת.</li><li>סף מחייב או המלצה, וניסוח משפטי.</li></ul></div></div>`;
+ document.getElementById("aSim").onclick=()=>{THR=Math.max(1,r.pct||50);area=roof;mode="roof";const a=document.getElementById("area");if(a)a.value=area;render()};
+ document.getElementById("aRain").onclick=()=>{RS.reg=7;mode="rain";RS.built=false;render()};
+ document.getElementById("aCopy").onclick=()=>{const t=ashClause(r);(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{aCopy.textContent="הועתק"}).catch(()=>{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();aCopy.textContent="הועתק"})};
+}
+
+
+function specHTML(){
+ const key=brush+sub;if(secState.pinKey!==key)secState.var=secVarFor(brush);
+ const V=SECV[secState.var];
+ const opts=Object.keys(SECV).map(k=>`<option value="${k}" ${k===secState.var?"selected":""}>${SECV[k].n}</option>`).join("");
+ const rows=V.L.slice().reverse().map(l=>`<tr><td><i style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#${l.c.toString(16).padStart(6,"0")};margin-inline-end:5px"></i>${l.n}</td><td>${l.mm||"-"}</td><td class="tl">${l.t}</td></tr>`).join("");
+ return `<div class="card"><label class="fld" style="margin-top:0">פרט חתך<select id="secvar">${opts}</select></label><p style="margin-top:6px"><b>${V.tag}</b>. לחיצה על "חתך פרט" בהדמיה מציגה את החתך בתלת-ממד עם סימון כל שכבה, וסרגל "פירוק" מפריד אותן.</p></div>
+ <table class="sp"><tr><th>שכבה (מלמעלה)</th><th>עובי, מ"מ</th><th>מפרט</th></tr>${rows}</table>
+ <div class="lay"><div><h3>משקל המערכת</h3><p>${V.wt}</p></div></div>
+ <div class="card"><h3>הערות ביצוע</h3><ul class="nt">${V.notes.map(n=>`<li>${n}</li>`).join("")}</ul></div>
+ <div class="src">מקור: ${V.src}. פרט עקרוני לפי המקורות, לא תוכנית ביצוע. עובי שאינו מצוין לא פורט במקורות. תכנון ביצוע: יועץ איטום, קונסטרוקטור ואדריכל נוף.</div>`;
+}
+function bindSpec(){const sl=document.getElementById("secvar");if(sl)sl.onchange=()=>{secState.var=sl.value;secState.pinKey=brush+sub;if(secState.on){buildSec();secUI()};render()}}
+function secToggle(){
+ secState.on=!secState.on;document.getElementById("secb").classList.toggle("on",secState.on);
+ if(secState.on){if(SIM.m!=="none")setSim(SIM.m);if(secState.pinKey!==brush+sub)secState.var=secVarFor(brush);region="spec";dist=19;el=.28;az=.5;tgt=.3;expTarget=0;buildSec();secUI();render()}
+ else{dist=40;el=.62;tgt=-1.5;simp.style.display="none";expTarget=0;explT=0}
+ place();
+}
+function secUI(){const V=SECV[secState.var];simp.style.display="block";simp.innerHTML=`<h4>${V.n}</h4><div class="sr small">${V.tag}. החתך מוגדל אנכית לצורך קריאות.</div><div class="sr"><label>פירוק שכבות <input id="expsl" type="range" min="0" max="1" step=".05" value="${expTarget}"></label></div><div class="sr small">מקור: ${V.src}</div>`;document.getElementById("expsl").oninput=e=>{expTarget=+e.target.value}}
+
 /* orbit */
-let az=.7,el=.62,dist=40,drag=null,moved=0;
-function place(){cam.position.set(dist*Math.cos(el)*Math.sin(az),dist*Math.sin(el)-1,dist*Math.cos(el)*Math.cos(az));cam.lookAt(0,-1.5,0)}
+let az=.7,el=.62,dist=40,tgt=-1.5,drag=null,moved=0;
+function place(){cam.position.set(dist*Math.cos(el)*Math.sin(az),dist*Math.sin(el)-1,dist*Math.cos(el)*Math.cos(az));cam.lookAt(0,tgt,0)}
 cv.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY};moved=0;cv.setPointerCapture(e.pointerId);cv.style.cursor="grabbing"});
 cv.addEventListener("pointermove",e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;moved+=Math.abs(dx)+Math.abs(dy);az-=dx*.007;el=Math.max(.08,Math.min(1.45,el+dy*.005));drag={x:e.clientX,y:e.clientY};place()});
 cv.addEventListener("pointerup",e=>{cv.style.cursor="grab";if(drag&&moved<6)pick(e);drag=null});
@@ -461,7 +813,7 @@ function pick(e){const r=cv.getBoundingClientRect();v2.set((e.clientX-r.left)/r.
 function size(){const w=stage.clientWidth,h=stage.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
 new ResizeObserver(size).observe(stage);
 buildRoof();place();render();size();
-(function loop(){requestAnimationFrame(loop);if(!drag)az+=.0015,place();updExpl();R.render(S,cam)})();
+(function loop(){requestAnimationFrame(loop);if(!drag&&!secState.on&&SIM.m!=="sun")az+=.0015;place();updSec();updSim();R.render(S,cam)})();
 </script>
 </body>
 </html>
