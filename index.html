@@ -44,12 +44,15 @@ aside{border-inline-end:1px solid var(--line);display:flex;flex-direction:column
 .facts{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .facts div{background:#f6f6f6;border-radius:8px;padding:6px 9px;font-size:12px;color:var(--mute)}
 .facts b{display:block;color:var(--ink);font-size:13px}
-.tabs{display:flex;gap:6px;padding:10px 16px 0;flex:none}
-.tabs button{border:0;background:#f4f4f4;border-radius:8px;padding:7px 14px;font:800 13px inherit;cursor:pointer}
+.tabs{display:flex;gap:5px;padding:10px 16px 0;flex:none}
+.tabs button{border:0;background:#f4f4f4;border-radius:8px;padding:7px 9px;font:800 13px inherit;cursor:pointer}
 .tabs button.on{background:var(--ink);color:#fff}
 #ex{flex:1;overflow:auto;padding:10px 16px 16px}
 .card{border-bottom:1px solid var(--line);padding:10px 0}
 .card h3{font-size:15px;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}th,td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:center}td:first-child,th:first-child{text-align:right}.yes{color:var(--ok);font-weight:800}.no{color:#bbb}
+.pl{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.pl span{background:#eef6ef;border-radius:6px;padding:2px 8px;font-size:12px}
+.load{border:0;background:var(--ink);color:#fff;border-radius:8px;padding:6px 10px;font:700 12px inherit;cursor:pointer;margin-top:6px}
 .card .where{font-size:12px;color:var(--mute);margin-top:1px}
 .card p{font-size:13px;line-height:1.5;margin-top:4px}
 .tag{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;margin-top:5px}
@@ -101,7 +104,7 @@ dialog button{margin-top:12px}
   </div>
   <aside>
     <div id="info"></div>
-    <div class="tabs"><button data-r="il" class="on">בארץ</button><button data-r="world">בעולם</button><button data-r="spec">מפרט שכבות</button></div>
+    <div class="tabs"><button data-r="il" class="on">בארץ</button><button data-r="world">בעולם</button><button data-r="spec">שכבות</button><button data-r="appr">אישורים</button><button data-r="maint">תחזוקה</button></div>
     <div id="ex"></div>
   </aside>
 </main>
@@ -109,6 +112,7 @@ dialog button{margin-top:12px}
 <p><b>מקור המדיניות:</b> טיוטת החלטה של מליאת ראשי הערים בפורום ה-15 ("גגות מועילים") ומכתב המנכ"ל מ-4.10.2026. פגישת הדיון נקבעה ל-17.11.26.</p>
 <ul><li>גג מועיל מתוכנן בלפחות 50% משטח הגגות, כולל שטחים טכניים.</li><li>ארבעה סוגים: כחול, ירוק, צהוב, פעיל.</li><li>מפרטי גג כחול וירוק מאושרים על ידי אדריכל העיר או מהנדס העיר.</li></ul>
 <p style="margin-top:8px"><b>דוגמאות:</b> לכל דוגמה מסומן אם נמצאה במקור מקוון, או שהיא ידע כללי שדורש אימות לפני פרסום.</p>
+<p style="margin-top:8px"><b>מקור מרכזי לגג ירוק:</b> מדריך לתכנון גגות ירוקים, משרד הבינוי והשיכון והמועצה הישראלית לבנייה ירוקה, דצמבר 2022. המפרטים שבו הם דוגמה ולא מפרט אופטימלי.</p>
 <button class="sq" style="width:auto;padding:0 16px" onclick="document.getElementById('about').close()">סגור</button></dialog>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -126,7 +130,7 @@ const TYPES={
   facts:[["תועלת","קירור, בידוד, מגוון ביולוגי"],["סוגים","אינטנסיבי או אקסטנסיבי"],["תנאי","השקיה, תחזוקה, עומס"],["אישור","מפרט: אדריכל או מהנדס העיר"]],
   il:[
    {t:"הקמפוס הלאומי לארכאולוגיה",w:"ירושלים",p:"פארק ציבורי של כ-1,600 מ\"ר על גג הבניין, במערכת ZinCo. אדריכלות: משה ספדי, נוף: שלמה אהרונסון.",ok:1,s:"https://zinco-greenroof.com/node/556"},
-   {t:"גג חי, בית קרן מעדל",w:"ירושלים",p:"גג חי עם צמחייה מקומית, מתועד במדריך לתכנון גגות ירוקים (2022).",ok:1,s:""},
+   {t:"גג חי, מרכז מנדל",w:"ירושלים",p:"גג חי של 2,300 מ\"ר. מנהל נגר בנפח של עד 130 מ\"ק. מעל 5,000 גאופיטים, ביניהם כ-800 חבצלות קטנות פרחים, 700 כלניות ו-200 רקפות, וכן זריעת חד שנתיים. אדריכלות נוף: ליאור לווינגר.",ok:1,s:"",preset:1},
    {t:"כפר סבא: 50% מהגג",w:"כפר סבא",p:"ועדת משנה, מרץ 2022: במבני משרדים ומסחר מעל 1,000 מ\"ר ובמוסדות השכלה גבוהה, לפחות 50% משטח הגג יתוכנן כגג ירוק, כחול, סולארי או משולב. תקדים ישיר לנוסח פורום ה-15.",ok:1,s:""},
    {t:"תל אביב: מוסדות חינוך",w:"תל אביב",p:"הוועדה המקומית קבעה: על מבני חינוך יוקם גג ירוק אם שטח הגג הפנוי ממערכות גדול מ-250 מ\"ר.",ok:1,s:""},
    {t:"הרצליה, תכנית הר/2440",w:"הרצליה",p:"דרישה להקמת גגות ירוקים על כל הגגות השטוחים בתכנית להתחדשות אזור התעשייה המערבי.",ok:1,s:""},
@@ -141,6 +145,7 @@ const TYPES={
   facts:[["תועלת","ייצור אנרגיה מקומי"],["תנאי","צל, עומס, לוח חשמל"],["רגולציה","חובת PV בבנייה חדשה (ראו דוגמאות)"],["שילוב","מעל גג ירוק או כחול"]],
   il:[
    {t:"חובת פאנלים בבנייה חדשה",w:"ישראל",p:"נדרשת מערכת PV במבנים חדשים לא למגורים עם גג מעל 250 מ\"ר, ובבתים צמודי קרקע עם גג מעל 100 מ\"ר. יעד 3.5 גיגה-וואט עד 2040.",ok:1,s:"https://www.pv-magazine.com/2025/07/02/israel-requires-pv-systems-on-new-residential-commercial-buildings/"},
+   {t:"שילוב גג ירוק וסולארי",w:"מחקרים בישראל ובעולם",p:"יעילות הפאנלים יורדת בכ-0.025% לכל מעלה מעל 28 מעלות. מחקר בישראל (שינדלר ואחרים, 2018) מצא שגג ירוק אקסטנסיבי מושקה בקיץ עדיף על גג רגיל עם פאנלים. לתכנון: מרחק 75 עד 100 ס\"מ בין שורות פאנלים, שפה תחתונה של הפאנל לפחות 20 ס\"מ מעל המצע, והגבהת קורות לעומסים.",ok:1,s:""},
    {t:"גג הכנסת",w:"ירושלים",p:"מערכת של 450 קילו-וואט על גג הכנסת, שהוצגה כפרויקט הסולארי הגדול בעולם שהושלם על ידי בית נבחרים.",ok:1,s:"https://reneweconomy.com.au/israeli-parliament-installs-450kw-rooftop-solar-system-22585"},
    {t:"מפעל אורמט",w:"יבנה",p:"מערכת של כ-1 מגה-וואט על גג של כ-15,000 עד 16,000 מ\"ר. הכותרת \"הגדול במזרח התיכון\" היא טענת היזמים.",ok:1,s:"https://www.greenprophet.com/?p=9354"}],
   world:[
@@ -194,10 +199,13 @@ function render(){
  document.getElementById("info").innerHTML=`<h2><i style="background:${T.css}"></i>${T.name}</h2><div id="insight">${T.insight}</div><div id="desc">${T.desc}</div>${subUI}${facts.length?`<div class="facts">${facts.map(f=>`<div>${f[0]}<b>${f[1]}</b></div>`).join("")}</div>`:""}`;
  document.querySelectorAll("#sub button").forEach(b=>b.onclick=()=>{sub=b.dataset.s;render()});
  const list=T[region]||[];const ex=document.getElementById("ex");
- if(region==="spec"){ex.innerHTML=(brush==="green"||brush==="blue")?`<div class="card"><p>שכבות הגג מלמטה למעלה. לחיצה על "פירוק שכבות" בהדמיה מפרידה אותן.</p></div>`+LAYERS.slice().reverse().map(l=>`<div class="lay"><i style="background:#${l.c.toString(16).padStart(6,"0")}"></i><div><h3>${l.n}</h3><p>${l.t}</p></div></div>`).join("")+`<div class="src">מקור: מדריך לתכנון גגות ירוקים, משרד הבינוי והשיכון והמועצה הישראלית לבנייה ירוקה, דצמבר 2022</div>`:`<div class="card"><p>מפרט שכבות זמין לגג ירוק.</p></div>`;meter();return}
+ if(region==="spec"){ex.innerHTML=(brush==="green"||brush==="blue")?`<div class="card"><p>שכבות הגג מלמטה למעלה. לחיצה על "פירוק שכבות" בהדמיה מפרידה אותן.</p></div>`+LAYERS.slice().reverse().map(l=>`<div class="lay"><i style="background:#${l.c.toString(16).padStart(6,"0")}"></i><div><h3>${l.n}</h3><p>${l.t}</p></div></div>`).join("")+`<div class="card"><h3>צמחייה לדוגמה, גג אקסטנסיבי</h3><p>זריעת 20 מינים חד שנתיים, 50 זרעים למ\"ר לכל מין, ושתילת 40 עד 50 גרם בצלי צורית גבוהה למ\"ר. משקל המערכת עד 150 ק\"ג למ\"ר.</p><div class="pl">${["בן חצב החורש","שום האבקנים","כדן נאה","נרקיס מצוי","לוף ארצישראלי","חרדל השדה","דרדר כחול","פרג אגסי","אספסת מצויה","דמדומית קטנת-פרי"].map(x=>`<span>${x}</span>`).join("")}</div></div><div class="src">מקור: מדריך לתכנון גגות ירוקים, משרד הבינוי והשיכון והמועצה הישראלית לבנייה ירוקה, דצמבר 2022. נספח א': דוגמה ולא מפרט מחייב.</div>`:`<div class="card"><p>מפרט שכבות זמין לגג ירוק.</p></div>`;meter();return}
+ if(region==="appr"){ex.innerHTML=`<div class="card"><h3>אישורים לפי סוג הבניין</h3></div>`+[["בניין חדש","הגג הירוק הוא חלק מהבקשה להיתר. מגישים תכנית גג לפי דרישות הרשות. בהליך הרישוי יש להציג אישור קונסטרוקטור לעומסים, אישור על איטום, ואישור יועץ בטיחות ומחלקת הכבאות."],["בניין קיים","פטור מהיתר לפי תקנה 145ג' לתקנות הפטור, אם העבודות פשוטות הנדסית, ההשפעה על הסביבה מועטה, ואין פגיעה בשלד ובמערכות. בעל הגג מדווח לרשות הרישוי ומוודא שאין סתירה לתכנית."],["מבנה ציבורי","עשויים להידרש אישורים נוספים, וכן הסכמה בכתב של מנהל המוסד."],["רכוש משותף","כשהגג הוא רכוש משותף, נדרשת הסכמה של כל בעלי הדירות באסיפה כללית, לפי חוק הבית המשותף."]].map(a=>`<div class="lay"><div><h3>${a[0]}</h3><p>${a[1]}</p></div></div>`).join("")+`<div class="card"><h3>דרישות מבנה ובטיחות</h3></div>`+[["עומסים","הגג נבדק לפי ת\"י 412. נבחנים משקלי המצע והצמחייה ומשקל מים רוויים, וכן רוחות ומשקעים."],["איטום","נדרש איטום לפי ת\"י 1430 ו-1752. בגג פוך שכבת הבידוד התרמי מעל האיטום."],["ניקוז","מערכת הניקוז לפי ת\"י 1205, עם שתי נקזים לפחות, ופתחי ביקורת נגישים."],["נפילה","מעקה גג לפי ת\"י 1142, והעלאת המעקה אם נוסף מצע."],["אש","בהתאם לתקנות התכנון והבנייה (בטיחות אש). מרחק מפתחי מילוט, ובתקופת ההקמה אין להשאיר חומרים דליקים."],["השקיה","מערכת אוטומטית, ומניעת זרימה חוזרת למי השתייה. בגינות מעל 50 מ\"ר נדרשת מערכת אוטומטית חוסכת מים."]].map(a=>`<div class="lay"><div><h3>${a[0]}</h3><p>${a[1]}</p></div></div>`).join("")+`<div class="src">מקור: מדריך לתכנון גגות ירוקים, 2022. אין חקיקה ארצית שמחייבת גג ירוק. יש לאמת מול מהנדס העיר ולפי הנוסח התקף.</div>`;meter();return}
+ if(region==="maint"){const R=[["הסרת צמחייה לא רצויה ומתה",0,1],["בדיקת מערכת ההשקיה",0,1],["דישון",0,1],["שמירה על גבולות, רצועות בטיחות ודרכי גישה",1,1],["הצפת המצע לשטיפת מלחים",0,1],["גיזום ודילול",0,1],["קיבוע וייצוב עצים",0,1],["בדיקת פתחי ניקוז והסרת כלוך",1,1]];ex.innerHTML=`<div class="card"><p>גג אקסטנסיבי דורש ביקור פעם או פעמיים בשנה. אינטנסיבי דורש תחזוקה תכופה. אחרי התבססות הצמחייה (תקופת הקליטה) מפחיתים את הדרישות.</p></div><table><tr><th>פעולה</th><th>אקסטנסיבי</th><th>אינטנסיבי</th></tr>${R.map(r=>`<tr><td>${r[0]}</td><td class="${r[1]?"yes":"no"}">${r[1]?"כן":"לא"}</td><td class="${r[2]?"yes":"no"}">${r[2]?"כן":"לא"}</td></tr>`).join("")}</table><div class="src">מקור: מדריך לתכנון גגות ירוקים, 2022. באקסטנסיבי עם השקיה ייתכן צורך בהסרת צמחים פולשים בקיץ.</div>`;meter();return}
  if(!["blue","green","yellow","active"].includes(brush)){ex.innerHTML=`<div class="card"><p>בחר סוג גג כדי לראות דוגמאות.</p></div>`}
  else if(!list.length){ex.innerHTML=`<div class="empty">לא נמצאה דוגמה מאומתת ${region==="il"?"בארץ":"בעולם"} לסוג זה בחיפוש. מומלץ לבדוק מול מינהל התכנון ופורום ה-15 (מסמך הסקירה ההשוואתי מ-2024).</div>`}
- else ex.innerHTML=list.map(e=>`<div class="card"><h3>${e.t}</h3><div class="where">${e.w}</div><p>${e.p}</p><span class="tag ${e.ok?"t-ok":"t-chk"}">${e.ok?"נמצא במקור מקוון":"ידע כללי, לאימות"}</span>${e.s?`<div class="src"><a href="${e.s}" target="_blank" rel="noopener">מקור</a></div>`:`<div class="src">מקור: מדריך לתכנון גגות ירוקים, 2022</div>`}</div>`).join("");
+ else ex.innerHTML=list.map(e=>`<div class="card"><h3>${e.t}</h3><div class="where">${e.w}</div><p>${e.p}</p><span class="tag ${e.ok?"t-ok":"t-chk"}">${e.ok?"נמצא במקור מקוון":"ידע כללי, לאימות"}</span>${e.preset?`<button class="load" data-load="1">טען לגג בהדמיה</button>`:""}${e.s?`<div class="src"><a href="${e.s}" target="_blank" rel="noopener">מקור</a></div>`:`<div class="src">מקור: מדריך לתכנון גגות ירוקים, 2022</div>`}</div>`).join("");
+ document.querySelectorAll(".load").forEach(b=>b.onclick=()=>{area=2300;sub="living";grid=Array(35).fill("green");gs=Array(35).fill("living");[0,1,34].forEach(i=>grid[i]="tech");brush="green";const a=document.getElementById("area");if(a)a.value=2300;buildRoof();render()});
  meter();
 }
 function meter(){
