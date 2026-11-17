@@ -57,6 +57,14 @@ aside{border-inline-end:1px solid var(--line);display:flex;flex-direction:column
 .empty{font-size:13px;color:var(--bad);padding:10px 0;font-weight:700}
 .src{font-size:11px;margin-top:4px}
 .src a{color:var(--mute)}
+#sub{display:flex;gap:6px;margin-top:8px}
+#sub button{flex:1;border:0;background:#f4f4f4;border-radius:8px;padding:6px 4px;font:700 12px inherit;cursor:pointer}
+#sub button.on{background:var(--green);color:#fff}
+#calc{grid-column:1/-1;font-size:12px;color:var(--mute);display:flex;gap:14px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:6px}
+#calc b{color:var(--ink)}#calc input{width:70px;border:0;background:#f4f4f4;border-radius:6px;padding:3px 6px;font:700 12px inherit}
+.lay{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
+.lay i{flex:none;width:14px;height:14px;border-radius:3px;margin-top:3px}
+.lay h3{font-size:14px;font-weight:800}.lay p{font-size:12.5px;line-height:1.5;margin-top:2px}
 @media(max-width:820px){
  body{overflow:auto}
  main{display:flex;flex-direction:column}
@@ -88,11 +96,12 @@ dialog button{margin-top:12px}
       <div><div id="pct">0%</div><div style="font-size:11px;color:var(--mute)">שטח גג מועיל</div></div>
       <div><div id="bar"><div id="thr"></div></div><div style="font-size:11px;color:var(--mute);margin-top:4px">הקו השחור: סף 50% מסך הגגות, כולל שטחים טכניים</div></div>
       <div id="verdict" class="bad"></div>
+      <div id="calc"></div>
     </div>
   </div>
   <aside>
     <div id="info"></div>
-    <div class="tabs"><button data-r="il" class="on">בארץ</button><button data-r="world">בעולם</button></div>
+    <div class="tabs"><button data-r="il" class="on">בארץ</button><button data-r="world">בעולם</button><button data-r="spec">מפרט שכבות</button></div>
     <div id="ex"></div>
   </aside>
 </main>
@@ -117,6 +126,11 @@ const TYPES={
   facts:[["תועלת","קירור, בידוד, מגוון ביולוגי"],["סוגים","אינטנסיבי או אקסטנסיבי"],["תנאי","השקיה, תחזוקה, עומס"],["אישור","מפרט: אדריכל או מהנדס העיר"]],
   il:[
    {t:"הקמפוס הלאומי לארכאולוגיה",w:"ירושלים",p:"פארק ציבורי של כ-1,600 מ\"ר על גג הבניין, במערכת ZinCo. אדריכלות: משה ספדי, נוף: שלמה אהרונסון.",ok:1,s:"https://zinco-greenroof.com/node/556"},
+   {t:"גג חי, בית קרן מעדל",w:"ירושלים",p:"גג חי עם צמחייה מקומית, מתועד במדריך לתכנון גגות ירוקים (2022).",ok:1,s:""},
+   {t:"כפר סבא: 50% מהגג",w:"כפר סבא",p:"ועדת משנה, מרץ 2022: במבני משרדים ומסחר מעל 1,000 מ\"ר ובמוסדות השכלה גבוהה, לפחות 50% משטח הגג יתוכנן כגג ירוק, כחול, סולארי או משולב. תקדים ישיר לנוסח פורום ה-15.",ok:1,s:""},
+   {t:"תל אביב: מוסדות חינוך",w:"תל אביב",p:"הוועדה המקומית קבעה: על מבני חינוך יוקם גג ירוק אם שטח הגג הפנוי ממערכות גדול מ-250 מ\"ר.",ok:1,s:""},
+   {t:"הרצליה, תכנית הר/2440",w:"הרצליה",p:"דרישה להקמת גגות ירוקים על כל הגגות השטוחים בתכנית להתחדשות אזור התעשייה המערבי.",ok:1,s:""},
+   {t:"ירושלים, תכנית 101-0406009",w:"ירושלים",p:"בנין מדגל: נדרש גג חי להתאמה לאתר טבע עירוני ובסמיכות לאפיק נחל.",ok:1,s:""},
    {t:"בניין PSES (הקפסולה), אוניברסיטת תל אביב",w:"תל אביב",p:"כמחצית משטח הגג מכוסה צמחייה מקומית חסכונית במים, בעיקר סוקולנטים וקקטוסים. הגג משמש מעבדת מחקר וכיתה פתוחה.",ok:1,s:"https://en-environment.tau.ac.il/PSESbuilding/Green_Roof"}],
   world:[
    {t:"ACROS Fukuoka",w:"פוקואוקה, יפן",p:"בניין עם גג גן מדורג שהופך את הבניין לפארק עירוני.",ok:0},
@@ -144,17 +158,29 @@ const TYPES={
  tech:{name:"שטח טכני",color:0x6b7280,css:"var(--tech)",insight:"נספר במכנה, <mark>לא</mark> במונה",desc:"מערכות מיזוג, חימום וכד'. לפי הנוסח המוצע הן נכללות בסך שטח הגגות, ולכן מקטינות את שיעור הגג המועיל.",facts:[],il:[],world:[]},
  none:{name:"גג חשוף",color:0x2b2b2b,css:"#2b2b2b",insight:"גג <mark>בלי</mark> תועלת",desc:"איטום חשוף. אין תרומה לעיר.",facts:[],il:[],world:[]}
 };
+const GSUB={
+ extensive:{n:"אקסטנסיבי",f:[["עובי מצע","עד 20 ס\"מ"],["השקיה","מועטה או ללא"],["עומס","נמוך, עד כ-150 ק\"ג למ\"ר"],["עלות","כ-600 ש\"ח למ\"ר"],["צמחייה","חד שנתיים, סוקולנטים, גאופיטים קטנים"],["תחזוקה","מועטה, בדיקת פתחי ניקוז"]],cost:600},
+ living:{n:"גג חי",f:[["עובי מצע","מעל 15 ס\"מ, אדמה מקומית"],["השקיה","ללא, וללא דישון"],["עומס","גבוה, לפחות 150 ק\"ג למ\"ר"],["עלות","כ-400 ש\"ח למ\"ר"],["צמחייה","מקומית: עשבוניים, סוקולנטים, גאופיטים"],["תחזוקה","מועטה, פתחי ניקוז"]],cost:400},
+ intensive:{n:"אינטנסיבי",f:[["עובי מצע","מעל 20 ס\"מ"],["השקיה","שוטפת"],["עומס","גבוה"],["עלות","800 עד 1,200 ש\"ח למ\"ר"],["צמחייה","דשא, שיחים ועצים"],["תחזוקה","מרובה: השקיה, דישון, גיזום"]],cost:1000}};
+const LAYERS=[
+ {n:"מצע גידול",c:0x6b4a2f,t:"אורגני, מינרלי או אדמה מקומית. קובע איזה צמחים יתפתחו. אינטנסיבי: בעל חומר אורגני גבוה. אקסטנסיבי: כ-10 עד 20% חומר אורגני."},
+ {n:"שכבת סינון",c:0xe8e8e8,t:"יריעת גיאוטקסטיל מעל הניקוז, למניעת סתימה. מעבר מים בלבד. חפיפה של 10 ס\"מ לפחות, ועליית שוליים כדי שהמצע לא יחדור לניקוז."},
+ {n:"שכבת ניקוז",c:0x9fd4c4,t:"אגירת מים וניקוז עודפים, בתבניות ביצים או חצץ. עובי מינימלי 1.5 ס\"מ במצע עד 20 ס\"מ, ו-2 ס\"מ במצע מעליו. עומד בעומס."},
+ {n:"שכבת הגנה מכאנית",c:0x8a8f95,t:"גיאוטקסטיל, לפחות GRK2, שמגן על ההגנה נגד שורשים מנזק. אוגר כ-2 עד 5 ליטר למ\"ר."},
+ {n:"הגנה נגד שורשים",c:0x2f5d50,t:"יריעה, בדרך כלל פוליאתילן, עובי 0.5 עד 1.5 מ\"מ. חובה בכל סוגי הגג הירוק. חיבור היריעות בהלחמה עם חפיית 10 ס\"מ."},
+ {n:"איטום הגג",c:0x2b2b2b,t:"נדרש איטום עמיד בהתאם לתקנות. אישורי היצרן לעמידות של 25 שנים לפחות, ובדיקת איטום לפני ההקמה."}];
 const ORDER=["blue","green","yellow","active","tech","none"];
 const COLS=7,ROWS=5,CELL=2;
-let brush="green",region="il",grid=Array(COLS*ROWS).fill("none");
+let sub="extensive",area=600,exploded=false,explT=0,gs=Array(35).fill("extensive"),brush="green",region="il",grid=Array(COLS*ROWS).fill("none");
 // preset: a few technical cells
 [0,1,COLS*ROWS-1].forEach(i=>grid[i]="tech");
 
 /* UI */
 const hud=document.getElementById("hud");
 ORDER.forEach(k=>{const b=document.createElement("button");b.className="brush";b.dataset.k=k;b.innerHTML=`<i style="background:${TYPES[k].css}"></i>${TYPES[k].name}`;b.onclick=()=>{brush=k;render()};hud.appendChild(b)});
-const fill=document.createElement("button");fill.className="brush";fill.textContent="מלא הכול";fill.onclick=()=>{grid=grid.map(g=>g==="tech"?g:brush);buildRoof();render()};hud.appendChild(fill);
+const fill=document.createElement("button");fill.className="brush";fill.textContent="מלא הכול";fill.onclick=()=>{grid=grid.map(g=>g==="tech"?g:brush);gs=gs.map(()=>sub);buildRoof();render()};hud.appendChild(fill);
 const rst=document.createElement("button");rst.className="brush";rst.textContent="איפוס";rst.onclick=reset;hud.appendChild(rst);
+const ex2=document.createElement("button");ex2.className="brush";ex2.textContent="פירוק שכבות";ex2.onclick=()=>{exploded=!exploded;ex2.classList.toggle("on",exploded)};hud.appendChild(ex2);
 function reset(){grid=Array(COLS*ROWS).fill("none");[0,1,COLS*ROWS-1].forEach(i=>grid[i]="tech");buildRoof();render()}
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{region=b.dataset.r;render()});
 document.getElementById("home").onclick=e=>{e.preventDefault();brush="green";region="il";render()};
@@ -163,11 +189,15 @@ function render(){
  document.querySelectorAll(".brush[data-k]").forEach(b=>b.classList.toggle("on",b.dataset.k===brush));
  document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.r===region));
  const T=TYPES[brush];
- document.getElementById("info").innerHTML=`<h2><i style="background:${T.css}"></i>${T.name}</h2><div id="insight">${T.insight}</div><div id="desc">${T.desc}</div>${T.facts.length?`<div class="facts">${T.facts.map(f=>`<div>${f[0]}<b>${f[1]}</b></div>`).join("")}</div>`:""}`;
+ const facts=brush==="green"?GSUB[sub].f:T.facts;
+ const subUI=brush==="green"?`<div id="sub">${Object.keys(GSUB).map(k=>`<button data-s="${k}" class="${k===sub?"on":""}">${GSUB[k].n}</button>`).join("")}</div>`:"";
+ document.getElementById("info").innerHTML=`<h2><i style="background:${T.css}"></i>${T.name}</h2><div id="insight">${T.insight}</div><div id="desc">${T.desc}</div>${subUI}${facts.length?`<div class="facts">${facts.map(f=>`<div>${f[0]}<b>${f[1]}</b></div>`).join("")}</div>`:""}`;
+ document.querySelectorAll("#sub button").forEach(b=>b.onclick=()=>{sub=b.dataset.s;render()});
  const list=T[region]||[];const ex=document.getElementById("ex");
+ if(region==="spec"){ex.innerHTML=(brush==="green"||brush==="blue")?`<div class="card"><p>שכבות הגג מלמטה למעלה. לחיצה על "פירוק שכבות" בהדמיה מפרידה אותן.</p></div>`+LAYERS.slice().reverse().map(l=>`<div class="lay"><i style="background:#${l.c.toString(16).padStart(6,"0")}"></i><div><h3>${l.n}</h3><p>${l.t}</p></div></div>`).join("")+`<div class="src">מקור: מדריך לתכנון גגות ירוקים, משרד הבינוי והשיכון והמועצה הישראלית לבנייה ירוקה, דצמבר 2022</div>`:`<div class="card"><p>מפרט שכבות זמין לגג ירוק.</p></div>`;meter();return}
  if(!["blue","green","yellow","active"].includes(brush)){ex.innerHTML=`<div class="card"><p>בחר סוג גג כדי לראות דוגמאות.</p></div>`}
  else if(!list.length){ex.innerHTML=`<div class="empty">לא נמצאה דוגמה מאומתת ${region==="il"?"בארץ":"בעולם"} לסוג זה בחיפוש. מומלץ לבדוק מול מינהל התכנון ופורום ה-15 (מסמך הסקירה ההשוואתי מ-2024).</div>`}
- else ex.innerHTML=list.map(e=>`<div class="card"><h3>${e.t}</h3><div class="where">${e.w}</div><p>${e.p}</p><span class="tag ${e.ok?"t-ok":"t-chk"}">${e.ok?"נמצא במקור מקוון":"ידע כללי, לאימות"}</span>${e.s?`<div class="src"><a href="${e.s}" target="_blank" rel="noopener">מקור</a></div>`:""}</div>`).join("");
+ else ex.innerHTML=list.map(e=>`<div class="card"><h3>${e.t}</h3><div class="where">${e.w}</div><p>${e.p}</p><span class="tag ${e.ok?"t-ok":"t-chk"}">${e.ok?"נמצא במקור מקוון":"ידע כללי, לאימות"}</span>${e.s?`<div class="src"><a href="${e.s}" target="_blank" rel="noopener">מקור</a></div>`:`<div class="src">מקור: מדריך לתכנון גגות ירוקים, 2022</div>`}</div>`).join("");
  meter();
 }
 function meter(){
@@ -177,6 +207,11 @@ function meter(){
  document.getElementById("pct").textContent=p+"%";
  const bar=document.getElementById("bar");bar.querySelectorAll("span").forEach(s=>s.remove());
  ["blue","green","yellow","active"].forEach(k=>{if(c[k]){const s=document.createElement("span");s.style.width=(c[k]/n*100)+"%";s.style.background=TYPES[k].css;bar.insertBefore(s,document.getElementById("thr"))}});
+ const cellArea=area/n;let cost=0;grid.forEach((g,i)=>{if(g==="green")cost+=cellArea*GSUB[gs[i]].cost});
+ const wet=((c.green||0)+(c.blue||0))*cellArea*0.028*0.9;
+ const cd=document.getElementById("calc");if(!document.getElementById("area")){cd.innerHTML=`<span>שטח הגג <input id="area" type="number" min="50" max="20000" value="${area}"> מ"ר</span><span>עלות גג ירוק משוערת <b id="cost"></b></span><span>נגר בשעת שיא מהשטח הירוק והכחול <b id="wet"></b></span>`;document.getElementById("area").oninput=e=>{area=Math.max(50,+e.target.value||600);meter()}}
+ document.getElementById("cost").textContent=Math.round(cost/1000)*1000>0?Math.round(cost/1000).toLocaleString("he-IL")+" אלף ש\"ח":"0";
+ document.getElementById("wet").textContent=wet.toFixed(1)+" מ\"ק לשעה";
  const v=document.getElementById("verdict");const ok=p>=50;v.className=ok?"ok":"bad";v.textContent=ok?"עומד בסף 50%":`חסרים ${Math.ceil(n/2)-good} משבצות`;
 }
 
@@ -214,8 +249,12 @@ function buildRoof(){
   const g=new THREE.Group();const[x,z]=cellPos(i);g.position.set(x,0,z);
   const base=new THREE.Mesh(new THREE.BoxGeometry(CELL-.06,.18,CELL-.06),M(t==="none"?0x2b2b2b:0x3a3a3a));base.position.y=.09;base.receiveShadow=true;base.userData.i=i;g.add(base);pickers.push(base);
   const add=(geo,mat,px,py,pz)=>{const m=new THREE.Mesh(geo,mat);m.position.set(px,py,pz);m.castShadow=m.receiveShadow=true;m.userData.i=i;g.add(m);pickers.push(m);return m};
-  if(t==="green"){add(new THREE.BoxGeometry(CELL-.1,.35,CELL-.1),M(0x6b4a2f),0,.3,0);
-   for(let k=0;k<7;k++){add(new THREE.SphereGeometry(.2+Math.random()*.18,8,6),M(0x2e9d4f+Math.floor(Math.random()*0x103000)),(Math.random()-.5)*1.5,.62,(Math.random()-.5)*1.5)}}
+  if(t==="green"){const sb=gs[i];const mh=sb==="intensive"?.6:sb==="living"?.4:.3;
+   add(new THREE.BoxGeometry(CELL-.1,mh,CELL-.1),M(0x6b4a2f),0,.18+mh/2,0);
+   const top=.18+mh;
+   if(sb==="intensive"){for(let k=0;k<6;k++){add(new THREE.SphereGeometry(.28+Math.random()*.25,8,6),M(0x2e8b4f+Math.floor(Math.random()*0x0a2000)),(Math.random()-.5)*1.5,top+.4,(Math.random()-.5)*1.5)};add(new THREE.CylinderGeometry(.06,.08,.9,6),M(0x5a3b22),.5,top+.45,-.5);add(new THREE.SphereGeometry(.45,8,6),M(0x1f7a3a),.5,top+1.05,-.5)}
+   else if(sb==="living"){const fc=[0xc2338a,0x8e5bd0,0xe9c46a,0x6fb34a];for(let k=0;k<14;k++){add(new THREE.SphereGeometry(.1,6,5),M(fc[k%4]),(Math.random()-.5)*1.7,top+.08+Math.random()*.1,(Math.random()-.5)*1.7)}}
+   else{for(let k=0;k<12;k++){add(new THREE.SphereGeometry(.12+Math.random()*.08,6,5),M(0x7fae5a+Math.floor(Math.random()*0x0a2000)),(Math.random()-.5)*1.7,top+.06,(Math.random()-.5)*1.7)}}}
   if(t==="blue"){[[-1,0],[1,0],[0,-1],[0,1]].forEach(([a,b])=>add(new THREE.BoxGeometry(a?.08:CELL,.35,b?.08:CELL),M(0x9aa3ad),a*(CELL/2-.05),.3,b*(CELL/2-.05)));
    add(new THREE.BoxGeometry(CELL-.2,.12,CELL-.2),M(0x1f6fe5,{transparent:true,opacity:.75}),0,.32,0);add(new THREE.CylinderGeometry(.1,.1,.5,8),M(0x333333),.6,.4,.6)}
   if(t==="yellow"){for(let k=0;k<2;k++){const p=add(new THREE.BoxGeometry(CELL-.4,.06,.65),M(0x1c3a7a),0,.55,-.45+k*.9);p.rotation.x=-.5;add(new THREE.BoxGeometry(.06,.45,.06),M(0x888888),-.6,.3,-.45+k*.9);add(new THREE.BoxGeometry(.06,.45,.06),M(0x888888),.6,.3,-.45+k*.9)}}
@@ -229,6 +268,14 @@ function buildRoof(){
  [[W/2,0],[-W/2,0]].forEach(([x,z])=>{const m=new THREE.Mesh(new THREE.BoxGeometry(.2,.5,D),pm);m.position.set(x,.25,z);roofGroup.add(m)});
  meter();
 }
+const explG=new THREE.Group();S.add(explG);
+const EL=[{c:0x2b2b2b,h:.08},{c:0x2f5d50,h:.04},{c:0x8a8f95,h:.05},{c:0x9fd4c4,h:.14},{c:0xe8e8e8,h:.03},{c:0x6b4a2f,h:.35}];
+const explM=EL.map(l=>{const m=new THREE.Mesh(new THREE.BoxGeometry(5,l.h,5),new THREE.MeshLambertMaterial({color:l.c}));m.castShadow=true;explG.add(m);return m});
+const plant=new THREE.Group();for(let k=0;k<14;k++){const p=new THREE.Mesh(new THREE.SphereGeometry(.18+Math.random()*.15,8,6),new THREE.MeshLambertMaterial({color:[0x2e9d4f,0xc2338a,0x8e5bd0,0x6fb34a][k%4]}));p.position.set((Math.random()-.5)*4.2,.15,(Math.random()-.5)*4.2);plant.add(p)}explG.add(plant);
+explG.visible=false;
+function updExpl(){explT+=((exploded?1:0)-explT)*.08;explG.visible=explT>.02;roofGroup.visible=explT<.5;
+ const y0=.4;let y=y0;explM.forEach((m,i)=>{y+=EL[i].h/2;m.position.set(0,y+explT*i*.9,0);y+=EL[i].h/2});
+ plant.position.y=y+explT*EL.length*.9+.05;explG.position.set(0,0,0)}
 /* orbit */
 let az=.7,el=.62,dist=40,drag=null,moved=0;
 function place(){cam.position.set(dist*Math.cos(el)*Math.sin(az),dist*Math.sin(el)-1,dist*Math.cos(el)*Math.cos(az));cam.lookAt(0,-1.5,0)}
@@ -238,11 +285,11 @@ cv.addEventListener("pointerup",e=>{cv.style.cursor="grab";if(drag&&moved<6)pick
 cv.addEventListener("wheel",e=>{e.preventDefault();dist=Math.max(10,Math.min(50,dist*(1+e.deltaY*.001)));place()},{passive:false});
 const ray=new THREE.Raycaster(),v2=new THREE.Vector2();
 function pick(e){const r=cv.getBoundingClientRect();v2.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(v2,cam);
- const h=ray.intersectObjects(pickers)[0];if(h){grid[h.object.userData.i]=brush;buildRoof();render()}}
+ const h=ray.intersectObjects(pickers)[0];if(h){grid[h.object.userData.i]=brush;gs[h.object.userData.i]=sub;buildRoof();render()}}
 function size(){const w=stage.clientWidth,h=stage.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
 new ResizeObserver(size).observe(stage);
 buildRoof();place();render();size();
-(function loop(){requestAnimationFrame(loop);if(!drag)az+=.0015,place();R.render(S,cam)})();
+(function loop(){requestAnimationFrame(loop);if(!drag)az+=.0015,place();updExpl();R.render(S,cam)})();
 </script>
 </body>
 </html>
