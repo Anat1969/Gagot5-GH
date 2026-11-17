@@ -76,6 +76,7 @@ table.sp{width:100%;border-collapse:collapse;font-size:12px}table.sp th{backgrou
 body[data-mode=rain] #rain{display:grid}
 body:not([data-mode=roof]) canvas,body:not([data-mode=roof]) #hud,body:not([data-mode=roof]) #meter,body:not([data-mode=roof]) #hint,body:not([data-mode=roof]) .tabs,body:not([data-mode=roof]) #simp,body:not([data-mode=roof]) #seclab,body:not([data-mode=roof]) #secsvg{display:none}
 body[data-mode=ash] #ash{display:block}
+body[data-mode=ins] #insp{display:block}
 body[data-mode=roof] #foot2{display:none}
 #rmap{padding:10px 8px;display:flex;flex-direction:column;border-inline-end:1px solid var(--line);min-height:0}
 #mpills{display:flex;flex-direction:column;gap:5px;margin-bottom:6px}
@@ -109,7 +110,15 @@ body[data-mode=roof] #foot2{display:none}
 .lnk:hover{color:var(--blue)}
 #foot{flex:none;border-top:1px solid var(--line);padding:8px 16px;font-size:12px;display:flex;gap:14px;flex-wrap:wrap}
 #foot a{color:var(--ink);font-weight:700}
-#ash{display:none;position:absolute;inset:0;background:#fff;overflow:auto;padding:16px 20px}
+#ash,#insp{display:none;position:absolute;inset:0;background:#fff;overflow:auto;padding:16px 20px}
+.ihd{border-inline-start:6px solid #111;padding:4px 14px;margin-bottom:6px}.ihd h2{font-size:26px;font-weight:900}.ih2{font-size:15px;font-weight:700;margin-top:2px}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.ic{background:#f6f6f6;border-radius:12px;padding:10px 14px}.ic h4{font-size:13px;font-weight:900;margin-bottom:4px}.ia{background:#eef2fb}.ir{margin-top:10px;background:#fdf1f1}
+ul.il{padding-inline-start:18px;font-size:12.5px;line-height:1.55}ul.il li{margin:3px 0}
+.tg{display:inline-block;font-size:10px;font-weight:800;border-radius:4px;padding:0 5px;margin-inline-start:3px;vertical-align:1px}.tg-f{background:#dff3e4;color:#1b6b36}.tg-d{background:#e0e9fb;color:#1c3f94}.tg-h{background:#fdf1c8;color:#7a5a00}
+.inav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.inav button{display:flex;align-items:center;gap:6px;border:0;background:#f4f4f4;border-radius:8px;padding:7px 10px;font:700 12.5px inherit;cursor:pointer}.inav button i{width:10px;height:10px;border-radius:3px;display:block}.inav button.on{background:var(--ink);color:#fff}.inav .pol{background:#fff3a8}.inav .pol.on{background:var(--ink)}
+.ibar{width:100%;max-width:640px;height:auto;display:block}.ibar text{font:11px Heebo,Assistant,sans-serif;fill:#555}.ibar .bv{font-weight:800;fill:#111}
+ol.pr{padding-inline-start:20px;font-size:13px;line-height:1.55}ol.pr li{margin:5px 0}
+.dc{background:#f6f6f6;border-radius:12px;padding:10px 14px;margin:8px 0}.dq{font-weight:900;font-size:14px}.dr{font-size:13px;margin:3px 0 4px}
 .ah{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .gauge{background:#eef6ef;border-radius:12px;padding:14px 16px}.gauge.b2{background:#eef2fb}
 .gl{font-size:12px;color:var(--mute)}.gv{font-size:44px;font-weight:900;line-height:1.1;margin:2px 0}.gs{font-size:12.5px;line-height:1.45}
@@ -130,8 +139,9 @@ table.fit th{background:#f4f4f4;font-weight:800}table.fit tr.cur th{background:v
 img.exi{width:100%;height:150px;object-fit:cover;border-radius:10px;display:block}.cr{font-size:10.5px;color:var(--mute);margin:2px 0 4px}
 #info .ti{width:100%;height:110px;object-fit:cover;border-radius:10px;margin-top:8px;display:block}
 @media(max-width:820px){
- .ah,.ac{grid-template-columns:1fr}
- body[data-mode=rain] #stage,body[data-mode=ash] #stage{height:auto}
+ .ah,.ac,.ig{grid-template-columns:1fr}
+ body[data-mode=rain] #stage,body[data-mode=ash] #stage,body[data-mode=ins] #stage{height:auto}
+ #insp{position:static}
  #ash{position:static}
  #rain{grid-template-columns:1fr;position:static}
  header .sub{display:none}
@@ -157,7 +167,7 @@ dialog button{margin-top:12px}
 <header>
   <a href="#" id="home">גגות מועילים</a>
   <span class="sub">ארבעה סוגי גג, הדמיה תלת-ממדית ודוגמאות מהארץ ומהעולם</span>
-  <div id="modes"><button data-m="roof" class="on">הדמיית גג</button><button data-m="rain">גשם ונגר</button><button data-m="ash">אשדוד</button></div>
+  <div id="modes"><button data-m="roof" class="on">הדמיית גג</button><button data-m="rain">גשם ונגר</button><button data-m="ash">אשדוד</button><button data-m="ins">תובנות</button></div>
   <ai-menu></ai-menu>
 </header>
 <main>
@@ -166,6 +176,7 @@ dialog button{margin-top:12px}
     <div id="hud"></div>
     <svg id="secsvg"></svg><div id="seclab"></div><div id="simp"></div>
     <div id="ash"></div>
+    <div id="insp"></div>
     <div id="rain">
       <div id="rmap"><div id="mpills"></div><svg id="msvg" viewBox="0 0 1700 4350" preserveAspectRatio="xMidYMid meet"></svg><div id="mleg"></div></div>
       <div id="rcharts">
@@ -297,6 +308,7 @@ function render(){
  document.body.dataset.mode=mode;document.querySelectorAll("#modes button").forEach(b=>b.classList.toggle("on",b.dataset.m===mode));
  if(mode==="rain"){renderRain();return}
  if(mode==="ash"){renderAsh();return}
+ if(mode==="ins"){renderIns();return}
  document.querySelectorAll(".brush[data-k]").forEach(b=>b.classList.toggle("on",b.dataset.k===brush));
  document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("on",b.dataset.r===region));
  const T=TYPES[brush];
@@ -799,6 +811,118 @@ function secToggle(){
  place();
 }
 function secUI(){const V=SECV[secState.var];simp.style.display="block";simp.innerHTML=`<h4>${V.n}</h4><div class="sr small">${V.tag}. החתך מוגדל אנכית לצורך קריאות.</div><div class="sr"><label>פירוק שכבות <input id="expsl" type="range" min="0" max="1" step=".05" value="${expTarget}"></label></div><div class="sr small">מקור: ${V.src}</div>`;document.getElementById("expsl").oninput=e=>{expTarget=+e.target.value}}
+
+/* ===== תובנות לאשדוד ===== */
+const IS={k:"blue"};
+const PVM=[90,99,138,156,173,178,181,171,150,128,100,88];
+const MONS=["ינו","פבר","מרץ","אפר","מאי","יוני","יולי","אוג","ספט","אוק","נוב","דצמ"];
+const TG={f:["עובדה","מקור"],d:["נגזר","חישוב שלי"],h:["השערה","לאימות"]};
+function insNums(){const g=RAIN.reg[7],v5=g.idf[5][5],v50=g.idf[50][5],d50=g.d50;
+ const coef=0.9*0.7+RAIN.soil[4].c[9]*0.3,V=coef*d50*10,M=V*0.75,roofB=4000*0.022;
+ return{v5,v50,d50,c5:Math.round(22/v5*100),c50:Math.round(22/v50*100),cd:Math.round(22/d50*100),V,M,roofB,share:Math.round(roofB/M*100),pv5:Math.round(5*1653.54/100)/10}}
+const insBar=(rows,max,unit)=>`<svg viewBox="0 0 560 ${rows.length*34+8}" class="ibar">${rows.map((r,i)=>`<text x="548" y="${i*34+20}" text-anchor="start" class="bl">${r.n}</text><rect x="${340-(r.v/max)*260}" y="${i*34+6}" width="${(r.v/max)*260}" height="20" rx="5" fill="${r.c||"#1f6fe5"}"/><text x="${334-(r.v/max)*260}" y="${i*34+21}" text-anchor="start" class="bv">${r.t}</text>`).join("")}</svg>`;
+function insChart(k){const n=insNums();
+ if(k==="blue")return`<h4 class="ash4">מה 22 ליטר למ"ר קולטים באשדוד (אזור גשם 7)</h4>`+insBar([{n:'שעה, חזרה 1:5 ('+n.v5+' מ"מ)',v:n.c5,t:n.c5+"%",c:"#1f6fe5"},{n:'שעה, חזרה 1:50 ('+n.v50+' מ"מ)',v:n.c50,t:n.c50+"%",c:"#e8590c"},{n:'יממה, חזרה 1:50 ('+fmt(n.d50)+' מ"מ)',v:n.cd,t:n.cd+"%",c:"#d62828"}],100)+`<div class="src">נגזר: 22 מ"מ חלקי עומק הגשם. הנתונים: מינהל התכנון, נובמבר 2022. 22 ל'/מ"ר הוא המינימום במפרט עיריית תל אביב.</div>`;
+ if(k==="yellow")return`<h4 class="ash4">תפוקה חודשית בכל קילו-וואט מותקן באשדוד (קוט"ש)</h4><svg viewBox="0 0 560 150" class="ibar">${PVM.map((v,i)=>`<rect x="${14+(11-i)*45}" y="${120-v*.6}" width="34" height="${v*.6}" rx="4" fill="${v>140?"#f2c200":"#fbe28a"}"/><text x="${31+(11-i)*45}" y="${114-v*.6}" text-anchor="middle" class="bv">${v}</text><text x="${31+(11-i)*45}" y="140" text-anchor="middle" class="bl">${MONS[i]}</text>`).join("")}</svg><div class="src">נגזר: שאילתה שלי ל-PVGIS (Joint Research Centre), קואורדינטות אשדוד, הטיה 10 מעלות דרומה, הפסדים 14%. סה"כ כ-1,654 קוט"ש לשנה.</div>`;
+ if(k==="green")return`<h4 class="ash4">עלות הקמה משוערת, ש"ח למ"ר</h4>`+insBar([{n:"גג חי",v:400,t:"400",c:"#2e9d4f"},{n:"אקסטנסיבי",v:600,t:"600",c:"#2e9d4f"},{n:"אינטנסיבי (אמצע הטווח)",v:1000,t:"800–1,200",c:"#1b6b36"}],1200)+`<div class="src">מקור: מדריך לתכנון גגות ירוקים 2022.</div>`;
+ if(k==="active"||k==="yellow2")return"";
+ return"";
+}
+const INS={
+ blue:{n:"גג כחול",c:"#1f6fe5",head:"עוזר לנגר, אבל לא מחליף חלחול באדמה",
+  what:[["משהה את הנגר על הגג ומשחרר לאט, כדי לחתוך את שיא ההזרמה לניקוז העירוני.","f"],["מפרט תל אביב: אצירה של 22 ליטר למ\"ר לפחות, 50% אוויר בשכבה, חצץ של 7 ס\"מ לפחות. משקל 50 עד 60 ק\"ג למ\"ר בגשם קיצוני.","f"]],
+  how:[["חיוב דרך סעיף ניהול הנגר בתכניות מפורטות (תמ\"א 1 תיקון 8): הנפח הנדרש במגרש אפשר לספק גם בגג.","f"],["בבקשה להיתר: להציג מפרט יריעות להשהיית נגר לפי הנפח הנדרש.","f"],["תנאי: איטום תקני, אישור קונסטרוקטור לעומס, בדיקה שנתית של הנקזים.","f"]],
+  where:[["גגות שטוחים בבנייה חדשה ובהתחדשות. אפשר גם מתחת לפאנלים ומסביב למערכות טכניות.","f"],["בעדיפות בתחומי הצפה חוזרת.","h"],["לא בבנייה קלה, בגלל המשקל.","f"]],
+  ash:[["אזור גשם 7: שעת גשם 1:5 היא 28.1 מ\"מ, 1:50 היא 51 מ\"מ, יממה 1:50 היא 169 מ\"מ.","f"],["22 ל'/מ\"ר קולטים 78% משעת 1:5, 43% משעת 1:50 ו-13% מהיממה. גג כחול חותך שיא, לא פותר אירוע קיצון.","d"],["דוגמה (ההנחות שלי): תכנית 10 דונם, 7 אטומים, 4 דונם גגות, קרקע חולית. נגר יממתי 1:50 כ-1,156 מ\"ק, ניהול נדרש 75% (כ-867). גגות כחולים מלאים קולטים 88 מ\"ק, כ-10% מהנדרש.","d"],["המסקנה: צריך גם חלחול ואגירה בקרקע. הגג משלים.","d"],["דיווחים על הצפות בנקודות בעיר ועל חדירת נגר לביוב.","h"]],
+  risk:["לוודא שהמרזב מחובר לתיעול ולא לביוב.","מי מתחזק פתחי השחרור, במיוחד ברכוש משותף.","בדיקה: סוג הקרקע לחלחול."]},
+ green:{n:"גג ירוק",c:"#2e9d4f",head:"מתאים בעיקר לקומות נמוכות ולגג המסד, עם מפרט קל",
+  what:[["צינון הבניין ועיר, בידוד, מגוון ביולוגי, השהיית נגר ושטח ירוק. נגר שמושהה בגג נקי יותר.","f"],["סוגים: חי (כ-400 ש\"ח למ\"ר), אקסטנסיבי (כ-600), אינטנסיבי (800 עד 1,200).","f"]],
+  how:[["ברירת מחדל אקסטנסיבי או חי: השקיה מועטה, מתאים למשק המים בישראל.","f"],["בהיתר: תכנון אגרונומי והשקיה, חוסם שורשים, ניקוז, סינון, אישור איטום.","f"],["ת\"י 5281: כיסוי 50% מהגג הפנוי נותן 2.5 נקודות. חוות דעת המחוז: הגג הירוק אינו כולל גישה לציבור.","f"]],
+  where:[["גגות בניינים בינוניים, גג מעל חניון וקומת מסד, מבני חינוך.","d"],["בעדיפות לגג קומת המסד במבנים מורכבים, לפי חוות דעת המחוז.","f"],["לא בגגות ללא אחריות ברורה לתחזוקה.","d"]],
+  ash:[["בתכניות ההתחדשות מדובר במגדלים עד 30–36 קומות ובמבנים של 9–10 קומות (לפי כתבות, סטטוס לאמת). מועמדים: גגות 9–10 קומות וגג מסד.","h"],["הקרבה לים: מליחות ורוח עשויות להשפיע על בחירת הצמחים, לבדוק עם אגרונום.","h"],["עלות של 1,000 מ\"ר אקסטנסיבי: כ-600 אלף ש\"ח.","d"]],
+  risk:["תחזוקה: ברכוש משותף נדרשת הסכמת בעלי הדירות.","סיכון איטום: לא להשתמש בצמחים בעלי שורשים אגרסיביים.","לבדוק התאמה לרוחות חוף."]},
+ yellow:{n:"גג צהוב",c:"#d8a800",head:"החיוב כבר ארצי, תפקיד העירייה הוא השילוב",
+  what:[["ייצור חשמל מקומי, תועלת כלכלית לבעל הנכס, ביטחון אנרגטי. החזר השקעה 7 עד 10 שנים (עד 100 ק\"ו).","f"],["יעילות הפאנל יורדת כ-0.4 עד 0.5% לכל מעלה מעל 25. בימי קיץ חמים (פאנל ב-65 מעלות ומעלה) עד 20%.","f"]],
+  how:[["תקנות 6.8.2024: חובת PV בבניין חדש שאינו למגורים עם גג מעל 250 מ\"ר, ובצמוד קרקע מעל 100 מ\"ר (5 קילו-וואט לפחות). אין צורך לחזור על החיוב בנוסח מקומי.","f"],["בנוסח המקומי: להגדיר ש-PV חובה נספר בסף הגג המועיל, ולהסדיר סנוור, הצללה וחזות.","f"],["שילוב עם גג ירוק (ביו-סולארי): ירוק מצנן את הפאנלים, 20 ס\"מ מרווח מהמצע.","f"]],
+  where:[["גגות מבני ציבור, תעסוקה ותעשייה. מקומה 4 ומעלה, בגלל סנוור בקומות נמוכות.","f"],["במגדלים: מומלץ בגובה, בהתאם לחוות דעת המחוז.","f"]],
+  ash:[["תפוקה: כ-1,654 קוט\"ש לשנה לכל ק\"ו מותקן. יולי 181, דצמבר 88.","d"],["בית צמוד קרקע שחייב ב-5 ק\"ו: כ-8.3 מגה-וואט-שעה בשנה.","d"],["העירייה מתקינה סולארי על 18 בתי ספר ובניין העירייה.","h"],["אזור התעשייה, הנמל ורובע החדשנות: גגות גדולים שמאפשרים חיוב מעבר למינימום.","h"],["חוף: מלחים וקורוזיה, לבדוק התאמת חומרים.","h"]],
+  risk:["פער בין ייצור לצריכה במגורים, פתרון: אגירה.","חימום המבנה בפאנל שחור.","חיבור לרשת עלול להתעכב."]},
+ active:{n:"גג פעיל",c:"#e8590c",head:"נכון לגג המסד של המגדלים, לא לגג העליון",
+  what:[["שטח ציבורי וקהילתי במרקם צפוף: ספורט, גינה קהילתית, בתי קפה, חינוך, חקלאות עירונית.","f"],["מעל 9 קומות: לא מומלץ, בגלל קושי משמעותי בהנגשה ובנוחות.","f"]],
+  how:[["בתכנית: גישה ישירה מהרחוב, כניסה נפרדת, שטח ציבורי מינימלי רשום, זיקת הנאה.","f"],["הפרדה פיזית ואקוסטית ממערכות טכניות.","f"],["אישורים: נגישות (ת\"י 1918), מעקה (1142), מילוט והכבאות, הצללה.","f"]],
+  where:[["על קומת מסד או בינוי מרקמי, במבנים מורכבים ומעורבי שימושים.","f"],["מבני ציבור וחינוך, גג חניון.","f"]],
+  ash:[["התחדשות עירונית במתחמים (רובעים ב', ה', ח'): מגדלים עם קומת מסד, מבנים של 9–10 קומות. המסד הוא המקום לגג פעיל ציבורי.","h"],["יעד התכנית הכוללנית: 350 אלף תושבים. ללא שטח ציבורי, גג פעיל הוא תוספת.","h"],["הצללה והגנה מרוח חוף חיוניות.","h"]],
+  risk:["אחזקה ואחריות לגג ציבורי.","בטיחות ורעש לדיירים.","עלות תפעול של הנגשה."]},
+ white:{n:"גג לבן",c:"#94a3b8",head:"כברירת מחדל לגג חשוף, לא כיעד בסף",
+  what:[["ציפוי בהיר מחזיר קרינה. בניו יורק הפחתה של 2 עד 3 מעלות בגג ובקומות העליונות. עלות כמו גג רגיל.","f"],["ביום ההחזר מחמם מעט את המרחב, אך בערב הבניין פולט פחות חום.","f"]],
+  how:[["אינו נספר בסף 50% בנוסח המוצע. אפשר להציע אותו כגג מינימום לגג שאינו מועיל.","d"],["לא פוגע בשילוב עם PV, אך פחות מועיל תחת הפאנלים.","h"]],
+  where:[["גגות תעשייה, מחסנים וגגות חשופים. בנייה קלה שאינה נושאת ירוק או כחול.","h"]],
+  ash:[["אזור תעשייה ונמל: גגות גדולים וחשופים, עם עלות נמוכה להטמעה.","h"],["אין נתוני אי חום של אשדוד: מומלץ למפות לפני קביעת יעד.","h"]],
+  risk:["נתון חום לאשדוד חסר.","סנוור לסביבה, בעיקר מגגות נמוכים לצד מגדלים."]},
+ logi:{n:"גג לוגיסטי",c:"#0f766e",head:"לשמור שטח פנוי, לא לחייב עכשיו",
+  what:[["מנחת רחפנים, נקודות מסירה, חנייה לאופניים. טכנולוגיה מפציעה ללא תקינה מוסכמת.","f"]],
+  how:[["לא לחייב. להשאיר גמישות בסעיף: שטח פנוי בגג ל\"שימוש עתידי\".","d"]],
+  where:[["אזורי תעסוקה ונמל.","h"]],
+  ash:[["הנמל ורובע החדשנות הם מועמדים לפיילוט, אם יש עניין.","h"]],
+  risk:["רעש, פרטיות וקבלה חברתית.","רגולציה אווירית."]}
+};
+function insTag(t){return`<span class="tg tg-${t}" title="${TG[t][1]}">${TG[t][0]}</span>`}
+function insList(a){return`<ul class="il">${a.map(x=>`<li>${x[0]} ${insTag(x[1])}</li>`).join("")}</ul>`}
+function renderIns(){
+ const nav=document.getElementById("info");
+ nav.innerHTML=`<h2><i style="background:var(--ink)"></i>תובנות לאשדוד</h2><div id="insight">מה נכון לכל גג, איך <mark>מטמיעים</mark>, ומה מיוחד באשדוד</div><div class="inav">${Object.keys(INS).map(k=>`<button data-i="${k}" class="${IS.k===k?"on":""}"><i style="background:${INS[k].c}"></i>${INS[k].n}</button>`).join("")}<button data-i="policy" class="pol ${IS.k==="policy"?"on":""}">ניסוח מדיניות</button></div>`;
+ nav.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{IS.k=b.dataset.i;renderIns()});
+ document.getElementById("ex").innerHTML=`<div class="card"><h3>איך לקרוא</h3><p>${insTag("f")} מקור שקראתי. ${insTag("d")} חישוב שלי מנתונים. ${insTag("h")} השערה או דיווח שלא אומת, יש לבדוק.</p></div><div class="src">נתוני אשדוד לא היו זמינים בכל התחומים. חסרים: מפת הצפות, מפת חום, סוג קרקע, מלאי גגות ציבוריים, הוראות תכנית המתאר, סטטוס תכניות ההתחדשות.</div>`;
+ const P=document.getElementById("insp");
+ if(IS.k==="policy"){P.innerHTML=renderPolicyIns();bindPolicyIns();return}
+ const D=INS[IS.k];
+ P.innerHTML=`<div class="ihd" style="border-color:${D.c}"><h2>${D.n}</h2><div class="ih2">${D.head}</div><div class="ab" style="margin-top:8px"><button class="load" id="iSim">הצג בהדמיה התלת-ממדית</button><button class="load" id="iSec">חתך פרט</button></div></div>
+ ${insChart(IS.k)}
+ <div class="ig"><div class="ic"><h4>מה זה נותן</h4>${insList(D.what)}</div><div class="ic"><h4>איך מטמיעים</h4>${insList(D.how)}</div><div class="ic"><h4>איפה ובאיזה מקרה</h4>${insList(D.where)}</div><div class="ic ia"><h4>אשדוד</h4>${insList(D.ash)}</div></div>
+ <div class="ic ir"><h4>סיכונים ושאלות פתוחות</h4><ul class="il">${D.risk.map(x=>`<li>${x}</li>`).join("")}</ul></div>${IS.k==="yellow"||IS.k==="active"||IS.k==="green"||IS.k==="blue"?insFit():""}`;
+ document.getElementById("iSim").onclick=()=>{brush=IS.k==="logi"?"logi":IS.k;mode="roof";if(secState.on)secToggle();render()};
+ document.getElementById("iSec").onclick=()=>{brush=IS.k==="logi"?"logi":IS.k;mode="roof";region="spec";render();if(!secState.on)secToggle()};
+}
+function insFit(){
+ const T=[["מגדל, גג עליון",{blue:["rec","מומלץ"],green:["mid","לבדוק רוח"],yellow:["rec","מומלץ"],active:["no","לא מומלץ מעל 9 קומות"]}],
+  ["קומת מסד של מגדל",{blue:["rec","מומלץ"],green:["rec","מועדף"],yellow:["mid","לבדוק סנוור"],active:["rec","מועדף"]}],
+  ["בניין 9 עד 10 קומות",{blue:["rec","מומלץ"],green:["rec","מומלץ. לבדיקה: הצללה"],yellow:["rec","מומלץ"],active:["mid","בגבול 9 קומות"]}],
+  ["מבנה ציבור או בית ספר",{blue:["rec","מומלץ"],green:["rec","חינוך"],yellow:["rec","בביצוע"],active:["rec","מומלץ"]}],
+  ["תעשייה ומסחר גדול",{blue:["rec","מומלץ"],green:["mid","לפי תחזוקה"],yellow:["rec","חובה מעל 250 מ\"ר"],active:["no","לא רלוונטי"]}]];
+ const cl={rec:"fitg",mid:"fita",no:"fitr"},ks=["blue","green","yellow","active"],nm={blue:"כחול",green:"ירוק",yellow:"צהוב",active:"פעיל"};
+ return`<h4 class="ash4">איזה גג מתאים לאיזה מבנה באשדוד</h4><table class="fit"><tr><th></th>${ks.map(k=>`<th>${nm[k]}</th>`).join("")}</tr>${T.map(r=>`<tr><th>${r[0]}</th>${ks.map(k=>`<td class="${cl[r[1][k][0]]}">${r[1][k][1]}</td>`).join("")}</tr>`).join("")}</table><div class="src">הצעה שלי על בסיס טבלת ההתאמה לגובה בחוות דעת המחוז והסקירה. ${insTag("h")} סוגי המבנים באשדוד נלקחו מכתבות, ויש לאמת.</div>`}
+const PRIN=[
+ ["להבחין בין שטח גג מועיל לשטח טכני.","השטח הטכני נכלל במכנה ואינו נספר במונה (פורום ה-15, חוות דעת המחוז).","f"],
+ ["לדרג את הסף לפי שימוש וגודל, ולא סף אחיד.","מחוז תל אביב: מגורים 30%, משרדים ומסחר 50%, ציבור 50%, ספי תכסית 500 מ\"ר. טוקיו וצרפת מדרגות לפי גודל.","f"],
+ ["למדוד ברמת התכנית, כולל גג המסד, ולא רק ברמת המבנה.","במגדל הגג העליון קטן. מסד הוא הגג הגדול. פורום ה-15 מודד לפי סך הגגות בתכנית.","d"],
+ ["לספור PV חובה בתוך הסף.","מונע כפל חיוב, והחיוב הארצי כבר קיים (6.8.2024).","f"],
+ ["לספור גג כחול וירוק גם בסעיף הנגר, ולא ליצור כפל.","תמ\"א 1 תיקון 8 מחייב ניהול נגר בכל תכנית מפורטת עם בינוי.","f"],
+ ["לשלב טבלת התאמה לגובה.","מעל 9 קומות גג פעיל לא מומלץ. 10 קומות כבר במעל 9.","f"],
+ ["גג פעיל ציבורי: גישה מהרחוב, שטח ציבורי מינימלי רשום, אחזקה מוגדרת.","חוות דעת המחוז והסקירה.","f"],
+ ["לקבוע רשימת אישורים להיתר.","11 אישורים בתל אביב: קונסטרוקטור, איטום, בטיחות, ניקוז, הצפה, נקודות מים וחשמל ועוד.","f"],
+ ["לקבוע מפרט מינימום: כחול לפחות 22 ל'/מ\"ר, ירוק לפי נספח א'.","תל אביב והמדריך 2022. מפרט עקרוני, לא תוכנית ביצוע.","f"],
+ ["לתת למהנדס העיר סמכות לאשר פתרון חלופי, ולבחון את המדיניות כל 3 שנים.","מתאים לטכנולוגיה שמשתנה (לוגיסטי, אגירה) ולנתוני ניטור.","d"]
+];
+const DEC=[
+ {q:"1. מה הכאב המרכזי של אשדוד?",r:"נגר והצפות כעוגן. אנרגיה כתוספת. שטח ציבורי במסד.",fit:"מתאים",why:["יש בסיס חוקי חזק: תמ\"א 1 תיקון 8 מחייב ניהול נגר בכל תכנית.","נתונים קיימים: אזור גשם 7, 169 מ\"מ ביממה 1:50, ו-28.1 מ\"מ לשעה ב-1:5.","דיווחים על הצפות בעיר ועל חדירת נגר לביוב (לא אומתו).","אנרגיה כבר מוסדרת בתקנות הארציות, ולכן לא צריך מדיניות מקומית חדשה.","חום: אין נתוני אי חום של אשדוד. לא מומלץ לקבוע יעד עד שייאספו."]},
+ {q:"2. כמה מחייב?",r:"חיוב בתכניות חדשות ובמבני ציבור. המלצה בשאר. מדיניות מאומצת בוועדה המקומית.",fit:"מתאים, בתנאי",why:["חלק מתכניות ההתחדשות מאושרות בוותמ\"ל ובוועדה הארצית (לפי הכתבות). כדי שהעירייה תוכל להתנות, נדרש מסמך מדיניות שהוועדה המקומית אימצה, והוא יוגש כהתייחסות בכל תכנית.","פורום ה-15 מציע בדיוק אימוץ כזה, ומחייב בתכניות.","חיוב בהיתר דורש הוראה בתכנית או הנחיות מרחביות. שאלה: אילו כבר קיימות באשדוד."]},
+ {q:"3. היקף: חדש, התחדשות, קיימים?",r:"חדש + התחדשות + מבני ציבור. קיימים: פיילוט בלבד.",fit:"מתאים",why:["תכניות ההתחדשות הן מנוף: לפי הכתבות לפחות חמש תכניות גדולות, אלפי יחידות דיור (סטטוס לאמת).","בניינים קיימים: אין סמכות להטיל חובה בלי חוק עזר. חוות דעת הכנסת ממליצה על חקיקה ראשית.","מבני ציבור: העירייה כבר מתקינה סולארי על 18 בתי ספר (לאמת), ולכן ההובלה בדוגמה כבר קיימת."]},
+ {q:"4. תמריצים?",r:"לא לבנות על ארנונה או זכויות בנייה. כן: ליווי מקצועי, האצת רישוי, פיילוט במימון חיצוני, הכשרת מתקינים.",fit:"מתאים חלקית",why:["לפי חוות דעת מ-2016 אין לעירייה סמכות להנחות ארנונה או להוסיף זכויות בנייה (לאמת מול יועץ משפטי).","הסקירה מציינת כלי חלופי: האצת רישוי, הכשרות, תחרויות ופיילוטים.","המבורג מסבסדת עד 60%, וינה 8–25 אירו למ\"ר: מחייב מימון שלא ידוע באשדוד."]},
+ {q:"5. מי אחראי לתחזוקה?",r:"בניין חדש: תקנון ועד או חברת ניהול, עם ביקורת שנתית של נקזים. גג ציבורי: העירייה.",fit:"מתאים",why:["הסיבה הנפוצה לכישלון. גג כחול דורש ניקוי נקזים בלבד, וגג אקסטנסיבי ביקור פעם או פעמיים בשנה.","במגדלי התחדשות לרוב יש חברת ניהול (השערה), ולכן אפשר לחייב אותה בנספח לתקנון.","רכוש משותף דורש הסכמת כל בעלי הדירות."]}
+];
+const GAPS=["מפת נקודות הצפה בעיר","סוג קרקע ויכולת חלחול (חול או כורכר)","מלאי גגות מבני ציבור: שטח, קונסטרוקציה, מצב איטום","הוראות תכנית המתאר הכוללנית לגבי גגות ונגר","סטטוס תכניות ההתחדשות (רובעים ב', ה', ח') וגבהי המבנים","הנחיות מרחביות קיימות או מדיניות ועדה מקומית","חוות דעת מתכנן מחוז דרום, אם קיימת","מפת אי חום או טמפרטורת פני שטח","יועץ משפטי: ארנונה, זכויות בנייה, חוק עזר"];
+function renderPolicyIns(){const n=insNums();
+ return`<div class="ihd" style="border-color:#111"><h2>תובנות לניסוח מדיניות גגות באשדוד</h2><div class="ih2">עשרה עקרונות, חמש החלטות עם המלצה, ומה חסר לפני שמנסחים</div></div>
+ <h4 class="ash4">עשרה עקרונות לניסוח</h4><ol class="pr">${PRIN.map(p=>`<li><b>${p[0]}</b> ${p[1]} ${insTag(p[2])}</li>`).join("")}</ol>
+ <h4 class="ash4">מה נראה על תכנית לדוגמה באשדוד</h4>${insBar([{n:'נגר יממתי 1:50, 10 דונם',v:n.V,t:fmt(n.V)+' מ"ק',c:"#9aa3ad"},{n:"ניהול נדרש (75%)",v:n.M,t:fmt(n.M)+' מ"ק',c:"#1f6fe5"},{n:"גגות כחולים (4 דונם, 22 מ\"מ)",v:n.roofB,t:fmt(n.roofB)+' מ"ק',c:"#e8590c"}],n.V)}<div class="src">נגזר, בהנחות שלי: 10 דונם, 7 אטומים, קרקע חולית, מחשבון מינהל התכנון. הגגות משלימים כ-${n.share}% בלבד.</div>
+ <h4 class="ash4">חמש החלטות והמלצה</h4>${DEC.map(d=>`<div class="dc"><div class="dq">${d.q}</div><div class="dr"><b>המלצה:</b> ${d.r} <span class="tg tg-${d.fit==="מתאים"?"f":"d"}">${d.fit}</span></div><ul class="il">${d.why.map(w=>`<li>${w}</li>`).join("")}</ul></div>`).join("")}
+ <h4 class="ash4">מה חסר לפני שמנסחים</h4><ul class="il">${GAPS.map(g=>`<li>${g}</li>`).join("")}</ul>
+ <div class="ab"><button class="load" id="pAsh">עבור לבדיקת עמידה</button><button class="load" id="pCopy">העתק את ההחלטות והמלצות</button></div>`;
+}
+function bindPolicyIns(){
+ document.getElementById("pAsh").onclick=()=>{mode="ash";AS.built=false;render()};
+ document.getElementById("pCopy").onclick=()=>{const t=DEC.map(d=>d.q+"\nהמלצה: "+d.r+"\n"+d.why.map(w=>"- "+w).join("\n")).join("\n\n");const done=()=>{pCopy.textContent="הועתק"};(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(done).catch(()=>{const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand("copy");ta.remove();done()})};
+}
 
 /* orbit */
 let az=.7,el=.62,dist=40,tgt=-1.5,drag=null,moved=0;
