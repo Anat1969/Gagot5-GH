@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>גגות מועילים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#111;--mute:#666;--line:#eee;--bg:#fff;--blue:#1f6fe5;--green:#2e9d4f;--yellow:#f2c200;--active:#e8590c;--tech:#6b7280;--bad:#d62828;--ok:#1b8a3a;--mark:#fff3a8}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
-body{font-family:"Heebo","Assistant",system-ui,sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;overflow:hidden}
+body{font-family:"Heebo","Assistant",system-ui,sans-serif;font-weight:400;letter-spacing:.005em;-webkit-font-smoothing:antialiased;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;overflow:hidden}
 header{height:52px;flex:none;display:flex;align-items:center;gap:12px;padding:0 14px;border-bottom:1px solid var(--line);background:#fff;position:relative;z-index:5}
-header a{font-weight:800;font-size:19px;color:var(--ink);text-decoration:none}
+header a{font-weight:600;font-size:19px;color:var(--ink);text-decoration:none}
 header .sub{color:var(--mute);font-size:13px}
 ai-menu{margin-inline-start:auto;position:relative}
 svg.ico{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
@@ -18,7 +19,7 @@ svg.ico{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;st
 .brush{gap:6px}.brush svg{color:var(--c,currentColor)}.brush.on svg{color:#fff}.brush.util svg{color:var(--mute)}.brush.util.on svg{color:#fff}
 #modes button{display:inline-flex;align-items:center;gap:6px}#modes button.on svg{color:#fff}
 .inav button svg{width:16px;height:16px}.ab .load{display:inline-flex;align-items:center;gap:6px}
-.sq{width:36px;height:36px;border:0;background:#f4f4f4;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.14);cursor:pointer;font:800 14px inherit;color:var(--ink);display:flex;align-items:center;justify-content:center}
+.sq{width:36px;height:36px;border:0;background:#f4f4f4;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.14);cursor:pointer;font:600 14px inherit;color:var(--ink);display:flex;align-items:center;justify-content:center}
 .sq:active{transform:scale(.95)}
 .menu{position:absolute;inset-inline-end:0;top:42px;background:#fff;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.18);min-width:200px;padding:6px;display:none}
 .menu.open{display:block}
@@ -28,54 +29,54 @@ main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax
 #stage{order:2;position:relative;min-height:0;background:linear-gradient(#f7f9fb,#fff)}
 canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 #hud{position:absolute;inset-inline:12px;top:10px;display:flex;gap:8px;flex-wrap:wrap;pointer-events:none}
-.brush{pointer-events:auto;display:flex;align-items:center;gap:6px;border:0;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.15);border-radius:8px;padding:7px 11px;font:700 13px inherit;cursor:pointer}
+.brush{pointer-events:auto;display:flex;align-items:center;gap:6px;border:0;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.15);border-radius:8px;padding:7px 11px;font:500 13px inherit;cursor:pointer}
 .brush i{width:12px;height:12px;border-radius:3px;display:block}
 .brush.on{background:var(--ink);color:#fff}
 #meter{position:absolute;inset-inline:12px;bottom:12px;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.16);padding:10px 14px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
-#pct{font-size:30px;font-weight:900;line-height:1}
+#pct{font-size:30px;font-weight:600;line-height:1}
 #bar{height:14px;border-radius:7px;background:#eee;position:relative;overflow:hidden;display:flex}
 #bar span{display:block;height:100%}
 #thr{position:absolute;inset-block:0;left:50%;width:2px;background:var(--ink)}
-#verdict{font-weight:800;font-size:14px;padding:4px 10px;border-radius:6px}
+#verdict{font-weight:600;font-size:14px;padding:4px 10px;border-radius:6px}
 .ok{background:#e3f5e8;color:var(--ok)}.bad{background:#fde7e7;color:var(--bad)}
 #hint{position:absolute;inset-inline-start:14px;bottom:86px;font-size:12px;color:var(--mute);pointer-events:none}
 aside{border-inline-end:1px solid var(--line);display:block;overflow-y:auto;min-height:0;background:#fff;order:1}
 #info{padding:14px 16px 10px;border-bottom:1px solid var(--line);flex:none}
-#info h2{font-size:22px;font-weight:900;display:flex;align-items:center;gap:8px}
+#info h2{font-size:22px;font-weight:600;display:flex;align-items:center;gap:8px}
 #info h2 i{width:14px;height:14px;border-radius:4px;display:block}
-#insight{margin-top:4px;font-size:15px;font-weight:700}
+#insight{margin-top:4px;font-size:15px;font-weight:500}
 #insight mark{background:var(--mark);padding:0 3px}
 #desc{margin-top:6px;font-size:13.5px;line-height:1.55}
 .facts{margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .facts div{background:#f6f6f6;border-radius:8px;padding:6px 9px;font-size:12px;color:var(--mute)}
 .facts b{display:block;color:var(--ink);font-size:13px}
 .tabs{display:flex;gap:5px;padding:10px 16px 8px;position:sticky;top:0;background:#fff;z-index:4;flex-wrap:wrap}
-.tabs button{border:0;background:#f4f4f4;border-radius:8px;padding:7px 6px;font:800 13px inherit;cursor:pointer}
+.tabs button{border:0;background:#f4f4f4;border-radius:8px;padding:7px 6px;font:600 13px inherit;cursor:pointer}
 .tabs button.on{background:var(--ink);color:#fff}
 #ex{padding:10px 16px 24px}
 .card{border-bottom:1px solid var(--line);padding:10px 0}
-.card h3{font-size:15px;font-weight:800}
-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}th,td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:center}td:first-child,th:first-child{text-align:right}.yes{color:var(--ok);font-weight:800}.no{color:#bbb}
+.card h3{font-size:15px;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}th,td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:center}td:first-child,th:first-child{text-align:right}.yes{color:var(--ok);font-weight:600}.no{color:#bbb}
 table.sp{width:100%;border-collapse:collapse;font-size:12px}table.sp th{background:#f4f4f4;padding:5px 4px;text-align:right}table.sp td{border-bottom:1px solid var(--line);padding:6px 4px;vertical-align:top;text-align:right}table.sp td.tl{color:#444;line-height:1.4}ul.nt{padding-inline-start:18px;font-size:12.5px;line-height:1.55;margin-top:4px}
 .pl{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.pl span{background:#eef6ef;border-radius:6px;padding:2px 8px;font-size:12px}
-.load{border:0;background:var(--ink);color:#fff;border-radius:8px;padding:6px 10px;font:700 12px inherit;cursor:pointer;margin-top:6px}
+.load{border:0;background:var(--ink);color:#fff;border-radius:8px;padding:6px 10px;font:500 12px inherit;cursor:pointer;margin-top:6px}
 .card .where{font-size:12px;color:var(--mute);margin-top:1px}
 .card p{font-size:13px;line-height:1.5;margin-top:4px}
-.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:1px 7px;margin-top:5px}
+.tag{display:inline-block;font-size:11px;font-weight:500;border-radius:5px;padding:1px 7px;margin-top:5px}
 .t-ok{background:#e3f5e8;color:var(--ok)}.t-chk{background:#fff3a8;color:#6b5a00}
-.empty{font-size:13px;color:var(--bad);padding:10px 0;font-weight:700}
+.empty{font-size:13px;color:var(--bad);padding:10px 0;font-weight:500}
 .src{font-size:11px;margin-top:4px}
 .src a{color:var(--mute)}
 #sub{display:flex;gap:6px;margin-top:8px}
-#sub button{flex:1;border:0;background:#f4f4f4;border-radius:8px;padding:6px 4px;font:700 12px inherit;cursor:pointer}
+#sub button{flex:1;border:0;background:#f4f4f4;border-radius:8px;padding:6px 4px;font:500 12px inherit;cursor:pointer}
 #sub button.on{background:var(--green);color:#fff}
 #calc{grid-column:1/-1;font-size:12px;color:var(--mute);display:flex;gap:14px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:6px}
-#calc b{color:var(--ink)}#calc input{width:70px;border:0;background:#f4f4f4;border-radius:6px;padding:3px 6px;font:700 12px inherit}
+#calc b{color:var(--ink)}#calc input{width:70px;border:0;background:#f4f4f4;border-radius:6px;padding:3px 6px;font:500 12px inherit}
 .lay{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line)}
 .lay i{flex:none;width:14px;height:14px;border-radius:3px;margin-top:3px}
-.lay h3{font-size:14px;font-weight:800}.lay p{font-size:12.5px;line-height:1.5;margin-top:2px}
+.lay h3{font-size:14px;font-weight:600}.lay p{font-size:12.5px;line-height:1.5;margin-top:2px}
 #modes{display:flex;gap:6px;margin-inline-start:14px}
-#modes button{border:0;background:#f4f4f4;border-radius:8px;padding:8px 14px;font:800 13px inherit;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+#modes button{border:0;background:#f4f4f4;border-radius:8px;padding:8px 14px;font:600 13px inherit;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)}
 #modes button.on{background:var(--ink);color:#fff}
 #rain{display:none;position:absolute;inset:0;background:#fff;grid-template-columns:230px minmax(0,1fr);gap:0}
 body[data-mode=rain] #rain{display:grid}
@@ -86,7 +87,7 @@ body[data-mode=dft] #dft{display:block}
 body[data-mode=roof] #foot2{display:none}
 #rmap{padding:10px 8px;display:flex;flex-direction:column;border-inline-end:1px solid var(--line);min-height:0}
 #mpills{display:flex;flex-direction:column;gap:5px;margin-bottom:6px}
-#mpills button{border:0;background:#f4f4f4;border-radius:8px;padding:6px 8px;font:700 12px inherit;cursor:pointer;text-align:right}
+#mpills button{border:0;background:#f4f4f4;border-radius:8px;padding:6px 8px;font:500 12px inherit;cursor:pointer;text-align:right}
 #mpills button.on{background:var(--blue);color:#fff}
 #msvg{flex:1;min-height:0;width:100%}
 #msvg path{stroke:#fff;stroke-width:12;cursor:pointer;transition:opacity .15s}
@@ -96,50 +97,50 @@ body[data-mode=roof] #foot2{display:none}
 #mleg i{display:block;height:8px;border-radius:4px;background:linear-gradient(90deg,#dbeafe,#1e3a8a);margin:3px 0}
 #mleg div{display:flex;justify-content:space-between}
 #rcharts{padding:12px 16px;overflow:auto;min-height:0}
-#rtitle{font-size:20px;font-weight:900}
+#rtitle{font-size:20px;font-weight:600}
 #rsub{font-size:12px;color:var(--mute);margin-top:2px}
 #kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:10px 0}
 .kpi{background:#f6f6f6;border-radius:10px;padding:8px 10px}
 .kpi small{display:block;font-size:11px;color:var(--mute)}
-.kpi b{display:block;font-size:24px;font-weight:900;line-height:1.15}
+.kpi b{display:block;font-size:24px;font-weight:600;line-height:1.15}
 .kpi span{font-size:11px;color:var(--mute)}
 .kpi.dim b{color:#bbb}
-.cb h4{font-size:13px;font-weight:800;margin:8px 0 2px}
+.cb h4{font-size:13px;font-weight:600;margin:8px 0 2px}
 .cb svg{width:100%;height:auto;display:block}
 .cb text{font:11px Heebo,Assistant,sans-serif;fill:#666}
 #rlink{margin-top:8px;border-radius:10px;background:#eef6ef;padding:10px 12px;font-size:13px;line-height:1.5}
-#rlink b{font-weight:900}
+#rlink b{font-weight:600}
 .fld{display:block;margin-top:8px;font-size:12px;color:var(--mute)}
-.fld input,.fld select{display:block;width:100%;margin-top:3px;border:0;background:#f4f4f4;border-radius:8px;padding:8px 10px;font:700 14px inherit;color:var(--ink)}
-.lnk{display:block;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink);text-decoration:none;font-weight:700}
+.fld input,.fld select{display:block;width:100%;margin-top:3px;border:0;background:#f4f4f4;border-radius:8px;padding:8px 10px;font:500 14px inherit;color:var(--ink)}
+.lnk{display:block;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink);text-decoration:none;font-weight:500}
 .lnk small{display:block;font-weight:400;color:var(--mute);font-size:11.5px}
 .lnk:hover{color:var(--blue)}
 #foot{border-top:1px solid var(--line);padding:10px 16px 18px;font-size:12px;display:flex;gap:14px;flex-wrap:wrap}
-#foot a{color:var(--ink);font-weight:700}
+#foot a{color:var(--ink);font-weight:500}
 #ash,#insp,#dft{display:none;position:absolute;inset:0;background:#fff;overflow:auto;padding:16px 20px 60px}
-.dp{background:#f6f6f6;border-radius:12px;padding:10px 14px;margin:10px 0}.dpt{display:flex;justify-content:space-between;align-items:center;gap:8px}.dpt h3{font-size:15px;font-weight:900}pre.dx{white-space:pre-wrap;font:13px/1.65 Heebo,Assistant,sans-serif;margin-top:6px;direction:rtl}
-.ihd{border-inline-start:6px solid #111;padding:4px 14px;margin-bottom:6px}.ihd h2{font-size:26px;font-weight:900}.ih2{font-size:15px;font-weight:700;margin-top:2px}
-.ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.ic{background:#f6f6f6;border-radius:12px;padding:10px 14px}.ic h4{font-size:13px;font-weight:900;margin-bottom:4px}.ia{background:#eef2fb}.ir{margin-top:10px;background:#fdf1f1}
+.dp{background:#f6f6f6;border-radius:12px;padding:10px 14px;margin:10px 0}.dpt{display:flex;justify-content:space-between;align-items:center;gap:8px}.dpt h3{font-size:15px;font-weight:600}pre.dx{white-space:pre-wrap;font:13px/1.65 Heebo,Assistant,sans-serif;margin-top:6px;direction:rtl}
+.ihd{border-inline-start:6px solid #111;padding:4px 14px;margin-bottom:6px}.ihd h2{font-size:26px;font-weight:600}.ih2{font-size:15px;font-weight:500;margin-top:2px}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.ic{background:#f6f6f6;border-radius:12px;padding:10px 14px}.ic h4{font-size:13px;font-weight:600;margin-bottom:4px}.ia{background:#eef2fb}.ir{margin-top:10px;background:#fdf1f1}
 ul.il{padding-inline-start:18px;font-size:12.5px;line-height:1.55}ul.il li{margin:3px 0}
-.tg{display:inline-block;font-size:10px;font-weight:800;border-radius:4px;padding:0 5px;margin-inline-start:3px;vertical-align:1px}.tg-f{background:#dff3e4;color:#1b6b36}.tg-d{background:#e0e9fb;color:#1c3f94}.tg-h{background:#fdf1c8;color:#7a5a00}
-.inav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.inav button{display:flex;align-items:center;gap:6px;border:0;background:#f4f4f4;border-radius:8px;padding:7px 10px;font:700 12.5px inherit;cursor:pointer}.inav button i{width:10px;height:10px;border-radius:3px;display:block}.inav button.on{background:var(--ink);color:#fff}.inav .pol{background:#fff3a8}.inav .pol.on{background:var(--ink)}
-.ibar{width:100%;max-width:640px;height:auto;display:block}.ibar text{font:11px Heebo,Assistant,sans-serif;fill:#555}.ibar .bv{font-weight:800;fill:#111}
+.tg{display:inline-block;font-size:10px;font-weight:600;border-radius:4px;padding:0 5px;margin-inline-start:3px;vertical-align:1px}.tg-f{background:#dff3e4;color:#1b6b36}.tg-d{background:#e0e9fb;color:#1c3f94}.tg-h{background:#fdf1c8;color:#7a5a00}
+.inav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.inav button{display:flex;align-items:center;gap:6px;border:0;background:#f4f4f4;border-radius:8px;padding:7px 10px;font:500 12.5px inherit;cursor:pointer}.inav button i{width:10px;height:10px;border-radius:3px;display:block}.inav button.on{background:var(--ink);color:#fff}.inav .pol{background:#fff3a8}.inav .pol.on{background:var(--ink)}
+.ibar{width:100%;max-width:640px;height:auto;display:block}.ibar text{font:11px Heebo,Assistant,sans-serif;fill:#555}.ibar .bv{font-weight:600;fill:#111}
 ol.pr{padding-inline-start:20px;font-size:13px;line-height:1.55}ol.pr li{margin:5px 0}
 .rs{display:flex;flex-direction:column;gap:8px;margin-top:10px}.rr{display:flex;gap:10px;align-items:flex-start;background:#f6f6f6;border-radius:10px;padding:8px 12px}.rr .tg{flex:none;margin-top:3px}.rr a{color:var(--ink)}
-.dc{background:#f6f6f6;border-radius:12px;padding:10px 14px;margin:8px 0}.dq{font-weight:900;font-size:14px}.dr{font-size:13px;margin:3px 0 4px}
+.dc{background:#f6f6f6;border-radius:12px;padding:10px 14px;margin:8px 0}.dq{font-weight:600;font-size:14px}.dr{font-size:13px;margin:3px 0 4px}
 .ah{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .gauge{background:#eef6ef;border-radius:12px;padding:14px 16px}.gauge.b2{background:#eef2fb}
-.gl{font-size:12px;color:var(--mute)}.gv{font-size:44px;font-weight:900;line-height:1.1;margin:2px 0}.gs{font-size:12.5px;line-height:1.45}
-.ash4{font-size:14px;font-weight:900;margin:16px 0 6px}
+.gl{font-size:12px;color:var(--mute)}.gv{font-size:44px;font-weight:600;line-height:1.1;margin:2px 0}.gs{font-size:12.5px;line-height:1.45}
+.ash4{font-size:14px;font-weight:600;margin:16px 0 6px}
 table.fit th,table.fit td{border:1px solid #fff;padding:8px 6px;font-size:12px;line-height:1.35;vertical-align:top}
-table.fit th{background:#f4f4f4;font-weight:800}table.fit tr.cur th{background:var(--ink);color:#fff}
+table.fit th{background:#f4f4f4;font-weight:600}table.fit tr.cur th{background:var(--ink);color:#fff}
 .fitg{background:#dff3e4}.fita{background:#fdf1c8}.fitr{background:#fbd9d9}
 .ab{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.ab .load{margin-top:0}
 .ac{display:grid;grid-template-columns:1fr 1fr;gap:16px}.ac ul{padding-inline-start:18px;font-size:12.5px;line-height:1.6}
 #simp{display:none;position:absolute;left:12px;bottom:96px;width:280px;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.2);padding:10px 12px;font-size:12.5px;max-height:55%;overflow:auto}
-#simp h4{font-size:14px;font-weight:900;margin-bottom:6px}.sr{margin:6px 0}.small{font-size:11px;color:var(--mute);line-height:1.45}
+#simp h4{font-size:14px;font-weight:600;margin-bottom:6px}.sr{margin:6px 0}.small{font-size:11px;color:var(--mute);line-height:1.45}
 .kv{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--line)}
-#simp input[type=number],#simp select{border:0;background:#f4f4f4;border-radius:6px;padding:3px 6px;font:700 12px inherit}#simp input[type=range]{width:100%}
+#simp input[type=number],#simp select{border:0;background:#f4f4f4;border-radius:6px;padding:3px 6px;font:500 12px inherit}#simp input[type=range]{width:100%}
 .heatbar{height:10px;border-radius:5px;background:linear-gradient(90deg,#3b82f6,#fde047,#ef4444)}
 #secsvg,#seclab{display:none;position:absolute;inset:0;pointer-events:none}#secsvg{width:100%;height:100%}
 .sl{position:absolute;width:240px;font-size:12px;line-height:1.25;background:rgba(255,255,255,.92);border-radius:8px;padding:3px 8px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
@@ -170,16 +171,20 @@ dialog p,dialog li{font-size:13.5px;line-height:1.6}
 dialog ul{padding-inline-start:18px}
 dialog button{margin-top:12px}
 
-/* שפת עיצוב: כפתור מול טקסט. כפתור = מסגרת כהה וצל מוצק. טקסט ומידע = שטוח, בלי מסגרת, מופרד בקו */
-.brush,#modes button,#sub button,#mpills button,.load,.inav button,.menu button,.sq,.ab button{background:#fff!important;color:#111!important;border:1.5px solid #111!important;border-radius:6px!important;box-shadow:0 2px 0 #111!important;font-weight:700;cursor:pointer;transition:transform .08s,box-shadow .08s}
-.brush:hover,#modes button:hover,#sub button:hover,#mpills button:hover,.load:hover,.inav button:hover,.sq:hover{transform:translateY(1px);box-shadow:0 1px 0 #111!important}
-.brush:active,#modes button:active,#sub button:active,.load:active,.inav button:active{transform:translateY(2px);box-shadow:none!important}
-.brush.on,#modes button.on,#sub button.on,#mpills button.on,.inav button.on,.inav .pol.on{background:#111!important;color:#fff!important}
-.tabs button{background:none!important;border:0!important;border-bottom:3px solid transparent!important;border-radius:0!important;box-shadow:none!important;color:#777!important;padding:8px 6px!important;cursor:pointer;font-weight:800}
+/* שפת עיצוב: כפתור = מסגרת דקה כהה, רקע לבן, צל עדין. טקסט ומידע = שטוח, בלי מסגרת, מופרד בקו */
+.brush,#modes button,#sub button,#mpills button,.load,.inav button,.menu button,.sq,.ab button{background:#fff!important;color:#1b1b1b!important;border:1px solid #2a2a2a!important;border-radius:6px!important;box-shadow:0 1px 2px rgba(0,0,0,.10)!important;font-weight:500;cursor:pointer;transition:background .12s,color .12s,box-shadow .12s;font-size:12px!important;padding:5px 9px!important;line-height:1.3}
+.brush svg,#modes button svg,.load svg,.inav button svg{width:14px!important;height:14px!important}
+.brush:hover,#modes button:hover,#sub button:hover,#mpills button:hover,.load:hover,.inav button:hover,.sq:hover{background:#f3f3f3!important;box-shadow:0 1px 3px rgba(0,0,0,.14)!important}
+.brush:active,#modes button:active,#sub button:active,.load:active,.inav button:active{background:#e8e8e8!important;box-shadow:none!important}
+.brush.on,#modes button.on,#sub button.on,#mpills button.on,.inav button.on,.inav .pol.on{background:#1b1b1b!important;color:#fff!important}
+#mpills button{font-size:11.5px!important;padding:4px 8px!important}
+.sq{width:30px!important;height:30px!important;padding:0!important}
+#hud{gap:6px}
+.tabs button{background:none!important;border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;box-shadow:none!important;color:#777!important;padding:8px 6px!important;cursor:pointer;font-weight:600}
 .tabs button.on{color:#111!important;border-bottom-color:#111!important}.tabs button:hover{transform:none}
 .lnk,#foot a,.src a,.card a,.rr a{color:#0b57d0!important;text-decoration:underline}
 .facts{display:grid;grid-template-columns:1fr 1fr;gap:0 26px;margin-top:12px}.facts div{background:none!important;border-radius:0!important;border-top:1px solid #d6d6d6;padding:8px 0!important}
-.kpi{background:none!important;border-radius:0!important;border-top:3px solid #111;padding:8px 0!important}
+.kpi{background:none!important;border-radius:0!important;border-top:2px solid #1b1b1b;padding:8px 0!important}
 .ic,.dc,.dp,.rr{background:none!important;border-radius:0!important;border-top:2px solid #111;padding:10px 0!important}.ia{border-top-color:#1f6fe5}.ir{border-top-color:#d62828}
 .gauge{background:none!important;border-radius:0!important;border-top:4px solid #2e9d4f;padding:10px 0!important}.gauge.b2{border-top-color:#1f6fe5}
 .tg{border-radius:2px!important;background:none!important;border:1px solid currentColor}
@@ -246,7 +251,7 @@ const ICONS={drop:'<path d="M12 3.5s6 6.3 6 10.6a6 6 0 0 1-12 0C6 9.8 12 3.5 12 
 document.body.insertAdjacentHTML("afterbegin",`<svg width="0" height="0" style="position:absolute" aria-hidden="true">${Object.keys(ICONS).map(k=>`<symbol id="i-${k}" viewBox="0 0 24 24">${ICONS[k]}</symbol>`).join("")}</svg>`);
 const ic=n=>`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const ICN={blue:"drop",green:"leaf",yellow:"sun",active:"users",white:"mirror",logi:"drone",tech:"fan",none:"square"};
-const INSI={blue:"drop",green:"leaf",yellow:"sun",active:"users",white:"mirror",logi:"drone",heat:"thermo"};
+const INSI={flood:"cloudrain",blue:"drop",green:"leaf",yellow:"sun",active:"users",white:"mirror",logi:"drone",heat:"thermo"};
 const TYPES={
  blue:{name:"גג כחול",color:0x1f6fe5,css:"var(--blue)",insight:"הגג שמחזיק את <mark>הגשם</mark> ומשחרר לאט",
   desc:"תשתית על הגג שמשהה או מאטה את זרימת מי הגשם, כדי להקל על ניקוז העיר בסערה. בישראל צפויה הקצנה: פחות ימי גשם, אך עוצמות גבוהות בפרקי זמן קצרים.",
@@ -746,7 +751,7 @@ function updRain(){
  for(let k=0;k<=4;k++){const v=sy/4*k;t+=`<line x1="${ml}" x2="${W-mr}" y1="${SY(v)-0}" y2="${SY(v)}" stroke="#eee"/><text x="${ml-5}" y="${SY(v)+4}" text-anchor="end">${fmt(v)}</text>`}
  c.rows.forEach((r,i)=>{const v=Math.max(0,r.s),mx=r.s===c.S,x=ml+i*bw+bw*.15;
   t+=`<rect x="${x}" y="${SY(v)}" width="${bw*.7}" height="${ih2-(SY(v)-mt)}" rx="4" fill="${mx?"#e8590c":"#c9d6ea"}"><title>${r.d} דק': ${fmt(r.s)} מ"ק</title></rect><text x="${x+bw*.35}" y="${H2-10}" text-anchor="middle">${r.d}</text>`;
-  if(mx)t+=`<text x="${x+bw*.35}" y="${SY(v)-5}" text-anchor="middle" style="fill:#e8590c;font-weight:800">${fmt(r.s)}</text>`});
+  if(mx)t+=`<text x="${x+bw*.35}" y="${SY(v)-5}" text-anchor="middle" style="fill:#e8590c;font-weight:600">${fmt(r.s)}</text>`});
  document.getElementById("stor").innerHTML=t;
  // roof link
  const roofA=area,good=grid.filter(x=>["blue","green","yellow","active"].includes(x)).length/grid.length;
@@ -952,6 +957,12 @@ const INS={
   where:[["אזורי תעסוקה ונמל.","h"]],
   ash:[["אשדוד היא עיר נמל ותעשייה (שני נמלים, תחנת כוח, בתי זיקוק, מכון התפלה). הנמל ורובע החדשנות מועמדים לפיילוט, אם יש עניין.","f"]],
   risk:["רעש, פרטיות וקבלה חברתית.","רגולציה אווירית."]},
+ flood:{n:"הצפות",c:"#1f6fe5",head:"מה אפשר לדעת היום על הצפות באשדוד, ומה עדיין חסר",
+  what:[["הצפה עירונית נובעת משילוב של עוצמת גשם, איטום, ותשתית ניקוז. מבקר המדינה (יוני 2026): תשתיות הניקוז בשלוש רשויות שנבדקו אינן עונות לתרחישי הייחוס המעודכנים.","f"],["בספטמבר 2025 נשברו שיאי גשם ביממה באזור נהרייה, ובדצמבר 2025 נרשמו באשקלון 20 עד 25 מ\"מ בחצי שעה והצפות שחייבו כוחות חילוץ.","f"],["לפי הדוח: חלוקת האחריות בין רשויות הניקוז לרשויות המקומיות עדיין לא הוסדרה בחקיקה, ולא נקבע בחוק היטל תיעול שמביא בחשבון את סיכון ההצפה.","f"]],
+  how:[["לפני ניסוח יעד לגגות כחולים: למפות נקודות הצפה ולתעדף בהן, כי גג מושהה שיא מקומי אך אינו פותר צוואר בקבוק בקו תיעול.","d"],["לבדוק מול תאגיד המים את חיבור הניקוז לביוב. הדוח מציין שמערכות ניקוז המחוברות לביוב עדיין קיימות ברשויות.","f"],["היטל תיעול: בשלוש הרשויות שנבדקו נע בין 26 ל-41 ש\"ח למ\"ר בנוי. אפשר לשקול זיכוי בהיטל על אמצעי השהיה בגג (לבדיקה משפטית).","h"]],
+  where:[["בשכונות הוותיקות ליד נחל לכיש, לפי תכנית האקלים של אשדוד (2021): תשתיות משנות ה-60 ותכנון גרביטציוני למפלסים נמוכים.","f"]],
+  ash:[["מדידות אמיתיות בנמל אשדוד (2007 עד 2021): המקסימום בשעה הגיע ל-34.9 מ\"מ (נובמבר 2014), מעל חזרה 1:5 (28.1) ומתחת ל-1:50 (51).","d"],["ב-14 שנות גשמים רק אחת עברה את סף 1:5 בשעה (שנת 2015). שלוש שנים התקרבו אליו (27.7 עד 27.9 מ\"מ: 2010, 2012, 2018). 2020: יום הגשם החזק ביותר ברישום, 96.9 מ\"מ ב-16.12.2020.","d"],["גשם שנתי ממוצע בנמל: כ-355 מ\"מ (2008 עד 2021, שנות גשמים).","d"],["עוצמה של 10 דקות: עד 105 מ\"מ לשעה (נובמבר 2014). עוצמה ל-30 דקות: 29 מ\"מ בחצי שעה.","d"],["הדיווח של עיריית אשדוד: כ-11,000 קולטנים מנוקים לפני החורף, ושיטפונות נקודתיים ובני חלוף (תוצאות חיפוש).","h"]],
+  risk:["הנמל אינו מרכז העיר ואינו שכונות נחל לכיש: יש לאמת בנתוני מדידה פנימיים של העירייה.","מפת ההצפות עצמה (נחל לכיש, עליית מים, הצפה עירונית) לא נשלפה: היא ב-GIS העירוני ובמפת סיכוני האקלים הלאומית.","קיבולת התיעול והגיל של הקווים: אין נתון ציבורי."]},
  heat:{n:"חום ומיתונו",c:"#ef4444",head:"קודם מפה, ואז אמצעים: עצים והצללה הם הכלי העיקרי, הגג משלים",
   what:[["אי חום: טמפרטורת האוויר בעיר גבוהה בכ-2 עד 12 מעלות מהאזור שמחוץ לעיר (מבקר המדינה, 2025).","f"],["אין בישראל הנחיות הצללה מחייבות לתכנון רחובות ומרחבים ציבוריים (מבקר המדינה).","f"]],
   how:[["מפה: טמפרטורת פני שטח מלוויין (Landsat) יחד עם מדד צמחייה ותכסית עצים. לא נמצאה מפה כזו לאשדוד.","d"],["אמצעי גג: גג לבן (2–3 מעלות בניו יורק), גג ירוק, PV עם ירוק. מחוץ לגג: עצים, הצללת שבילים, קירוי.","f"],["מימון: קול קורא של המשרד להגנת הסביבה להצללה (21 רשויות, כ-21.3 מיליון ש\"ח, לפי מבקר המדינה).","f"],["מדריך תכנון למיתון אי חום עירוני (מינהל התכנון, 2024) מוזכר בביבליוגרפיות. הקובץ לא אותר.","f"]],
@@ -970,6 +981,11 @@ const RES=[
  ["s","טבע עירוני בתכנון כוללני ומפורט (המשרד להגנת הסביבה, 2025)","הנחיות לשילוב טבע עירוני בתכניות. מופיע בחיפוש, לא נקרא.","https://www.gov.il/BlobFolder/generalpage/urban-nature-in-planning/he/urban-nature-in-planning-2025.pdf"],
  ["s","GHSL גובה מבנים (JRC)","גובה מבנים ברזולוציה 100 מ' (2018). גלובלי, לא ישראלי.","https://developers.google.com/earth-engine/datasets/catalog/JRC_GHSL_P2023A_GHS_BUILT_H"],
  ["s","GovMap ו-data.gov.il","שכבות GIS ממשלתיות. לא אותרה שכבת קומות או הצפה.","https://data.gov.il"],
+ ["v","גשם דקתי: 84 תחנות אוטומטיות, השירות המטאורולוגי","כולל תחנת נמל אשדוד, 2007 עד 2021. נשלף דרך ה-API של data.gov.il (הורדת קובץ ישירה נחסמת מהסביבה). משולב בדף 'הצפות'.","https://data.gov.il/dataset/1minrain"],
+ ["v","מבקר המדינה: היערכות הרשויות לשיטפונות והצפות, ביקורת מעקב (יוני 2026)","תקציר נקרא. ליקויים: אסדרת אחריות הניקוז, מיפוי תשתיות, תרחישי ייחוס, היטל תיעול.","https://library.mevaker.gov.il/sites/DigitalLibrary/Documents/2026/Shilton/2026-Shilton-203-Floods-Taktzir.pdf"],
+ ["s","מפת סיכוני האקלים הלאומית (המשרד להגנת הסביבה, ינואר 2024)","הצפות מנחלים ומאגני ניקוז, הצפות עירוניות והצפות מהים, ואיי חום. גרסה ראשונה. כתובת ישירה לא אותרה.",""],
+ ["s","מיפוי חופות עצים, מאגר גיאוגרפי לאומי (מפ\"י 2021)","שכבת כל חופות העצים בישראל, 359MB. לא עובדה כאן: מתאימה לחישוב צל ותכסית בעיר.","https://data.gov.il/dataset/nationalcanopytrees"],
+ ["n","מפת נקודות הצפה ושכבת הניקוז של אשדוד","קיימת ב-GIS העירוני לפי תכנית האקלים 2021. לא פורסמה. לקבל ממחלקת הניקוז.",""],
  ["n","מדריך תכנון למיתון אי חום עירוני (מינהל התכנון, 2024)","מוזכר בביבליוגרפיה של האוניברסיטה הפתוחה ושל המשרד להגנת הסביבה. הקובץ לא אותר. לפנות למינהל התכנון.",""],
  ["n","מפת אי חום או טמפרטורת פני שטח לאשדוד","לא נמצאה. אפשר ליצור: Landsat 8 או 9, ערוץ תרמי, ביחד עם NDVI.",""],
  ["n","תכנית הצללה טקטית, חולון (דצמבר 2024)","מוזכרת בחיפוש כדוגמה למיפוי וקטלוג פתרונות. לפנות לעיריית חולון.",""],
@@ -987,7 +1003,7 @@ function renderIns(){
  if(IS.k==="res"){P.innerHTML=renderRes();return}
  const D=INS[IS.k];
  P.innerHTML=`<div class="ihd" style="border-color:${D.c}"><h2>${D.n}</h2><div class="ih2">${D.head}</div>${["blue","green","yellow","active","white","logi"].includes(IS.k)?`<div class="ab" style="margin-top:8px"><button class="load" id="iSim">הצג בהדמיה התלת-ממדית</button><button class="load" id="iSec">חתך פרט</button></div>`:""}</div>
- ${insChart(IS.k)}
+ ${IS.k==="flood"?floodChart():insChart(IS.k)}
  <div class="ig"><div class="ic"><h4>מה זה נותן</h4>${insList(D.what)}</div><div class="ic"><h4>איך מטמיעים</h4>${insList(D.how)}</div><div class="ic"><h4>איפה ובאיזה מקרה</h4>${insList(D.where)}</div><div class="ic ia"><h4>אשדוד</h4>${insList(D.ash)}</div></div>
  <div class="ic ir"><h4>סיכונים ושאלות פתוחות</h4><ul class="il">${D.risk.map(x=>`<li>${x}</li>`).join("")}</ul></div>${IS.k==="yellow"||IS.k==="active"||IS.k==="green"||IS.k==="blue"?insFit():""}`;
  const isim=document.getElementById("iSim"),isec=document.getElementById("iSec");
@@ -996,6 +1012,11 @@ function renderIns(){
 }
 function renderRes(){const st={v:["פתחתי","f"],s:["נמצא בחיפוש","h"],n:["לא נמצא","d"]};
  return`<div class="ihd" style="border-color:#111"><h2>נתונים ומסמכים שקיימים ברשת</h2><div class="ih2">מה פתחתי בעצמי, מה נמצא בחיפוש בלבד, ומה לא נמצא</div></div><div class="rs">${RES.map(r=>`<div class="rr"><span class="tg tg-${st[r[0]][1]}">${st[r[0]][0]}</span><div><b>${r[3]?`<a href="${r[3]}" target="_blank" rel="noopener">${r[1]}</a>`:r[1]}</b><div class="small">${r[2]}</div></div></div>`).join("")}</div><div class="src">"פתחתי" = קראתי את הקובץ או שאלתי את השכבה. "נמצא בחיפוש" = מופיע בתוצאות, לא נבדק לעומק. "לא נמצא" = קיים כנראה, אך לא אותר.</div>`}
+const ASHR={"ann60":{"2008":15.9,"2009":15.8,"2010":27.7,"2011":18.0,"2012":27.9,"2013":15.0,"2014":10.4,"2015":34.9,"2016":21.7,"2017":20.6,"2018":27.7,"2019":18.0,"2020":24.7,"2021":26.9},"hy":{"2008":321,"2009":220,"2010":263,"2011":284,"2012":496,"2013":380,"2014":261,"2015":462,"2016":374,"2017":262,"2018":350,"2019":477,"2020":480,"2021":348},"top":[["2020-12-16",96.9],["2012-01-13",79.7],["2020-01-09",74.0],["2008-01-26",70.4],["2018-01-26",61.3],["2018-12-07",54.8],["2012-02-01",54.0],["2013-01-08",52.5]],"mx":{"10":[17.5,"2014-11-16 05:56:00",104.9],"30":[29.0,"2014-11-16 06:14:00",57.9],"60":[34.9,"2014-11-16 06:35:00",34.9],"120":[44.4,"2018-01-26 22:54:00",22.2]}};
+
+function floodChart(){const ys=Object.keys(ASHR.ann60),mx=Math.max(...Object.values(ASHR.ann60),52),W=560,H0=190,bw=34,step=38;
+ const Y=v=>150-v/mx*130;
+ return`<h4 class="ash4">מקסימום גשם בשעה לכל שנת גשמים, נמל אשדוד (מ"מ)</h4><svg viewBox="0 0 560 190" class="ibar">${[28.1,51].map((v,i)=>`<line x1="6" x2="554" y1="${Y(v)}" y2="${Y(v)}" stroke="${i?"#d62828":"#e8590c"}" stroke-dasharray="4 3"/><text x="552" y="${Y(v)-3}" text-anchor="start" class="bl" style="fill:${i?"#d62828":"#e8590c"}">${i?"חזרה 1:50 (51)":"חזרה 1:5 (28.1)"}</text>`).join("")}${ys.map((y,i)=>{const v=ASHR.ann60[y],x=14+(ys.length-1-i)*step;return`<rect x="${x}" y="${Y(v)}" width="${bw}" height="${150-Y(v)}" rx="3" fill="#1f6fe5" opacity="${v>=28.1?1:.45}"/><text x="${x+bw/2}" y="${Y(v)-4}" text-anchor="middle" class="bv">${v}</text><text x="${x+bw/2}" y="168" text-anchor="middle" class="bl">${String(y).slice(2)}</text>`}).join("")}</svg><div class="src">מדידה: תחנה אוטומטית של השירות המטאורולוגי בנמל אשדוד, גשם דקתי, ספטמבר 2007 עד נובמבר 2021 (data.gov.il). חישוב שלי: חלון נע של 60 דקות. הנמל אינו מרכז העיר, והמדידה בקפיצות של 0.2 מ"מ.</div>`}
 function insFit(){
  const T=[["מגדל, גג עליון",{blue:["rec","מומלץ"],green:["mid","לבדוק רוח"],yellow:["rec","מומלץ"],active:["no","לא מומלץ מעל 9 קומות"]}],
   ["קומת מסד של מגדל",{blue:["rec","מומלץ"],green:["rec","מועדף"],yellow:["mid","לבדוק סנוור"],active:["rec","מועדף"]}],
@@ -1190,7 +1211,7 @@ const MONH=["ינו","פבר","מרץ","אפר","מאי","יונ","יול","או
 function monBars(arr,color,hi,fmtv){const mx=Math.max(...arr,1);const f=fmtv||(v=>fmt(v));
  return`<svg viewBox="0 0 560 150" class="ibar">${arr.map((v,i)=>{const x=14+(11-i)*45,h=v/mx*92;const on=!hi||hi.includes(i);return`<rect x="${x}" y="${112-h}" width="34" height="${h}" rx="3" fill="${color}" opacity="${on?1:.35}"/><text x="${x+17}" y="${106-h}" text-anchor="middle" class="bv">${f(v)}</text><text x="${x+17}" y="132" text-anchor="middle" class="bl">${MONH[i]}</text>`}).join("")}</svg>`}
 function rankBars(fn,color,unit){const rows=Object.values(NATJ).map(r=>({id:r.id,v:fn(r),n:RAIN.reg[r.id].n})).sort((a,b)=>b.v-a.v),mx=Math.max(...rows.map(r=>r.v),1);
- return`<svg viewBox="0 0 560 ${rows.length*21+6}" class="ibar">${rows.map((r,i)=>{const w=r.v/mx*240,y=i*21+3,sel=r.id===NS.reg;return`<text x="548" y="${y+14}" text-anchor="start" class="bl" style="${sel?"font-weight:800;fill:#111":""}">${r.n}</text><rect x="${320-w}" y="${y+2}" width="${w}" height="14" rx="3" fill="${color}" opacity="${sel?1:.45}"/><text x="${314-w}" y="${y+14}" text-anchor="start" class="bv">${fmt(r.v,r.v<20?1:0)}</text>`}).join("")}</svg>`}
+ return`<svg viewBox="0 0 560 ${rows.length*21+6}" class="ibar">${rows.map((r,i)=>{const w=r.v/mx*240,y=i*21+3,sel=r.id===NS.reg;return`<text x="548" y="${y+14}" text-anchor="start" class="bl" style="${sel?"font-weight:600;fill:#111":""}">${r.n}</text><rect x="${320-w}" y="${y+2}" width="${w}" height="14" rx="3" fill="${color}" opacity="${sel?1:.45}"/><text x="${314-w}" y="${y+14}" text-anchor="start" class="bv">${fmt(r.v,r.v<20?1:0)}</text>`}).join("")}</svg>`}
 function natTag(t){return insTag(t)}
 function natBlock(k,r){
  const P=NS.par,mfn=NT[k].M[NS.m[k]][1],c=NT[k].c;
